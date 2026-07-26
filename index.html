@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="theme-color" content="#0a0f1d">
     <title>Temple Clicker Deluxe</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
         :root {
             --bg-base: #0a0f1d;
@@ -25,82 +26,66 @@
             --safe-bottom: env(safe-area-inset-bottom, 0px);
         }
 
+        /* --- THEME VARIATIONS --- */
         [data-theme="dark"] {
-            --bg-base: #050505;
-            --bg-card: rgba(24, 24, 27, 0.85);
-            --bg-card-active: rgba(39, 39, 42, 0.95);
-            --text-main: #fafafa;
-            --text-sub: #a1a1aa;
-            --primary: #a855f7;
-            --primary-glow: rgba(168, 85, 247, 0.4);
-            --accent: #eab308;
-            --accent-glow: rgba(234, 179, 8, 0.4);
-            --border: rgba(255, 255, 255, 0.12);
+            --bg-base: #050505; --bg-card: rgba(24, 24, 27, 0.85); --bg-card-active: rgba(39, 39, 42, 0.95);
+            --text-main: #fafafa; --text-sub: #a1a1aa; --primary: #a855f7; --primary-glow: rgba(168, 85, 247, 0.4);
+            --accent: #eab308; --accent-glow: rgba(234, 179, 8, 0.4); --border: rgba(255, 255, 255, 0.12);
         }
-
         [data-theme="celestial"] {
-            --bg-base: #0a0f1d;
-            --bg-card: rgba(16, 25, 46, 0.85);
-            --bg-card-active: rgba(27, 40, 71, 0.95);
-            --text-main: #f8fafc;
-            --text-sub: #829ab1;
-            --primary: #d4af37;
-            --primary-glow: rgba(212, 175, 55, 0.45);
-            --accent: #38bdf8;
-            --accent-glow: rgba(56, 189, 248, 0.4);
-            --border: rgba(212, 175, 55, 0.25);
+            --bg-base: #0a0f1d; --bg-card: rgba(16, 25, 46, 0.85); --bg-card-active: rgba(27, 40, 71, 0.95);
+            --text-main: #f8fafc; --text-sub: #829ab1; --primary: #d4af37; --primary-glow: rgba(212, 175, 55, 0.45);
+            --accent: #38bdf8; --accent-glow: rgba(56, 189, 248, 0.4); --border: rgba(212, 175, 55, 0.25);
         }
-
         [data-theme="ironrod"] {
-            --bg-base: #111827;
-            --bg-card: rgba(31, 41, 55, 0.85);
-            --bg-card-active: rgba(55, 65, 81, 0.95);
-            --text-main: #f9fafb;
-            --text-sub: #9ca3af;
-            --primary: #9ba3af;
-            --primary-glow: rgba(155, 163, 175, 0.4);
-            --accent: #10b981;
-            --accent-glow: rgba(16, 185, 129, 0.4);
-            --border: rgba(255, 255, 255, 0.15);
+            --bg-base: #111827; --bg-card: rgba(31, 41, 55, 0.85); --bg-card-active: rgba(55, 65, 81, 0.95);
+            --text-main: #f9fafb; --text-sub: #9ca3af; --primary: #9ba3af; --primary-glow: rgba(155, 163, 175, 0.4);
+            --accent: #10b981; --accent-glow: rgba(16, 185, 129, 0.4); --border: rgba(255, 255, 255, 0.15);
         }
-
         [data-theme="moroni"] {
-            --bg-base: #1c1303;
-            --bg-card: rgba(45, 30, 8, 0.85);
-            --bg-card-active: rgba(70, 48, 12, 0.95);
-            --text-main: #fffbeb;
-            --text-sub: #d97706;
-            --primary: #f59e0b;
-            --primary-glow: rgba(245, 158, 11, 0.5);
-            --accent: #fef08a;
-            --accent-glow: rgba(254, 240, 138, 0.5);
-            --border: rgba(245, 158, 11, 0.3);
+            --bg-base: #1c1303; --bg-card: rgba(45, 30, 8, 0.85); --bg-card-active: rgba(70, 48, 12, 0.95);
+            --text-main: #fffbeb; --text-sub: #d97706; --primary: #f59e0b; --primary-glow: rgba(245, 158, 11, 0.5);
+            --accent: #fef08a; --accent-glow: rgba(254, 240, 138, 0.5); --border: rgba(245, 158, 11, 0.3);
         }
-
         [data-theme="pioneer"] {
-            --bg-base: #1c1917;
-            --bg-card: rgba(41, 37, 36, 0.85);
-            --bg-card-active: rgba(68, 64, 60, 0.95);
-            --text-main: #f5f5f4;
-            --text-sub: #a8a29e;
-            --primary: #f97316;
-            --primary-glow: rgba(249, 115, 22, 0.4);
-            --accent: #78350f;
-            --accent-glow: rgba(120, 53, 15, 0.4);
-            --border: rgba(249, 115, 22, 0.2);
+            --bg-base: #1c1917; --bg-card: rgba(41, 37, 36, 0.85); --bg-card-active: rgba(68, 64, 60, 0.95);
+            --text-main: #f5f5f4; --text-sub: #a8a29e; --primary: #f97316; --primary-glow: rgba(249, 115, 22, 0.4);
+            --accent: #78350f; --accent-glow: rgba(120, 53, 15, 0.4); --border: rgba(249, 115, 22, 0.2);
         }
-
         [data-theme="zion"] {
-            --bg-base: #022c22;
-            --bg-card: rgba(6, 78, 59, 0.85);
-            --bg-card-active: rgba(4, 120, 87, 0.95);
-            --text-main: #ecfdf5;
-            --text-sub: #6ee7b7;
-            --primary: #34d399;
-            --primary-glow: rgba(52, 211, 153, 0.45);
-            --accent: #facc15;
-            --accent-glow: rgba(250, 204, 21, 0.45);
-            --border: rgba(52, 211, 153, 0.3);
+            --bg-base: #022c22; --bg-card: rgba(6, 78, 59, 0.85); --bg-card-active: rgba(4, 120, 87, 0.95);
+            --text-main: #ecfdf5; --text-sub: #6ee7b7; --primary: #34d399; --primary-glow: rgba(52, 211, 153, 0.45);
+            --accent: #facc15; --accent-glow: rgba(250, 204, 21, 0.45); --border: rgba(52, 211, 153, 0.3);
+        }
+        [data-theme="desert"] {
+            --bg-base: #2a1208; --bg-card: rgba(61, 31, 18, 0.85); --bg-card-active: rgba(85, 45, 27, 0.95);
+            --text-main: #fff7ed; --text-sub: #fdba74; --primary: #fb923c; --primary-glow: rgba(251, 146, 60, 0.45);
+            --accent: #f43f5e; --accent-glow: rgba(244, 63, 94, 0.45); --border: rgba(251, 146, 60, 0.3);
+        }
+        [data-theme="alpine"] {
+            --bg-base: #0f172a; --bg-card: rgba(30, 41, 59, 0.85); --bg-card-active: rgba(51, 65, 85, 0.95);
+            --text-main: #f8fafc; --text-sub: #cbd5e1; --primary: #38bdf8; --primary-glow: rgba(56, 189, 248, 0.45);
+            --accent: #818cf8; --accent-glow: rgba(129, 140, 248, 0.45); --border: rgba(56, 189, 248, 0.3);
+        }
+        [data-theme="rosegold"] {
+            --bg-base: #1a0c13; --bg-card: rgba(48, 22, 35, 0.85); --bg-card-active: rgba(74, 35, 55, 0.95);
+            --text-main: #fff1f2; --text-sub: #f43f5e; --primary: #fb7185; --primary-glow: rgba(251, 113, 133, 0.45);
+            --accent: #fecdd3; --accent-glow: rgba(254, 205, 211, 0.45); --border: rgba(251, 113, 133, 0.3);
+        }
+        [data-theme="ocean"] {
+            --bg-base: #03182b; --bg-card: rgba(8, 47, 73, 0.85); --bg-card-active: rgba(14, 116, 144, 0.95);
+            --text-main: #f0f9ff; --text-sub: #7dd3fc; --primary: #06b6d4; --primary-glow: rgba(6, 182, 212, 0.45);
+            --accent: #22d3ee; --accent-glow: rgba(34, 211, 238, 0.45); --border: rgba(6, 182, 212, 0.3);
+        }
+        [data-theme="neon"] {
+            --bg-base: #090014; --bg-card: rgba(31, 9, 56, 0.85); --bg-card-active: rgba(58, 17, 105, 0.95);
+            --text-main: #ffffff; --text-sub: #f0abfc; --primary: #f032e6; --primary-glow: rgba(240, 50, 230, 0.5);
+            --accent: #00f0ff; --accent-glow: rgba(0, 240, 255, 0.5); --border: rgba(240, 50, 230, 0.4);
+        }
+        [data-theme="ethereal"] {
+            --bg-base: #1e293b; --bg-card: rgba(51, 65, 85, 0.85); --bg-card-active: rgba(71, 85, 105, 0.95);
+            --text-main: #ffffff; --text-sub: #e2e8f0; --primary: #ffffff; --primary-glow: rgba(255, 255, 255, 0.6);
+            --accent: #cbd5e1; --accent-glow: rgba(203, 213, 225, 0.5); --border: rgba(255, 255, 255, 0.3);
         }
 
         * {
@@ -148,6 +133,7 @@
             position: relative;
             z-index: 6;
             backdrop-filter: blur(10px);
+            flex-shrink: 0;
         }
 
         .marquee-content {
@@ -175,6 +161,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            flex-shrink: 0;
         }
 
         .score-container { text-align: center; }
@@ -218,30 +205,35 @@
             font-weight: 800;
         }
 
+        /* --- FIXED VIEWPORT & SCROLL MECHANICS FOR iOS --- */
         .app-viewport {
             position: relative;
             z-index: 2;
             flex: 1;
-            display: flex;
             width: 100%;
             overflow: hidden;
+            display: flex;
         }
 
         .view-panel {
-            min-width: 100%;
+            width: 100%;
             height: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: space-between;
-            padding: 10px 20px 20px;
             overflow-y: auto;
             -webkit-overflow-scrolling: touch;
+            padding: 10px 20px 30px;
+        }
+
+        #panel-clicker {
+            justify-content: space-between;
         }
 
         .stage-header {
             text-align: center;
-            margin-bottom: 6px;
+            margin-bottom: 12px;
+            flex-shrink: 0;
         }
 
         .temple-title {
@@ -264,12 +256,13 @@
 
         .click-stage {
             position: relative;
-            width: clamp(210px, 54vw, 310px);
-            height: clamp(210px, 54vw, 310px);
+            width: clamp(210px, 50vw, 300px);
+            height: clamp(210px, 50vw, 300px);
             display: flex;
             align-items: center;
             justify-content: center;
             margin: auto 0;
+            flex-shrink: 0;
         }
 
         .click-aura {
@@ -350,6 +343,7 @@
             padding: 16px;
             backdrop-filter: blur(12px);
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            flex-shrink: 0;
         }
 
         .progress-header {
@@ -410,7 +404,7 @@
             display: flex;
             flex-direction: column;
             gap: 12px;
-            padding-bottom: 25px;
+            padding-bottom: 40px;
         }
 
         .upgrade-card {
@@ -424,6 +418,7 @@
             transition: background 0.15s, transform 0.08s;
             cursor: pointer;
             backdrop-filter: blur(8px);
+            flex-shrink: 0;
         }
 
         .upgrade-card:active {
@@ -447,6 +442,7 @@
             align-items: center;
             justify-content: center;
             border: 1px solid var(--border);
+            flex-shrink: 0;
         }
 
         .upgrade-info { flex: 1; }
@@ -463,6 +459,7 @@
             box-shadow: 0 2px 12px var(--primary-glow);
             text-align: center;
             min-width: 80px;
+            flex-shrink: 0;
         }
 
         .map-card {
@@ -475,6 +472,7 @@
             gap: 14px;
             cursor: pointer;
             backdrop-filter: blur(8px);
+            flex-shrink: 0;
         }
 
         .map-card.locked { opacity: 0.45; cursor: not-allowed; }
@@ -490,6 +488,7 @@
             justify-content: space-around;
             align-items: center;
             padding-bottom: clamp(0px, var(--safe-bottom), 20px);
+            flex-shrink: 0;
         }
 
         .nav-item {
@@ -513,55 +512,12 @@
         .nav-item:active { transform: scale(0.93); }
         .nav-item svg { width: 22px; height: 22px; fill: currentColor; }
 
-        .modal-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
-            z-index: 100;
-            display: flex;
-            align-items: flex-end;
-            justify-content: center;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.25s ease;
-        }
-
-        .modal-overlay.active { opacity: 1; pointer-events: auto; }
-
-        .sheet {
+        .theme-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
             width: 100%;
-            max-width: 520px;
-            background: var(--bg-base);
-            border-top-left-radius: var(--radius-lg);
-            border-top-right-radius: var(--radius-lg);
-            border: 1px solid var(--border);
-            padding: 24px 20px clamp(20px, var(--safe-bottom), 40px);
-            transform: translateY(100%);
-            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            max-height: 85vh;
-            overflow-y: auto;
         }
-
-        .modal-overlay.active .sheet { transform: translateY(0); }
-        .sheet-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-        .sheet-title { font-size: 1.25rem; font-weight: 900; }
-
-        .close-btn {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            color: var(--text-main);
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .theme-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 
         .theme-card {
             background: var(--bg-card);
@@ -585,7 +541,7 @@
             color: #000;
             font-weight: 800;
             font-size: 0.75rem;
-            padding: 6px 10px;
+            padding: 8px 10px;
             border-radius: var(--radius-sm);
             border: none;
             text-align: center;
@@ -602,9 +558,10 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 14px 0;
+            padding: 16px 0;
             border-bottom: 1px solid var(--border);
             font-weight: 700;
+            width: 100%;
         }
 
         .toggle {
@@ -631,6 +588,28 @@
         }
 
         .toggle.active .toggle-handle { transform: translateX(22px); }
+
+        /* --- CELESTIAL BLESSING BONUS EVENT --- */
+        .blessing-orb {
+            position: fixed;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #fff, var(--primary));
+            box-shadow: 0 0 20px var(--primary-glow);
+            z-index: 99;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            animation: orbFloat 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes orbFloat {
+            0% { transform: translateY(0px) rotate(0deg); }
+            100% { transform: translateY(-20px) rotate(20deg); }
+        }
     </style>
 </head>
 <body>
@@ -698,6 +677,42 @@
             </div>
             <div class="list-container" id="map-list"></div>
         </section>
+
+        <section class="view-panel" id="panel-shop" style="display: none;">
+            <div class="stage-header">
+                <h2 class="temple-title">Theme Shop</h2>
+                <div class="status-msg">Customize your temple visual experience</div>
+            </div>
+            <div class="list-container">
+                <div class="theme-grid" id="theme-shop-grid"></div>
+            </div>
+        </section>
+
+        <section class="view-panel" id="panel-settings" style="display: none;">
+            <div class="stage-header">
+                <h2 class="temple-title">Game Settings</h2>
+                <div class="status-msg">Adjust audio, vibrations, and data</div>
+            </div>
+            <div class="list-container">
+                <div class="setting-row">
+                    <span>Audio Feedback</span>
+                    <div class="toggle active" id="toggle-audio" onclick="toggleAudioSetting()">
+                        <div class="toggle-handle"></div>
+                    </div>
+                </div>
+
+                <div class="setting-row">
+                    <span>Haptic Vibration</span>
+                    <div class="toggle active" id="toggle-haptics" onclick="toggleHapticsSetting()">
+                        <div class="toggle-handle"></div>
+                    </div>
+                </div>
+
+                <button style="width: 100%; margin-top: 35px; padding: 16px; background: rgba(239, 68, 68, 0.2); border: 1px solid rgba(239, 68, 68, 0.4); color: #ef4444; border-radius: var(--radius-md); font-weight: 800; cursor: pointer;" onclick="hardReset()">
+                    Reset Saved Progress
+                </button>
+            </div>
+        </section>
     </main>
 
     <nav class="bottom-nav">
@@ -713,41 +728,15 @@
             <svg viewBox="0 0 24 24"><path d="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM15 19l-6-2.11V5l6 2.11V19z"/></svg>
             Travel
         </button>
-        <button class="nav-item" onclick="openModal('settings-modal')">
+        <button class="nav-item" onclick="switchTab('shop')">
+            <svg viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
+            Shop
+        </button>
+        <button class="nav-item" onclick="switchTab('settings')">
             <svg viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6-3.6z"/></svg>
-            Shop/Set
+            Settings
         </button>
     </nav>
-
-    <div class="modal-overlay" id="settings-modal" onclick="closeModal('settings-modal')">
-        <div class="sheet" onclick="event.stopPropagation()">
-            <div class="sheet-header">
-                <div class="sheet-title">Settings & Theme Shop</div>
-                <div class="close-btn" onclick="closeModal('settings-modal')">✕</div>
-            </div>
-
-            <div class="setting-row">
-                <span>Audio Feedback</span>
-                <div class="toggle active" id="toggle-audio" onclick="toggleAudioSetting()">
-                    <div class="toggle-handle"></div>
-                </div>
-            </div>
-
-            <div class="setting-row">
-                <span>Haptic Vibration</span>
-                <div class="toggle active" id="toggle-haptics" onclick="toggleHapticsSetting()">
-                    <div class="toggle-handle"></div>
-                </div>
-            </div>
-
-            <div style="margin: 22px 0 12px; font-weight: 800; font-size: 0.9rem; color: var(--text-sub); text-transform: uppercase; letter-spacing: 1px;">Theme Shop</div>
-            <div class="theme-grid" id="theme-shop-grid"></div>
-
-            <button style="width: 100%; margin-top: 25px; padding: 14px; background: rgba(239, 68, 68, 0.2); border: 1px solid rgba(239, 68, 68, 0.4); color: #ef4444; border-radius: var(--radius-md); font-weight: 800; cursor: pointer;" onclick="hardReset()">
-                Reset Saved Progress
-            </button>
-        </div>
-    </div>
 
     <script>
         const PRICE_FACTOR = 1.15;
@@ -771,10 +760,15 @@
             { id: 'ironrod', name: 'Iron Rod', cost: 50000, color: '#10b981' },
             { id: 'moroni', name: 'Golden Moroni', cost: 1000000, color: '#f59e0b' },
             { id: 'pioneer', name: 'Pioneer Trek', cost: 25000000, color: '#f97316' },
-            { id: 'zion', name: 'Zion Glow', cost: 500000000, color: '#34d399' }
+            { id: 'zion', name: 'Zion Glow', cost: 500000000, color: '#34d399' },
+            { id: 'desert', name: 'Desert Sunset', cost: 2500000000, color: '#fb923c' },
+            { id: 'alpine', name: 'Alpine Peaks', cost: 15000000000, color: '#38bdf8' },
+            { id: 'rosegold', name: 'Rose Gold', cost: 100000000000, color: '#fb7185' },
+            { id: 'ocean', name: 'Deep Ocean', cost: 500000000000, color: '#06b6d4' },
+            { id: 'neon', name: 'Cyber Neon', cost: 2500000000000, color: '#f032e6' },
+            { id: 'ethereal', name: 'Ethereal White', cost: 10000000000000, color: '#ffffff' }
         ];
 
-        // --- REAL-LIFE LDS CALLINGS, MISSIONARY & YOUTH TREK ROLES ---
         const temples = [
             { 
                 name: "Kirtland Ohio", 
@@ -923,7 +917,7 @@
             "A beacon of light to all nations."
         ];
 
-        // --- AUDIO ENGINE ---
+        // --- RELIABLE AUDIO ENGINE FOR iOS ---
         let audioCtx = null;
         function initAudio() { 
             if (!audioCtx) {
@@ -941,22 +935,48 @@
                 const osc = audioCtx.createOscillator();
                 const gain = audioCtx.createGain();
                 osc.type = 'sine';
-                osc.frequency.setValueAtTime(440, audioCtx.currentTime);
-                osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.06);
-                gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.06);
+                osc.frequency.setValueAtTime(520, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.05);
+                gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.05);
                 osc.connect(gain);
                 gain.connect(audioCtx.destination);
                 osc.start();
-                osc.stop(audioCtx.currentTime + 0.06);
+                osc.stop(audioCtx.currentTime + 0.05);
             } catch (e) {}
         }
 
-        function triggerHaptic() {
-            if (state.haptics && navigator.vibrate) navigator.vibrate(8);
+        function playVictorySound() {
+            if (!state.audio) return;
+            initAudio();
+            try {
+                const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
+                notes.forEach((freq, idx) => {
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(freq, audioCtx.currentTime + (idx * 0.1));
+                    gain.gain.setValueAtTime(0.2, audioCtx.currentTime + (idx * 0.1));
+                    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + (idx * 0.1) + 0.3);
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+                    osc.start(audioCtx.currentTime + (idx * 0.1));
+                    osc.stop(audioCtx.currentTime + (idx * 0.1) + 0.3);
+                });
+            } catch(e) {}
         }
 
-        // --- HIGH-PERFORMANCE OBJECT-POOLED PARTICLE SYSTEM ---
+        function triggerHaptic(type = 'tap') {
+            if (state.haptics && navigator.vibrate) {
+                if (type === 'victory') {
+                    navigator.vibrate([100, 50, 100, 50, 200]);
+                } else {
+                    navigator.vibrate(12);
+                }
+            }
+        }
+
+        // --- PARTICLE SYSTEM ---
         const canvas = document.getElementById('particle-canvas');
         const ctx = canvas.getContext('2d');
         const MAX_PARTICLES = 150;
@@ -1056,7 +1076,7 @@
         }
         requestAnimationFrame(renderLoop);
 
-        // --- HELPERS & MATH ---
+        // --- MATH HELPERS ---
         function formatNumber(n) {
             if (n >= 1e33) return (n/1e33).toFixed(1) + 'Dc';
             if (n >= 1e30) return (n/1e30).toFixed(1) + 'No';
@@ -1108,13 +1128,14 @@
             setTimeout(() => floatText.remove(), 750);
 
             playClickSound();
-            triggerHaptic();
+            triggerHaptic('tap');
             spawnFX(x, y, 14);
 
             updateUIThrottled();
         }
 
         function buyCalling(i) {
+            initAudio();
             const t = temples[state.currentT];
             if (!state.counts[state.currentT]) state.counts[state.currentT] = [];
             const count = state.counts[state.currentT][i] || 0;
@@ -1123,7 +1144,8 @@
             if (state.sp >= cost) {
                 state.sp -= cost;
                 state.counts[state.currentT][i] = count + 1;
-                triggerHaptic();
+                playClickSound();
+                triggerHaptic('tap');
                 renderUpgrades();
                 updateUI();
                 saveGame();
@@ -1131,6 +1153,7 @@
         }
 
         function buyTheme(tId) {
+            initAudio();
             const th = themeCatalog.find(x => x.id === tId);
             if (!th) return;
 
@@ -1140,7 +1163,8 @@
                 state.sp -= th.cost;
                 state.ownedThemes.push(tId);
                 setTheme(tId);
-                triggerHaptic();
+                triggerHaptic('tap');
+                playClickSound();
                 saveGame();
             }
             renderThemeShop();
@@ -1152,14 +1176,51 @@
                 state.unlockedT++;
                 state.faith += 2.0;
                 state.currentT = state.unlockedT;
-                triggerHaptic();
+
+                // CELEBRATION EFFECTS
+                playVictorySound();
+                triggerHaptic('victory');
+                if (typeof confetti === 'function') {
+                    confetti({
+                        particleCount: 120,
+                        spread: 80,
+                        origin: { y: 0.6 }
+                    });
+                }
+
                 switchTab('clicker');
                 renderAll();
                 saveGame();
             }
         }
 
-        // --- DOM UPDATES THROTTLED ---
+        // --- RANDOM BONUS ORB ---
+        function spawnBlessingOrb() {
+            if (document.querySelector('.blessing-orb')) return;
+            const orb = document.createElement('div');
+            orb.className = 'blessing-orb';
+            orb.innerHTML = '✨';
+            orb.style.left = Math.random() * (window.innerWidth - 70) + 10 + 'px';
+            orb.style.top = Math.random() * (window.innerHeight - 200) + 100 + 'px';
+
+            orb.onclick = (e) => {
+                e.stopPropagation();
+                initAudio();
+                const bonus = Math.max(50, getSPS() * 15 + 100);
+                state.sp += bonus;
+                playVictorySound();
+                triggerHaptic('victory');
+                spawnFX(e.clientX, e.clientY, 30);
+                orb.remove();
+                updateUI();
+            };
+
+            document.body.appendChild(orb);
+            setTimeout(() => { if (orb.parentNode) orb.remove(); }, 8000);
+        }
+        setInterval(spawnBlessingOrb, 28000);
+
+        // --- DOM UPDATES ---
         let lastUIUpdate = 0;
         function updateUIThrottled() {
             const now = performance.now();
@@ -1177,7 +1238,6 @@
             const t = temples[state.currentT];
             document.getElementById('display-tname').innerText = t.name + (state.currentT < state.unlockedT ? " (✓)" : "");
 
-            // Update Temple Image from repository assets
             const imgEl = document.getElementById('temple-img');
             const fallbackEl = document.getElementById('temple-svg-fallback');
             imgEl.src = `./temples/${t.file}`;
@@ -1296,30 +1356,32 @@
             updateUI();
         }
 
-        // --- NAVIGATION & MODALS ---
+        // --- TAB SWITCHING ---
         function switchTab(tabId) {
+            initAudio();
             document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
             document.querySelectorAll('.view-panel').forEach(el => el.style.display = 'none');
 
-            if (tabId === 'clicker') {
-                document.getElementById('panel-clicker').style.display = 'flex';
-                event.currentTarget && event.currentTarget.classList.add('active');
-            } else if (tabId === 'upgrades') {
-                renderUpgrades();
-                document.getElementById('panel-upgrades').style.display = 'flex';
-                event.currentTarget && event.currentTarget.classList.add('active');
-            } else if (tabId === 'map') {
-                renderMap();
-                document.getElementById('panel-map').style.display = 'flex';
-                event.currentTarget && event.currentTarget.classList.add('active');
+            const tabMap = {
+                'clicker': 'panel-clicker',
+                'upgrades': 'panel-upgrades',
+                'map': 'panel-map',
+                'shop': 'panel-shop',
+                'settings': 'panel-settings'
+            };
+
+            const targetPanel = document.getElementById(tabMap[tabId]);
+            if (targetPanel) {
+                targetPanel.style.display = 'flex';
+                if (tabId === 'upgrades') renderUpgrades();
+                if (tabId === 'map') renderMap();
+                if (tabId === 'shop') renderThemeShop();
+            }
+
+            if (event && event.currentTarget && event.currentTarget.classList) {
+                event.currentTarget.classList.add('active');
             }
         }
-
-        function openModal(id) { 
-            renderThemeShop();
-            document.getElementById(id).classList.add('active'); 
-        }
-        function closeModal(id) { document.getElementById(id).classList.remove('active'); }
 
         function setTheme(t) {
             state.theme = t;
@@ -1339,19 +1401,15 @@
             saveGame();
         }
 
-        // --- SAVE/LOAD ---
+        // --- SAVE / LOAD ---
         function saveGame() {
-            localStorage.setItem('TC_BALANCED_V4', JSON.stringify(state));
+            localStorage.setItem('TC_BALANCED_V5', JSON.stringify(state));
         }
 
         function loadGame() {
-            const data = localStorage.getItem('TC_BALANCED_V4');
+            const data = localStorage.getItem('TC_BALANCED_V5');
             if (data) {
-                try {
-                    state = { ...state, ...JSON.parse(data) };
-                } catch (e) {
-                    console.error("Save data reset", e);
-                }
+                try { state = { ...state, ...JSON.parse(data) }; } catch (e) {}
             }
             setTheme(state.theme || 'celestial');
             document.getElementById('toggle-audio').classList.toggle('active', state.audio);
@@ -1361,12 +1419,12 @@
 
         function hardReset() {
             if (confirm("Are you sure you want to reset all spiritual progress?")) {
-                localStorage.removeItem('TC_BALANCED_V4');
+                localStorage.removeItem('TC_BALANCED_V5');
                 location.reload();
             }
         }
 
-        // --- EVENT INITIALIZATION ---
+        // --- INITIALIZATION ---
         const clickTarget = document.getElementById('click-target');
         clickTarget.addEventListener('pointerdown', handleTap);
         document.getElementById('dedicate-btn').addEventListener('click', dedicateTemple);
