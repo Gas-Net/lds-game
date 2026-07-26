@@ -5,6 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="theme-color" content="#0a0f1d">
     <title>Temple Clicker Deluxe</title>
+
+    <link rel="apple-touch-icon" href="logo1024x1024.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="logo1024x1024.png">
+
+    <link rel="icon" type="image/png" sizes="32x32" href="icon.png">
+    <link rel="icon" type="image/x-icon" href="icon.ico">
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Temple Clicker">
+
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
         :root {
@@ -241,16 +252,17 @@
             align-items: center;
             justify-content: center;
             touch-action: manipulation;
+            padding: 16px;
         }
 
         .click-target.tap-active {
             transform: scale(0.92);
         }
 
-        .temple-svg {
-            width: 70%;
-            height: 70%;
-            fill: var(--primary);
+        .temple-img {
+            width: 85%;
+            height: 85%;
+            object-fit: contain;
             filter: drop-shadow(0 0 12px var(--primary-glow));
             pointer-events: none;
         }
@@ -383,6 +395,13 @@
             justify-content: center;
             border: 1px solid var(--border);
             flex-shrink: 0;
+            overflow: hidden;
+        }
+
+        .upgrade-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .upgrade-info { flex: 1; }
@@ -596,9 +615,7 @@
             <div class="click-stage">
                 <div class="click-aura"></div>
                 <div class="click-target" id="click-target">
-                    <svg class="temple-svg" viewBox="0 0 24 24">
-                        <path d="M12 2L10 6H14L12 2ZM11 7H13V10H11V7ZM4 21V11H20V21H18V13H15V21H9V13H6V21H4ZM11 15H13V21H11V15Z"/>
-                    </svg>
+                    <img class="temple-img" id="temple-display-img" src="temples/kirtland.png" alt="Temple Image" />
                 </div>
             </div>
 
@@ -727,6 +744,7 @@
         const temples = [
             { 
                 name: "Kirtland Ohio", 
+                image: "temples/kirtland.png",
                 goal: 1500000, 
                 callings: [
                     {n: "Primary Teacher", c: 15, s: 1, i: "🎨"}, 
@@ -741,6 +759,7 @@
             },
             { 
                 name: "Manti Utah", 
+                image: "temples/manti.png",
                 goal: 850000000, 
                 callings: [
                     {n: "Pioneer Trek Youth", c: 50000, s: 200, i: "🤠"}, 
@@ -754,6 +773,7 @@
             },
             { 
                 name: "Mesa Arizona", 
+                image: "temples/mesa.png",
                 goal: 500000000000, 
                 callings: [
                     {n: "Youth Camp Specialist", c: 2500000, s: 8000, i: "🌲"}, 
@@ -766,6 +786,7 @@
             },
             { 
                 name: "Nauvoo Illinois", 
+                image: "temples/nauvoo.png",
                 goal: 250000000000000, 
                 callings: [
                     {n: "Nursery Leader", c: 100000000, s: 250000, i: "🧸"}, 
@@ -778,6 +799,7 @@
             },
             { 
                 name: "Salt Lake City", 
+                image: "temples/salt.png",
                 goal: 100000000000000000, 
                 callings: [
                     {n: "Tabernacle Choir Member", c: 50000000000, s: 85000000, i: "🎵"}, 
@@ -990,6 +1012,11 @@
 
             const t = temples[state.currentT];
             document.getElementById('display-tname').innerText = t.name + (state.currentT < state.unlockedT ? " (✓)" : "");
+            
+            const templeImg = document.getElementById('temple-display-img');
+            if (templeImg && templeImg.getAttribute('src') !== t.image) {
+                templeImg.src = t.image;
+            }
 
             const prog = Math.min((state.sp / t.goal) * 100, 100);
             document.getElementById('fill-bar').style.width = `${prog}%`;
@@ -1058,7 +1085,9 @@
                 };
 
                 card.innerHTML = `
-                    <div class="upgrade-icon">🏛️</div>
+                    <div class="upgrade-icon">
+                        <img src="${t.image}" alt="${t.name}" />
+                    </div>
                     <div style="flex: 1;">
                         <div style="font-weight: 800; font-size: 0.95rem;">${t.name}</div>
                         <div style="font-size: 0.72rem; color: var(--text-sub);">Goal: ${formatNumber(t.goal)} SP</div>
