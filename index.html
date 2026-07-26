@@ -3,25 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#0a0f1d">
     <title>Temple Clicker Deluxe</title>
     <style>
         :root {
-            --bg-base: #0f172a;
-            --bg-card: rgba(30, 41, 59, 0.85);
-            --bg-card-active: rgba(51, 65, 85, 0.95);
+            --bg-base: #0a0f1d;
+            --bg-card: rgba(16, 25, 46, 0.85);
+            --bg-card-active: rgba(27, 40, 71, 0.95);
             --text-main: #f8fafc;
-            --text-sub: #94a3b8;
-            --primary: #38bdf8;
-            --primary-glow: rgba(56, 189, 248, 0.4);
-            --accent: #fbbf24;
-            --accent-glow: rgba(251, 191, 36, 0.4);
-            --border: rgba(255, 255, 255, 0.12);
+            --text-sub: #829ab1;
+            --primary: #d4af37;
+            --primary-glow: rgba(212, 175, 55, 0.45);
+            --accent: #38bdf8;
+            --accent-glow: rgba(56, 189, 248, 0.4);
+            --border: rgba(212, 175, 55, 0.25);
             --radius-lg: 24px;
             --radius-md: 16px;
             --radius-sm: 10px;
-            --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
+            --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             --safe-top: env(safe-area-inset-top, 0px);
             --safe-bottom: env(safe-area-inset-bottom, 0px);
         }
@@ -129,18 +128,16 @@
             transition: background-color 0.4s ease;
         }
 
-        /* Particle Canvas Overlay */
         #particle-canvas {
             position: fixed;
-            top: 0;
-            left: 0;
+            inset: 0;
             width: 100%;
             height: 100%;
             pointer-events: none;
             z-index: 1;
+            will-change: transform;
         }
 
-        /* Scrolling LDS Banner */
         .marquee-banner {
             width: 100%;
             background: rgba(0, 0, 0, 0.45);
@@ -156,6 +153,7 @@
         .marquee-content {
             display: inline-block;
             white-space: nowrap;
+            will-change: transform;
             animation: marquee 24s linear infinite;
             font-size: 0.75rem;
             font-weight: 800;
@@ -170,7 +168,6 @@
             100% { transform: translateX(-100%); }
         }
 
-        /* Score Header */
         .top-nav {
             position: relative;
             z-index: 5;
@@ -197,6 +194,7 @@
             color: var(--text-main);
             text-shadow: 0 0 25px var(--primary-glow);
             line-height: 1.1;
+            font-variant-numeric: tabular-nums;
         }
 
         .stats-strip {
@@ -212,6 +210,7 @@
             border: 1px solid var(--border);
             backdrop-filter: blur(12px);
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            font-variant-numeric: tabular-nums;
         }
 
         .stat-item span {
@@ -219,7 +218,6 @@
             font-weight: 800;
         }
 
-        /* App Main Panels */
         .app-viewport {
             position: relative;
             z-index: 2;
@@ -264,7 +262,6 @@
             transition: opacity 0.3s;
         }
 
-        /* Main Clicker Object */
         .click-stage {
             position: relative;
             width: clamp(210px, 54vw, 310px);
@@ -282,6 +279,7 @@
             background: radial-gradient(circle, var(--primary-glow) 0%, rgba(0,0,0,0) 70%);
             animation: pulseAura 3.5s infinite ease-in-out;
             z-index: 1;
+            pointer-events: none;
         }
 
         @keyframes pulseAura {
@@ -300,23 +298,23 @@
             box-shadow: 0 20px 40px rgba(0,0,0,0.6), inset 0 0 25px var(--primary-glow);
             overflow: hidden;
             cursor: pointer;
-            transition: transform 0.08s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            will-change: transform;
+            transition: transform 0.06s cubic-bezier(0.2, 0.8, 0.2, 1);
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        .click-target:active { transform: scale(0.92); }
+        .click-target:active { transform: scale(0.93); }
 
-        #temple-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+        .temple-svg-icon {
+            width: 65%;
+            height: 65%;
+            fill: var(--primary);
+            filter: drop-shadow(0 0 12px var(--primary-glow));
             pointer-events: none;
-            transition: filter 0.3s;
         }
 
-        /* Particle Float Overlay */
         .floating-text {
             position: absolute;
             pointer-events: none;
@@ -325,16 +323,16 @@
             color: var(--accent);
             text-shadow: 0 2px 10px rgba(0,0,0,0.9), 0 0 8px var(--accent-glow);
             z-index: 10;
-            animation: floatUp 0.85s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+            will-change: transform, opacity;
+            animation: floatUp 0.75s cubic-bezier(0.23, 1, 0.32, 1) forwards;
         }
 
         @keyframes floatUp {
             0% { opacity: 1; transform: translate(-50%, -50%) scale(0.8) translateY(0); }
-            50% { transform: translate(-50%, -50%) scale(1.25) translateY(-35px); }
-            100% { opacity: 0; transform: translate(-50%, -50%) scale(1) translateY(-70px); }
+            50% { transform: translate(-50%, -50%) scale(1.2) translateY(-30px); }
+            100% { opacity: 0; transform: translate(-50%, -50%) scale(1) translateY(-60px); }
         }
 
-        /* Progress Bar Card */
         .progress-card {
             width: 100%;
             max-width: 420px;
@@ -370,7 +368,7 @@
             width: 0%;
             background: linear-gradient(90deg, var(--primary), var(--accent));
             border-radius: 7px;
-            transition: width 0.3s ease;
+            transition: width 0.2s ease-out;
             box-shadow: 0 0 14px var(--accent-glow);
         }
 
@@ -398,7 +396,6 @@
             60% { transform: translateY(-3px); }
         }
 
-        /* List Items & Cards */
         .list-container {
             width: 100%;
             max-width: 480px;
@@ -416,7 +413,7 @@
             display: flex;
             align-items: center;
             gap: 14px;
-            transition: background 0.2s, transform 0.1s;
+            transition: background 0.15s, transform 0.08s;
             cursor: pointer;
             backdrop-filter: blur(8px);
         }
@@ -474,16 +471,6 @@
 
         .map-card.locked { opacity: 0.45; cursor: not-allowed; }
 
-        .map-thumb {
-            width: 52px;
-            height: 52px;
-            border-radius: var(--radius-sm);
-            object-fit: cover;
-            border: 1px solid var(--border);
-            background: rgba(0,0,0,0.3);
-        }
-
-        /* Bottom Nav Bar */
         .bottom-nav {
             position: relative;
             z-index: 10;
@@ -518,7 +505,6 @@
         .nav-item:active { transform: scale(0.93); }
         .nav-item svg { width: 22px; height: 22px; fill: currentColor; }
 
-        /* Settings & Shop Modal */
         .modal-overlay {
             position: fixed;
             inset: 0;
@@ -530,7 +516,7 @@
             justify-content: center;
             opacity: 0;
             pointer-events: none;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.25s ease;
         }
 
         .modal-overlay.active { opacity: 1; pointer-events: auto; }
@@ -544,7 +530,7 @@
             border: 1px solid var(--border);
             padding: 24px 20px clamp(20px, var(--safe-bottom), 40px);
             transform: translateY(100%);
-            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
             max-height: 85vh;
             overflow-y: auto;
         }
@@ -620,7 +606,7 @@
             border-radius: 14px;
             position: relative;
             cursor: pointer;
-            transition: background 0.3s;
+            transition: background 0.25s;
         }
 
         .toggle.active { background: var(--primary); }
@@ -633,7 +619,7 @@
             position: absolute;
             top: 3px;
             left: 3px;
-            transition: transform 0.3s ease;
+            transition: transform 0.25s ease;
         }
 
         .toggle.active .toggle-handle { transform: translateX(22px); }
@@ -670,7 +656,9 @@
             <div class="click-stage">
                 <div class="click-aura"></div>
                 <div class="click-target" id="click-target">
-                    <img id="temple-img" src="" alt="Temple" onerror="this.style.display='none'">
+                    <svg class="temple-svg-icon" viewBox="0 0 24 24">
+                        <path d="M12 2L10 6H14L12 2ZM11 7H13V10H11V7ZM4 21V11H20V21H18V13H15V21H9V13H6V21H4ZM11 15H13V21H11V15Z"/>
+                    </svg>
                 </div>
             </div>
 
@@ -778,16 +766,14 @@
         ];
 
         const temples = [
-            { name: "Kirtland Ohio", goal: 10000, img: "temples/kirtland.png", callings: [{n: "Clerk", c: 10, s: 1, i: "✍️"}, {n: "Exec Sec", c: 150, s: 5, i: "📅"}, {n: "2nd Counselor", c: 1500, s: 20, i: "📋"}, {n: "1st Counselor", c: 10000, s: 90, i: "💼"}, {n: "Bishop", c: 75000, s: 400, i: "🗝️"}, {n: "Recorder", c: 500000, s: 2000, i: "💰"}, {n: "Librarian", c: 3000000, s: 8000, i: "📚"}, {n: "Building Rep", c: 20000000, s: 35000, i: "🔑"}, {n: "High Councilor", c: 150000000, s: 150000, i: "🏛️"}, {n: "Stake President", c: 1000000000, s: 800000, i: "👔"}] },
-            { name: "Manti Utah", goal: 400000, img: "temples/manti.png", callings: [{n: "Gardener", c: 8000, s: 30, i: "🌻"}, {n: "Carpenter", c: 50000, s: 150, i: "🪵"}, {n: "Mason", c: 250000, s: 700, i: "🧱"}, {n: "Dancer", c: 2000000, s: 3500, i: "💃"}, {n: "Cast Member", c: 12000000, s: 15000, i: "🎭"}, {n: "Farmer", c: 75000000, s: 80000, i: "🚜"}, {n: "Chorister", c: 500000000, s: 400000, i: "🎼"}, {n: "Guide", c: 3000000000, s: 2000000, i: "⛪"}, {n: "Patriarch", c: 20000000000, s: 10000000, i: "🖐️"}, {n: "Architect", c: 150000000000, s: 60000000, i: "📐"}] },
-            { name: "Logan Utah", goal: 10000000, img: "temples/logan.png", callings: [{n: "Mt Guide", c: 200000, s: 500, i: "🏔️"}, {n: "Sawyer", c: 1500000, s: 3500, i: "⚙️"}, {n: "Settler", c: 10000000, s: 15000, i: "🚜"}, {n: "Quarryman", c: 70000000, s: 75000, i: "⛏️"}, {n: "Janitor", c: 400000000, s: 400000, i: "🧹"}, {n: "Singer", c: 2500000000, s: 2000000, i: "🎵"}, {n: "Farmer", c: 15000000000, s: 10000000, i: "🐄"}, {n: "Clerk", c: 100000000000, s: 60000000, i: "📂"}, {n: "HP Leader", c: 750000000000, s: 350000000, i: "👴"}, {n: "Castle Builder", c: 5000000000000, s: 1500000000, i: "🏰"}] },
-            { name: "Mesa Arizona", goal: 500000000, img: "temples/mesa.png", callings: [{n: "Picker", c: 5000000, s: 6000, i: "🍊"}, {n: "Crew", c: 35000000, s: 30000, i: "🧵"}, {n: "Cast", c: 150000000, s: 200000, i: "🎭"}, {n: "Decorator", c: 1200000000, s: 1000000, i: "✨"}, {n: "Missionary", c: 8000000000, s: 6000000, i: "☀️"}, {n: "Branch Clerk", c: 50000000000, s: 35000000, i: "🇪🇸"}, {n: "Historian", c: 350000000000, s: 150000000, i: "🌳"}, {n: "Stake Pres", c: 1500000000000, s: 800000000, i: "👔"}, {n: "Gardener", c: 10000000000000, s: 4500000000, i: "🌵"}, {n: "Pioneer", c: 75000000000000, s: 25000000000, i: "🏜️"}] },
-            { name: "Lehi Utah", goal: 5000000000, img: "temples/lehi.png", callings: [{n: "Support", c: 80000000, s: 150000, i: "💻"}, {n: "Dev", c: 500000000, s: 900000, i: "🖥️"}, {n: "Cooling", c: 3500000000, s: 5000000, i: "❄️"}, {n: "Volunteer", c: 20000000000, s: 25000000, i: "⌨️"}, {n: "Researcher", c: 120000000000, s: 150000000, i: "🌳"}, {n: "CEO", c: 800000000000, s: 800000000, i: "🏢"}, {n: "Historian", c: 5000000000000, s: 5000000000, i: "📜"}, {n: "Fiber Tech", c: 35000000000000, s: 25000000000, i: "🔌"}, {n: "Lead", c: 200000000000000, s: 150000000000, i: "💾"}, {n: "Virtual", c: 1500000000000000, s: 800000000000, i: "🌐"}] },
-            { name: "Nauvoo Illinois", goal: 100000000000, img: "temples/nauvoo.png", callings: [{n: "Baptistry", c: 2500000000, s: 2000000, i: "🌊"}, {n: "Initiatory", c: 15000000000, s: 10000000, i: "🕯️"}, {n: "Guide", c: 100000000000, s: 60000000, i: "✨"}, {n: "Witness", c: 750000000000, s: 350000000, i: "💍"}, {n: "Linen", c: 4000000000000, s: 1500000000, i: "👕"}, {n: "Organist", c: 25000000000000, s: 8000000000, i: "🎹"}, {n: "Coord.", c: 150000000000000, s: 35000000000, i: "🕒"}, {n: "Recorder", c: 1000000000000000, s: 150000000000, i: "📜"}, {n: "Counselor", c: 7500000000000000, s: 800000000000, i: "🏛️"}, {n: "President", c: 50000000000000000, s: 4000000000000, i: "🗝️"}] },
-            { name: "Phoenix Arizona", goal: 2000000000000, img: "temples/phoenix.png", callings: [{n: "Teacher", c: 75000000000, s: 300000000, i: "🍎"}, {n: "FHE", c: 500000000000, s: 1500000000, i: "🏠"}, {n: "Chair", c: 3500000000000, s: 10000000000, i: "🎈"}, {n: "YM Pres", c: 25000000000000, s: 55000000000, i: "🏕️"}, {n: "YW Pres", c: 150000000000000, s: 250000000000, i: "🛡️"}, {n: "Clerk", c: 1000000000000000, s: 1500000000000, i: "📁"}, {n: "RS Pres", c: 6000000000000000, s: 7500000000000, i: "🍲"}, {n: "Leader", c: 40000000000000000, s: 35000000000000, i: "👔"}, {n: "Director", c: 250000000000000000, s: 200000000000000, i: "🗺️"}, {n: "Pioneer", c: 1500000000000000000, s: 1000000000000000, i: "🌵"}] },
-            { name: "Salt Lake City", goal: 50000000000000, img: "temples/salt.png", callings: [{n: "Choir", c: 2000000000000, s: 15000000000, i: "🎵"}, {n: "Grounds", c: 12000000000000, s: 75000000000, i: "🌷"}, {n: "Center", c: 75000000000000, s: 350000000000, i: "🗺️"}, {n: "Usher", c: 500000000000000, s: 1500000000000, i: "👔"}, {n: "Historian", c: 3500000000000000, s: 12000000000000, i: "📜"}, {n: "Seventy", c: 20000000000000000, s: 65000000000000, i: "🌍"}, {n: "Apostle", c: 120000000000000000, s: 350000000000000, i: "🕊️"}, {n: "Counsel", c: 800000000000000000, s: 1800000000000000, i: "🗝️"}, {n: "Prophet", c: 5000000000000000000, s: 12000000000000000, i: "📜"}, {n: "Faith", c: 35000000000000000000, s: 75000000000000000, i: "🌎"}] },
-            { name: "Bern Switzerland", goal: 2000000000000000, img: "temples/bern.png", callings: [{n: "Guide", c: 75000000000000, s: 750000000000, i: "🏔️"}, {n: "Trans.", c: 500000000000000, s: 5000000000000, i: "🗣️"}, {n: "Matron", c: 3500000000000000, s: 25000000000000, i: "👗"}, {n: "Admin", c: 25000000000000000, s: 120000000000000, i: "🏢"}, {n: "Guard", c: 150000000000000000, s: 750000000000000, i: "🛡️"}, {n: "Counsel", c: 1000000000000000000, s: 5000000000000000, i: "🌍"}, {n: "Multi", c: 6000000000000000000, s: 25000000000000000, i: "📖"}, {n: "Global", c: 35000000000000000000, s: 150000000000000000, i: "🌎"}, {n: "Art", c: 200000000000000000000, s: 800000000000000000, i: "🎨"}, {n: "Pres.", c: 1500000000000000000000, s: 6000000000000000000, i: "👑"}] },
-            { name: "Manila Philippines", goal: 50000000000000000, img: "temples/manila.png", callings: [{n: "Pioneer", c: 7500000000000000, s: 6000000000000, i: "🏝️"}, {n: "Vol.", c: 60000000000000000, s: 45000000000000, i: "🤝"}, {n: "Tagalog", c: 400000000000000000, s: 300000000000000, i: "📜"}, {n: "Inst.", c: 2500000000000000000, s: 1500000000000000, i: "🏫"}, {n: "Auditor", c: 15000000000000000000, s: 10000000000000000, i: "⚖️"}, {n: "Worker", c: 100000000000000000000, s: 65000000000000000, i: "🕯️"}, {n: "Dist.", c: 600000000000000000000, s: 450000000000000000, i: "🗝️"}, {n: "Counsel", c: 4000000000000000000000, s: 2500000000000000000, i: "🤝"}, {n: "Growth", c: 25000000000000000000000, s: 12000000000000000000, i: "🌏"}, {n: "Pres.", c: 150000000000000000000000, s: 75000000000000000000, i: "📜"}] }
+            { name: "Kirtland Ohio", goal: 10000, callings: [{n: "Clerk", c: 10, s: 1, i: "✍️"}, {n: "Exec Sec", c: 150, s: 5, i: "📅"}, {n: "2nd Counselor", c: 1500, s: 20, i: "📋"}, {n: "1st Counselor", c: 10000, s: 90, i: "💼"}, {n: "Bishop", c: 75000, s: 400, i: "🗝️"}, {n: "Recorder", c: 500000, s: 2000, i: "💰"}, {n: "Librarian", c: 3000000, s: 8000, i: "📚"}, {n: "Building Rep", c: 20000000, s: 35000, i: "🔑"}, {n: "High Councilor", c: 150000000, s: 150000, i: "🏛️"}, {n: "Stake President", c: 1000000000, s: 800000, i: "👔"}] },
+            { name: "Manti Utah", goal: 400000, callings: [{n: "Gardener", c: 8000, s: 30, i: "🌻"}, {n: "Carpenter", c: 50000, s: 150, i: "🪵"}, {n: "Mason", c: 250000, s: 700, i: "🧱"}, {n: "Dancer", c: 2000000, s: 3500, i: "💃"}, {n: "Cast Member", c: 12000000, s: 15000, i: "🎭"}, {n: "Farmer", c: 75000000, s: 80000, i: "🚜"}, {n: "Chorister", c: 500000000, s: 400000, i: "🎼"}, {n: "Guide", c: 3000000000, s: 2000000, i: "⛪"}, {n: "Patriarch", c: 20000000000, s: 10000000, i: "🖐️"}, {n: "Architect", c: 150000000000, s: 60000000, i: "📐"}] },
+            { name: "Logan Utah", goal: 10000000, callings: [{n: "Mt Guide", c: 200000, s: 500, i: "🏔️"}, {n: "Sawyer", c: 1500000, s: 3500, i: "⚙️"}, {n: "Settler", c: 10000000, s: 15000, i: "🚜"}, {n: "Quarryman", c: 70000000, s: 75000, i: "⛏️"}, {n: "Janitor", c: 400000000, s: 400000, i: "🧹"}, {n: "Singer", c: 2500000000, s: 2000000, i: "🎵"}, {n: "Farmer", c: 15000000000, s: 10000000, i: "🐄"}, {n: "Clerk", c: 100000000000, s: 60000000, i: "📂"}, {n: "HP Leader", c: 750000000000, s: 350000000, i: "👴"}, {n: "Castle Builder", c: 5000000000000, s: 1500000000, i: "🏰"}] },
+            { name: "Mesa Arizona", goal: 500000000, callings: [{n: "Picker", c: 5000000, s: 6000, i: "🍊"}, {n: "Crew", c: 35000000, s: 30000, i: "🧵"}, {n: "Cast", c: 150000000, s: 200000, i: "🎭"}, {n: "Decorator", c: 1200000000, s: 1000000, i: "✨"}, {n: "Missionary", c: 8000000000, s: 6000000, i: "☀️"}, {n: "Branch Clerk", c: 50000000000, s: 35000000, i: "🇲🇽"}, {n: "Historian", c: 350000000000, s: 150000000, i: "🌳"}, {n: "Stake Pres", c: 1500000000000, s: 800000000, i: "👔"}, {n: "Gardener", c: 10000000000000, s: 4500000000, i: "🌵"}, {n: "Pioneer", c: 75000000000000, s: 25000000000, i: "🏜️"}] },
+            { name: "Lehi Utah", goal: 5000000000, callings: [{n: "Support", c: 80000000, s: 150000, i: "💻"}, {n: "Dev", c: 500000000, s: 900000, i: "🖥️"}, {n: "Cooling", c: 3500000000, s: 5000000, i: "❄️"}, {n: "Volunteer", c: 20000000000, s: 25000000, i: "⌨️"}, {n: "Researcher", c: 120000000000, s: 150000000, i: "🌳"}, {n: "CEO", c: 800000000000, s: 800000000, i: "🏢"}, {n: "Historian", c: 5000000000000, s: 5000000000, i: "📜"}, {n: "Fiber Tech", c: 35000000000000, s: 25000000000, i: "🔌"}, {n: "Lead", c: 200000000000000, s: 150000000000, i: "💾"}, {n: "Virtual", c: 1500000000000000, s: 800000000000, i: "🌐"}] },
+            { name: "Nauvoo Illinois", goal: 100000000000, callings: [{n: "Baptistry", c: 2500000000, s: 2000000, i: "🌊"}, {n: "Initiatory", c: 15000000000, s: 10000000, i: "🕯️"}, {n: "Guide", c: 100000000000, s: 60000000, i: "✨"}, {n: "Witness", c: 750000000000, s: 350000000, i: "💍"}, {n: "Linen", c: 4000000000000, s: 1500000000, i: "👕"}, {n: "Organist", c: 25000000000000, s: 8000000000, i: "🎹"}, {n: "Coord.", c: 150000000000000, s: 35000000000, i: "🕒"}, {n: "Recorder", c: 1000000000000000, s: 150000000000, i: "📜"}, {n: "Counselor", c: 7500000000000000, s: 800000000000, i: "🏛️"}, {n: "President", c: 50000000000000000, s: 4000000000000, i: "🗝️"}] },
+            { name: "Phoenix Arizona", goal: 2000000000000, callings: [{n: "Teacher", c: 75000000000, s: 300000000, i: "🍎"}, {n: "FHE", c: 500000000000, s: 1500000000, i: "🏠"}, {n: "Chair", c: 3500000000000, s: 10000000000, i: "🎈"}, {n: "YM Pres", c: 25000000000000, s: 55000000000, i: "🏕️"}, {n: "YW Pres", c: 150000000000000, s: 250000000000, i: "🛡️"}, {n: "Clerk", c: 1000000000000000, s: 1500000000000, i: "📁"}, {n: "RS Pres", c: 6000000000000000, s: 7500000000000, i: "🍲"}, {n: "Leader", c: 40000000000000000, s: 35000000000000, i: "👔"}, {n: "Director", c: 250000000000000000, s: 200000000000000, i: "🗺️"}, {n: "Pioneer", c: 1500000000000000000, s: 1000000000000000, i: "🌵"}] },
+            { name: "Salt Lake City", goal: 50000000000000, callings: [{n: "Choir", c: 2000000000000, s: 15000000000, i: "🎵"}, {n: "Grounds", c: 12000000000000, s: 75000000000, i: "🌷"}, {n: "Center", c: 75000000000000, s: 350000000000, i: "🗺️"}, {n: "Usher", c: 500000000000000, s: 1500000000000, i: "👔"}, {n: "Historian", c: 3500000000000000, s: 12000000000000, i: "📜"}, {n: "Seventy", c: 20000000000000000, s: 65000000000000, i: "🌍"}, {n: "Apostle", c: 120000000000000000, s: 350000000000000, i: "🕊️"}, {n: "Counsel", c: 800000000000000000, s: 1800000000000000, i: "🗝️"}, {n: "Prophet", c: 5000000000000000000, s: 12000000000000000, i: "📜"}, {n: "Faith", c: 35000000000000000000, s: 75000000000000000, i: "🌎"}] }
         ];
 
         const flavorMessages = [
@@ -801,34 +787,42 @@
 
         // --- AUDIO ENGINE ---
         let audioCtx = null;
-        function initAudio() { if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)(); }
+        function initAudio() { 
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+        }
 
         function playClickSound() {
             if (!state.audio) return;
             initAudio();
-            if (audioCtx.state === 'suspended') audioCtx.resume();
-            
-            const osc = audioCtx.createOscillator();
-            const gain = audioCtx.createGain();
-            osc.type = 'sine';
-            osc.frequency.setValueAtTime(480, audioCtx.currentTime);
-            osc.frequency.exponentialRampToValueAtTime(920, audioCtx.currentTime + 0.08);
-            gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
-            gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.08);
-            osc.connect(gain);
-            gain.connect(audioCtx.destination);
-            osc.start();
-            osc.stop(audioCtx.currentTime + 0.08);
+            try {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(440, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.06);
+                gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.06);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.06);
+            } catch (e) {}
         }
 
         function triggerHaptic() {
-            if (state.haptics && navigator.vibrate) navigator.vibrate(10);
+            if (state.haptics && navigator.vibrate) navigator.vibrate(8);
         }
 
-        // --- ENHANCED PARTICLE SYSTEM ---
+        // --- HIGH-PERFORMANCE OBJECT-POOLED PARTICLE SYSTEM ---
         const canvas = document.getElementById('particle-canvas');
         const ctx = canvas.getContext('2d');
-        let particles = [];
+        const MAX_PARTICLES = 150;
+        const particlePool = [];
 
         function resizeCanvas() {
             canvas.width = window.innerWidth;
@@ -838,46 +832,93 @@
         resizeCanvas();
 
         class Particle {
-            constructor(x, y) {
+            constructor() { this.active = false; }
+            spawn(x, y, primaryColor, accentColor) {
                 this.x = x;
                 this.y = y;
-                this.size = Math.random() * 5 + 2;
-                this.speedX = (Math.random() - 0.5) * 5;
-                this.speedY = (Math.random() - 0.5) * 5 - 2;
-                this.color = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#fbbf24';
+                this.type = Math.random() > 0.3 ? 'burst' : 'sparkle';
+                this.size = this.type === 'sparkle' ? Math.random() * 4 + 3 : Math.random() * 6 + 4;
+                const angle = Math.random() * Math.PI * 2;
+                const speed = Math.random() * 6 + 2;
+                this.vx = Math.cos(angle) * speed;
+                this.vy = Math.sin(angle) * speed - 1.5;
+                this.color = Math.random() > 0.5 ? primaryColor : accentColor;
                 this.alpha = 1;
-                this.decay = Math.random() * 0.025 + 0.015;
+                this.decay = Math.random() * 0.03 + 0.02;
+                this.rotation = Math.random() * Math.PI * 2;
+                this.vRot = (Math.random() - 0.5) * 0.2;
+                this.active = true;
             }
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-                this.alpha -= this.decay;
+            update(dt) {
+                if (!this.active) return;
+                this.x += this.vx * dt * 60;
+                this.y += this.vy * dt * 60;
+                this.vy += 0.12 * dt * 60; // Soft gravity
+                this.rotation += this.vRot;
+                this.alpha -= this.decay * dt * 60;
+                if (this.alpha <= 0) this.active = false;
             }
             draw() {
+                if (!this.active) return;
                 ctx.save();
-                ctx.globalAlpha = this.alpha;
+                ctx.globalAlpha = Math.max(0, this.alpha);
+                ctx.translate(this.x, this.y);
+                ctx.rotate(this.rotation);
                 ctx.fillStyle = this.color;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
+
+                if (this.type === 'sparkle') {
+                    // Draw 4-point star
+                    ctx.beginPath();
+                    for (let i = 0; i < 4; i++) {
+                        ctx.lineTo(Math.cos(i * Math.PI / 2) * this.size, Math.sin(i * Math.PI / 2) * this.size);
+                        ctx.lineTo(Math.cos((i + 0.5) * Math.PI / 2) * (this.size * 0.3), Math.sin((i + 0.5) * Math.PI / 2) * (this.size * 0.3));
+                    }
+                    ctx.closePath();
+                    ctx.fill();
+                } else {
+                    ctx.beginPath();
+                    ctx.arc(0, 0, this.size, 0, Math.PI * 2);
+                    ctx.fill();
+                }
                 ctx.restore();
             }
         }
 
-        function spawnParticles(x, y, count = 10) {
-            for (let i = 0; i < count; i++) particles.push(new Particle(x, y));
+        // Pre-allocate particle pool
+        for (let i = 0; i < MAX_PARTICLES; i++) {
+            particlePool.push(new Particle());
         }
 
-        function handleParticles() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            for (let i = particles.length - 1; i >= 0; i--) {
-                particles[i].update();
-                particles[i].draw();
-                if (particles[i].alpha <= 0) particles.splice(i, 1);
+        function spawnFX(x, y, count = 12) {
+            const style = getComputedStyle(document.documentElement);
+            const pColor = style.getPropertyValue('--primary').trim() || '#d4af37';
+            const aColor = style.getPropertyValue('--accent').trim() || '#38bdf8';
+
+            let spawned = 0;
+            for (let i = 0; i < MAX_PARTICLES; i++) {
+                if (!particlePool[i].active) {
+                    particlePool[i].spawn(x, y, pColor, aColor);
+                    spawned++;
+                    if (spawned >= count) break;
+                }
             }
-            requestAnimationFrame(handleParticles);
         }
-        handleParticles();
+
+        let lastTime = performance.now();
+        function renderLoop(now) {
+            const dt = Math.min((now - lastTime) / 1000, 0.1);
+            lastTime = now;
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < MAX_PARTICLES; i++) {
+                if (particlePool[i].active) {
+                    particlePool[i].update(dt);
+                    particlePool[i].draw();
+                }
+            }
+            requestAnimationFrame(renderLoop);
+        }
+        requestAnimationFrame(renderLoop);
 
         // --- HELPERS & MATH ---
         function formatNumber(n) {
@@ -913,6 +954,7 @@
 
         // --- GAME ACTIONS ---
         function handleTap(e) {
+            initAudio();
             const rect = e.currentTarget.getBoundingClientRect();
             const x = e.clientX || (e.touches && e.touches[0].clientX) || (rect.left + rect.width / 2);
             const y = e.clientY || (e.touches && e.touches[0].clientY) || (rect.top + rect.height / 2);
@@ -927,13 +969,13 @@
             floatText.style.left = `${x}px`;
             floatText.style.top = `${y}px`;
             document.body.appendChild(floatText);
-            setTimeout(() => floatText.remove(), 850);
+            setTimeout(() => floatText.remove(), 750);
 
             playClickSound();
             triggerHaptic();
-            spawnParticles(x, y, 8);
+            spawnFX(x, y, 14);
 
-            updateUI();
+            updateUIThrottled();
         }
 
         function buyCalling(i) {
@@ -981,7 +1023,16 @@
             }
         }
 
-        // --- RENDER LOGIC ---
+        // --- DOM UPDATES THROTTLED ---
+        let lastUIUpdate = 0;
+        function updateUIThrottled() {
+            const now = performance.now();
+            if (now - lastUIUpdate > 50) { // Max 20 DOM updates/sec
+                updateUI();
+                lastUIUpdate = now;
+            }
+        }
+
         function updateUI() {
             document.getElementById('display-sp').innerText = formatNumber(state.sp);
             document.getElementById('display-sps').innerText = formatNumber(getSPS());
@@ -989,12 +1040,6 @@
 
             const t = temples[state.currentT];
             document.getElementById('display-tname').innerText = t.name + (state.currentT < state.unlockedT ? " (✓)" : "");
-            
-            const imgEl = document.getElementById('temple-img');
-            if (imgEl.getAttribute('src') !== t.img) {
-                imgEl.style.display = 'block';
-                imgEl.src = t.img;
-            }
 
             const prog = Math.min((state.sp / t.goal) * 100, 100);
             document.getElementById('fill-bar').style.width = `${prog}%`;
@@ -1063,7 +1108,7 @@
                 };
 
                 card.innerHTML = `
-                    <img class="map-thumb" src="${t.img}" onerror="this.style.display='none'">
+                    <div class="upgrade-icon">🏛️</div>
                     <div style="flex: 1;">
                         <div style="font-weight: 800; font-size: 0.95rem;">${t.name}</div>
                         <div style="font-size: 0.75rem; color: var(--text-sub);">Goal: ${formatNumber(t.goal)} SP</div>
@@ -1153,11 +1198,11 @@
 
         // --- SAVE/LOAD ---
         function saveGame() {
-            localStorage.setItem('TC_BALANCED_V2', JSON.stringify(state));
+            localStorage.setItem('TC_BALANCED_V3', JSON.stringify(state));
         }
 
         function loadGame() {
-            const data = localStorage.getItem('TC_BALANCED_V2');
+            const data = localStorage.getItem('TC_BALANCED_V3');
             if (data) {
                 try {
                     state = { ...state, ...JSON.parse(data) };
@@ -1173,26 +1218,31 @@
 
         function hardReset() {
             if (confirm("Are you sure you want to reset all spiritual progress?")) {
-                localStorage.removeItem('TC_BALANCED_V2');
+                localStorage.removeItem('TC_BALANCED_V3');
                 location.reload();
             }
         }
 
         // --- EVENT INITIALIZATION ---
-        document.getElementById('click-target').addEventListener('pointerdown', handleTap);
+        const clickTarget = document.getElementById('click-target');
+        clickTarget.addEventListener('pointerdown', handleTap);
         document.getElementById('dedicate-btn').addEventListener('click', dedicateTemple);
 
         window.onload = () => {
             loadGame();
+
+            // Passive gain loop (10Hz)
             setInterval(() => {
                 const sps = getSPS();
                 state.sp += sps / 10;
                 state.total += sps / 10;
-                updateUI();
+                updateUIThrottled();
             }, 100);
 
+            // Auto-save loop (5s)
             setInterval(saveGame, 5000);
 
+            // Text flavor ticker
             setInterval(() => {
                 const el = document.getElementById('display-status');
                 el.style.opacity = '0';
