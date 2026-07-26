@@ -5,64 +5,103 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Temple Clicker: Global Legend</title>
+    <title>Temple Clicker Deluxe</title>
     <style>
         :root {
             --bg-base: #0f172a;
-            --bg-card: rgba(30, 41, 59, 0.75);
-            --bg-card-active: rgba(51, 65, 85, 0.9);
+            --bg-card: rgba(30, 41, 59, 0.85);
+            --bg-card-active: rgba(51, 65, 85, 0.95);
             --text-main: #f8fafc;
             --text-sub: #94a3b8;
             --primary: #38bdf8;
-            --primary-glow: rgba(56, 189, 248, 0.35);
+            --primary-glow: rgba(56, 189, 248, 0.4);
             --accent: #fbbf24;
             --accent-glow: rgba(251, 191, 36, 0.4);
-            --border: rgba(255, 255, 255, 0.1);
+            --border: rgba(255, 255, 255, 0.12);
             --radius-lg: 24px;
             --radius-md: 16px;
             --radius-sm: 10px;
             --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
-            --safe-area-top: env(safe-area-inset-top, 0px);
-            --safe-area-bottom: env(safe-area-inset-bottom, 0px);
+            --safe-top: env(safe-area-inset-top, 0px);
+            --safe-bottom: env(safe-area-inset-bottom, 0px);
         }
 
         [data-theme="dark"] {
             --bg-base: #050505;
-            --bg-card: rgba(24, 24, 27, 0.8);
+            --bg-card: rgba(24, 24, 27, 0.85);
             --bg-card-active: rgba(39, 39, 42, 0.95);
             --text-main: #fafafa;
             --text-sub: #a1a1aa;
             --primary: #a855f7;
-            --primary-glow: rgba(168, 85, 247, 0.35);
+            --primary-glow: rgba(168, 85, 247, 0.4);
             --accent: #eab308;
             --accent-glow: rgba(234, 179, 8, 0.4);
-            --border: rgba(255, 255, 255, 0.1);
+            --border: rgba(255, 255, 255, 0.12);
         }
 
         [data-theme="celestial"] {
             --bg-base: #0a0f1d;
-            --bg-card: rgba(16, 25, 46, 0.8);
+            --bg-card: rgba(16, 25, 46, 0.85);
             --bg-card-active: rgba(27, 40, 71, 0.95);
             --text-main: #f8fafc;
             --text-sub: #829ab1;
             --primary: #d4af37;
-            --primary-glow: rgba(212, 175, 55, 0.4);
+            --primary-glow: rgba(212, 175, 55, 0.45);
             --accent: #38bdf8;
-            --accent-glow: rgba(56, 189, 248, 0.35);
-            --border: rgba(212, 175, 55, 0.2);
+            --accent-glow: rgba(56, 189, 248, 0.4);
+            --border: rgba(212, 175, 55, 0.25);
         }
 
         [data-theme="ironrod"] {
             --bg-base: #111827;
-            --bg-card: rgba(31, 41, 55, 0.8);
+            --bg-card: rgba(31, 41, 55, 0.85);
             --bg-card-active: rgba(55, 65, 81, 0.95);
             --text-main: #f9fafb;
             --text-sub: #9ca3af;
             --primary: #9ba3af;
-            --primary-glow: rgba(155, 163, 175, 0.35);
+            --primary-glow: rgba(155, 163, 175, 0.4);
             --accent: #10b981;
-            --accent-glow: rgba(16, 185, 129, 0.35);
-            --border: rgba(255, 255, 255, 0.12);
+            --accent-glow: rgba(16, 185, 129, 0.4);
+            --border: rgba(255, 255, 255, 0.15);
+        }
+
+        [data-theme="moroni"] {
+            --bg-base: #1c1303;
+            --bg-card: rgba(45, 30, 8, 0.85);
+            --bg-card-active: rgba(70, 48, 12, 0.95);
+            --text-main: #fffbeb;
+            --text-sub: #d97706;
+            --primary: #f59e0b;
+            --primary-glow: rgba(245, 158, 11, 0.5);
+            --accent: #fef08a;
+            --accent-glow: rgba(254, 240, 138, 0.5);
+            --border: rgba(245, 158, 11, 0.3);
+        }
+
+        [data-theme="pioneer"] {
+            --bg-base: #1c1917;
+            --bg-card: rgba(41, 37, 36, 0.85);
+            --bg-card-active: rgba(68, 64, 60, 0.95);
+            --text-main: #f5f5f4;
+            --text-sub: #a8a29e;
+            --primary: #f97316;
+            --primary-glow: rgba(249, 115, 22, 0.4);
+            --accent: #78350f;
+            --accent-glow: rgba(120, 53, 15, 0.4);
+            --border: rgba(249, 115, 22, 0.2);
+        }
+
+        [data-theme="zion"] {
+            --bg-base: #022c22;
+            --bg-card: rgba(6, 78, 59, 0.85);
+            --bg-card-active: rgba(4, 120, 87, 0.95);
+            --text-main: #ecfdf5;
+            --text-sub: #6ee7b7;
+            --primary: #34d399;
+            --primary-glow: rgba(52, 211, 153, 0.45);
+            --accent: #facc15;
+            --accent-glow: rgba(250, 204, 21, 0.45);
+            --border: rgba(52, 211, 153, 0.3);
         }
 
         * {
@@ -85,11 +124,12 @@
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            padding-top: var(--safe-area-top);
-            padding-bottom: var(--safe-area-bottom);
+            padding-top: var(--safe-top);
+            padding-bottom: var(--safe-bottom);
+            transition: background-color 0.4s ease;
         }
 
-        /* Particle Canvas */
+        /* Particle Canvas Overlay */
         #particle-canvas {
             position: fixed;
             top: 0;
@@ -100,28 +140,29 @@
             z-index: 1;
         }
 
-        /* Continuous Scrolling Text Marquee */
+        /* Scrolling LDS Banner */
         .marquee-banner {
             width: 100%;
-            background: rgba(0, 0, 0, 0.4);
+            background: rgba(0, 0, 0, 0.45);
             border-bottom: 1px solid var(--border);
             overflow: hidden;
             white-space: nowrap;
-            padding: 6px 0;
+            padding: 7px 0;
             position: relative;
             z-index: 6;
+            backdrop-filter: blur(10px);
         }
 
         .marquee-content {
             display: inline-block;
             white-space: nowrap;
-            animation: marquee 22s linear infinite;
+            animation: marquee 24s linear infinite;
             font-size: 0.75rem;
-            font-weight: 700;
-            letter-spacing: 1.5px;
+            font-weight: 800;
+            letter-spacing: 2px;
             text-transform: uppercase;
             color: var(--accent);
-            text-shadow: 0 0 8px var(--accent-glow);
+            text-shadow: 0 0 10px var(--accent-glow);
         }
 
         @keyframes marquee {
@@ -129,57 +170,56 @@
             100% { transform: translateX(-100%); }
         }
 
-        /* Top Bar Dynamic Display */
+        /* Score Header */
         .top-nav {
             position: relative;
             z-index: 5;
-            padding: 10px 20px 8px;
+            padding: 12px 20px 8px;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
-        .score-container {
-            text-align: center;
-        }
+        .score-container { text-align: center; }
 
         .score-label {
             font-size: 0.65rem;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 2.5px;
             color: var(--text-sub);
-            font-weight: 700;
+            font-weight: 800;
         }
 
         .score {
-            font-size: clamp(2.2rem, 6vw, 3.2rem);
+            font-size: clamp(2.2rem, 7vw, 3.4rem);
             font-weight: 900;
             letter-spacing: -1px;
             color: var(--text-main);
-            text-shadow: 0 0 20px var(--primary-glow);
+            text-shadow: 0 0 25px var(--primary-glow);
             line-height: 1.1;
         }
 
         .stats-strip {
             display: flex;
             gap: 16px;
-            margin-top: 6px;
+            margin-top: 8px;
             font-size: 0.8rem;
-            font-weight: 600;
+            font-weight: 700;
             color: var(--text-sub);
             background: var(--bg-card);
-            padding: 6px 16px;
+            padding: 6px 18px;
             border-radius: 20px;
             border: 1px solid var(--border);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
 
         .stat-item span {
             color: var(--text-main);
-            font-weight: 700;
+            font-weight: 800;
         }
 
-        /* Main Viewport */
+        /* App Main Panels */
         .app-viewport {
             position: relative;
             z-index: 2;
@@ -198,37 +238,37 @@
             justify-content: space-between;
             padding: 10px 20px 20px;
             overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
         }
 
-        /* Clicker Stage */
         .stage-header {
             text-align: center;
             margin-bottom: 6px;
         }
 
         .temple-title {
-            font-size: 1.2rem;
-            font-weight: 800;
+            font-size: 1.25rem;
+            font-weight: 900;
             letter-spacing: 0.5px;
             text-transform: uppercase;
-            background: linear-gradient(135deg, var(--text-main), var(--text-sub));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: var(--text-main);
+            text-shadow: 0 2px 10px var(--primary-glow);
         }
 
         .status-msg {
-            font-size: 0.75rem;
+            font-size: 0.78rem;
             color: var(--accent);
             min-height: 1.2em;
-            margin-top: 2px;
+            margin-top: 3px;
             font-style: italic;
             transition: opacity 0.3s;
         }
 
+        /* Main Clicker Object */
         .click-stage {
             position: relative;
-            width: clamp(210px, 52vw, 300px);
-            height: clamp(210px, 52vw, 300px);
+            width: clamp(210px, 54vw, 310px);
+            height: clamp(210px, 54vw, 310px);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -237,16 +277,16 @@
 
         .click-aura {
             position: absolute;
-            inset: -12px;
-            border-radius: 40px;
+            inset: -15px;
+            border-radius: 50px;
             background: radial-gradient(circle, var(--primary-glow) 0%, rgba(0,0,0,0) 70%);
-            animation: pulseAura 4s infinite ease-in-out;
+            animation: pulseAura 3.5s infinite ease-in-out;
             z-index: 1;
         }
 
         @keyframes pulseAura {
-            0%, 100% { transform: scale(0.95); opacity: 0.5; }
-            50% { transform: scale(1.08); opacity: 0.9; }
+            0%, 100% { transform: scale(0.92); opacity: 0.4; }
+            50% { transform: scale(1.1); opacity: 0.95; }
         }
 
         .click-target {
@@ -256,49 +296,48 @@
             height: 100%;
             border-radius: 36px;
             background: var(--bg-card);
-            border: 4px solid var(--border);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5), inset 0 0 20px var(--primary-glow);
+            border: 3px solid var(--border);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.6), inset 0 0 25px var(--primary-glow);
             overflow: hidden;
             cursor: pointer;
-            transition: transform 0.08s ease, border-color 0.3s ease;
+            transition: transform 0.08s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        .click-target:active {
-            transform: scale(0.93);
-        }
+        .click-target:active { transform: scale(0.92); }
 
         #temple-img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             pointer-events: none;
+            transition: filter 0.3s;
         }
 
-        /* Floating Click Text */
+        /* Particle Float Overlay */
         .floating-text {
             position: absolute;
             pointer-events: none;
             font-weight: 900;
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             color: var(--accent);
-            text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+            text-shadow: 0 2px 10px rgba(0,0,0,0.9), 0 0 8px var(--accent-glow);
             z-index: 10;
-            animation: floatUp 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+            animation: floatUp 0.85s cubic-bezier(0.23, 1, 0.32, 1) forwards;
         }
 
         @keyframes floatUp {
             0% { opacity: 1; transform: translate(-50%, -50%) scale(0.8) translateY(0); }
-            50% { transform: translate(-50%, -50%) scale(1.2) translateY(-30px); }
-            100% { opacity: 0; transform: translate(-50%, -50%) scale(1) translateY(-60px); }
+            50% { transform: translate(-50%, -50%) scale(1.25) translateY(-35px); }
+            100% { opacity: 0; transform: translate(-50%, -50%) scale(1) translateY(-70px); }
         }
 
-        /* Progress Card */
+        /* Progress Bar Card */
         .progress-card {
             width: 100%;
-            max-width: 400px;
+            max-width: 420px;
             background: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: var(--radius-lg);
@@ -311,16 +350,16 @@
             display: flex;
             justify-content: space-between;
             font-size: 0.8rem;
-            font-weight: 700;
+            font-weight: 800;
             margin-bottom: 8px;
             color: var(--text-sub);
         }
 
         .bar-track {
             width: 100%;
-            height: 12px;
-            background: rgba(0,0,0,0.4);
-            border-radius: 6px;
+            height: 14px;
+            background: rgba(0,0,0,0.45);
+            border-radius: 7px;
             overflow: hidden;
             position: relative;
             border: 1px solid var(--border);
@@ -330,9 +369,9 @@
             height: 100%;
             width: 0%;
             background: linear-gradient(90deg, var(--primary), var(--accent));
-            border-radius: 6px;
+            border-radius: 7px;
             transition: width 0.3s ease;
-            box-shadow: 0 0 12px var(--accent-glow);
+            box-shadow: 0 0 14px var(--accent-glow);
         }
 
         .action-btn {
@@ -350,7 +389,7 @@
             cursor: pointer;
             box-shadow: 0 4px 20px var(--accent-glow);
             display: none;
-            animation: bounce 2s infinite;
+            animation: bounce 1.8s infinite;
         }
 
         @keyframes bounce {
@@ -359,14 +398,14 @@
             60% { transform: translateY(-3px); }
         }
 
-        /* Upgrades & Map Lists */
+        /* List Items & Cards */
         .list-container {
             width: 100%;
-            max-width: 500px;
+            max-width: 480px;
             display: flex;
             flex-direction: column;
-            gap: 10px;
-            padding-bottom: 20px;
+            gap: 12px;
+            padding-bottom: 25px;
         }
 
         .upgrade-card {
@@ -379,6 +418,7 @@
             gap: 14px;
             transition: background 0.2s, transform 0.1s;
             cursor: pointer;
+            backdrop-filter: blur(8px);
         }
 
         .upgrade-card:active {
@@ -387,9 +427,9 @@
         }
 
         .upgrade-card.disabled {
-            opacity: 0.4;
+            opacity: 0.45;
             pointer-events: none;
-            filter: grayscale(0.8);
+            filter: grayscale(0.7);
         }
 
         .upgrade-icon {
@@ -405,22 +445,21 @@
         }
 
         .upgrade-info { flex: 1; }
-        .upgrade-title { font-size: 0.95rem; font-weight: 700; color: var(--text-main); }
+        .upgrade-title { font-size: 0.95rem; font-weight: 800; color: var(--text-main); }
         .upgrade-sub { font-size: 0.75rem; color: var(--text-sub); margin-top: 2px; }
 
         .upgrade-buy {
             background: var(--primary);
             color: #000;
-            font-weight: 800;
+            font-weight: 900;
             font-size: 0.8rem;
-            padding: 8px 14px;
+            padding: 9px 14px;
             border-radius: var(--radius-sm);
-            box-shadow: 0 2px 10px var(--primary-glow);
+            box-shadow: 0 2px 12px var(--primary-glow);
             text-align: center;
-            min-width: 75px;
+            min-width: 80px;
         }
 
-        /* Global Map Card */
         .map-card {
             background: var(--bg-card);
             border: 1px solid var(--border);
@@ -428,22 +467,23 @@
             padding: 14px 16px;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 14px;
             cursor: pointer;
+            backdrop-filter: blur(8px);
         }
 
-        .map-card.locked { opacity: 0.4; cursor: not-allowed; }
+        .map-card.locked { opacity: 0.45; cursor: not-allowed; }
 
         .map-thumb {
-            width: 50px;
-            height: 50px;
+            width: 52px;
+            height: 52px;
             border-radius: var(--radius-sm);
             object-fit: cover;
             border: 1px solid var(--border);
-            background: rgba(0,0,0,0.2);
+            background: rgba(0,0,0,0.3);
         }
 
-        /* Bottom Nav */
+        /* Bottom Nav Bar */
         .bottom-nav {
             position: relative;
             z-index: 10;
@@ -454,7 +494,7 @@
             display: flex;
             justify-content: space-around;
             align-items: center;
-            padding-bottom: clamp(0px, var(--safe-area-bottom), 20px);
+            padding-bottom: clamp(0px, var(--safe-bottom), 20px);
         }
 
         .nav-item {
@@ -465,24 +505,25 @@
             justify-content: center;
             height: 100%;
             color: var(--text-sub);
-            font-size: 0.7rem;
-            font-weight: 700;
+            font-size: 0.72rem;
+            font-weight: 800;
             gap: 4px;
             border: none;
             background: transparent;
             cursor: pointer;
-            transition: color 0.2s;
+            transition: color 0.2s, transform 0.1s;
         }
 
         .nav-item.active { color: var(--primary); }
+        .nav-item:active { transform: scale(0.93); }
         .nav-item svg { width: 22px; height: 22px; fill: currentColor; }
 
-        /* Slide Sheet Modal */
+        /* Settings & Shop Modal */
         .modal-overlay {
             position: fixed;
             inset: 0;
-            background: rgba(0, 0, 0, 0.75);
-            backdrop-filter: blur(8px);
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
             z-index: 100;
             display: flex;
             align-items: flex-end;
@@ -496,21 +537,21 @@
 
         .sheet {
             width: 100%;
-            max-width: 500px;
+            max-width: 520px;
             background: var(--bg-base);
             border-top-left-radius: var(--radius-lg);
             border-top-right-radius: var(--radius-lg);
             border: 1px solid var(--border);
-            padding: 24px 20px clamp(20px, var(--safe-area-bottom), 40px);
+            padding: 24px 20px clamp(20px, var(--safe-bottom), 40px);
             transform: translateY(100%);
-            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            max-height: 80vh;
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            max-height: 85vh;
             overflow-y: auto;
         }
 
         .modal-overlay.active .sheet { transform: translateY(0); }
         .sheet-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-        .sheet-title { font-size: 1.2rem; font-weight: 800; }
+        .sheet-title { font-size: 1.25rem; font-weight: 900; }
 
         .close-btn {
             background: var(--bg-card);
@@ -526,22 +567,42 @@
             cursor: pointer;
         }
 
-        .theme-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .theme-btn {
+        .theme-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+        .theme-card {
             background: var(--bg-card);
             border: 1px solid var(--border);
             padding: 14px;
             border-radius: var(--radius-md);
             color: var(--text-main);
-            font-weight: 700;
-            font-size: 0.85rem;
-            cursor: pointer;
             display: flex;
-            align-items: center;
+            flex-direction: column;
             justify-content: space-between;
+            gap: 10px;
+            cursor: pointer;
         }
 
+        .theme-card-top { display: flex; align-items: center; justify-content: space-between; }
+        .theme-name { font-weight: 800; font-size: 0.9rem; }
         .theme-dot { width: 14px; height: 14px; border-radius: 50%; }
+
+        .theme-buy-btn {
+            background: var(--primary);
+            color: #000;
+            font-weight: 800;
+            font-size: 0.75rem;
+            padding: 6px 10px;
+            border-radius: var(--radius-sm);
+            border: none;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .theme-buy-btn.equipped {
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
 
         .setting-row {
             display: flex;
@@ -549,6 +610,7 @@
             justify-content: space-between;
             padding: 14px 0;
             border-bottom: 1px solid var(--border);
+            font-weight: 700;
         }
 
         .toggle {
@@ -627,7 +689,7 @@
         <section class="view-panel" id="panel-upgrades" style="display: none;">
             <div class="stage-header">
                 <h2 class="temple-title">Callings & Service</h2>
-                <div class="status-msg">Expand ward capacity and strength</div>
+                <div class="status-msg">Expand ward strength and capacity</div>
             </div>
             <div class="list-container" id="upgrades-list"></div>
         </section>
@@ -647,7 +709,7 @@
             Temple
         </button>
         <button class="nav-item" onclick="switchTab('upgrades')">
-            <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
             Callings
         </button>
         <button class="nav-item" onclick="switchTab('map')">
@@ -655,15 +717,15 @@
             Travel
         </button>
         <button class="nav-item" onclick="openModal('settings-modal')">
-            <svg viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
-            Settings
+            <svg viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6-3.6z"/></svg>
+            Shop/Set
         </button>
     </nav>
 
     <div class="modal-overlay" id="settings-modal" onclick="closeModal('settings-modal')">
         <div class="sheet" onclick="event.stopPropagation()">
             <div class="sheet-header">
-                <div class="sheet-title">Settings & Themes</div>
+                <div class="sheet-title">Settings & Theme Shop</div>
                 <div class="close-btn" onclick="closeModal('settings-modal')">✕</div>
             </div>
 
@@ -681,21 +743,8 @@
                 </div>
             </div>
 
-            <div style="margin: 20px 0 10px; font-weight: 700; font-size: 0.9rem; color: var(--text-sub);">Select Theme</div>
-            <div class="theme-grid">
-                <button class="theme-btn" onclick="setTheme('celestial')">
-                    Celestial
-                    <div class="theme-dot" style="background: #d4af37;"></div>
-                </button>
-                <button class="theme-btn" onclick="setTheme('dark')">
-                    Midnight
-                    <div class="theme-dot" style="background: #a855f7;"></div>
-                </button>
-                <button class="theme-btn" onclick="setTheme('ironrod')">
-                    Iron Rod
-                    <div class="theme-dot" style="background: #10b981;"></div>
-                </button>
-            </div>
+            <div style="margin: 22px 0 12px; font-weight: 800; font-size: 0.9rem; color: var(--text-sub); text-transform: uppercase; letter-spacing: 1px;">Theme Shop</div>
+            <div class="theme-grid" id="theme-shop-grid"></div>
 
             <button style="width: 100%; margin-top: 25px; padding: 14px; background: rgba(239, 68, 68, 0.2); border: 1px solid rgba(239, 68, 68, 0.4); color: #ef4444; border-radius: var(--radius-md); font-weight: 800; cursor: pointer;" onclick="hardReset()">
                 Reset Saved Progress
@@ -714,11 +763,20 @@
             counts: {},
             total: 0,
             theme: 'celestial',
+            ownedThemes: ['celestial'],
             audio: true,
             haptics: true
         };
 
-        // All 10 Temples Restored
+        const themeCatalog = [
+            { id: 'celestial', name: 'Celestial', cost: 0, color: '#d4af37' },
+            { id: 'dark', name: 'Midnight', cost: 2500, color: '#a855f7' },
+            { id: 'ironrod', name: 'Iron Rod', cost: 50000, color: '#10b981' },
+            { id: 'moroni', name: 'Golden Moroni', cost: 1000000, color: '#f59e0b' },
+            { id: 'pioneer', name: 'Pioneer Trek', cost: 25000000, color: '#f97316' },
+            { id: 'zion', name: 'Zion Glow', cost: 500000000, color: '#34d399' }
+        ];
+
         const temples = [
             { name: "Kirtland Ohio", goal: 10000, img: "temples/kirtland.png", callings: [{n: "Clerk", c: 10, s: 1, i: "✍️"}, {n: "Exec Sec", c: 150, s: 5, i: "📅"}, {n: "2nd Counselor", c: 1500, s: 20, i: "📋"}, {n: "1st Counselor", c: 10000, s: 90, i: "💼"}, {n: "Bishop", c: 75000, s: 400, i: "🗝️"}, {n: "Recorder", c: 500000, s: 2000, i: "💰"}, {n: "Librarian", c: 3000000, s: 8000, i: "📚"}, {n: "Building Rep", c: 20000000, s: 35000, i: "🔑"}, {n: "High Councilor", c: 150000000, s: 150000, i: "🏛️"}, {n: "Stake President", c: 1000000000, s: 800000, i: "👔"}] },
             { name: "Manti Utah", goal: 400000, img: "temples/manti.png", callings: [{n: "Gardener", c: 8000, s: 30, i: "🌻"}, {n: "Carpenter", c: 50000, s: 150, i: "🪵"}, {n: "Mason", c: 250000, s: 700, i: "🧱"}, {n: "Dancer", c: 2000000, s: 3500, i: "💃"}, {n: "Cast Member", c: 12000000, s: 15000, i: "🎭"}, {n: "Farmer", c: 75000000, s: 80000, i: "🚜"}, {n: "Chorister", c: 500000000, s: 400000, i: "🎼"}, {n: "Guide", c: 3000000000, s: 2000000, i: "⛪"}, {n: "Patriarch", c: 20000000000, s: 10000000, i: "🖐️"}, {n: "Architect", c: 150000000000, s: 60000000, i: "📐"}] },
@@ -734,19 +792,16 @@
 
         const flavorMessages = [
             "A small spark of faith.",
-            "The ward is just starting out.",
-            "Finding joy in service.",
-            "Ward socials are buzzing.",
-            "International growth is exploding.",
+            "The ward is growing day by day.",
+            "Finding pure joy in service.",
+            "Ward activities are lively and bright.",
+            "International growth is surging.",
             "A beacon of light to all nations."
         ];
 
         // --- AUDIO ENGINE ---
         let audioCtx = null;
-
-        function initAudio() {
-            if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        }
+        function initAudio() { if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)(); }
 
         function playClickSound() {
             if (!state.audio) return;
@@ -756,9 +811,9 @@
             const osc = audioCtx.createOscillator();
             const gain = audioCtx.createGain();
             osc.type = 'sine';
-            osc.frequency.setValueAtTime(440, audioCtx.currentTime);
-            osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.08);
-            gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+            osc.frequency.setValueAtTime(480, audioCtx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(920, audioCtx.currentTime + 0.08);
+            gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
             gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.08);
             osc.connect(gain);
             gain.connect(audioCtx.destination);
@@ -767,10 +822,10 @@
         }
 
         function triggerHaptic() {
-            if (state.haptics && navigator.vibrate) navigator.vibrate(12);
+            if (state.haptics && navigator.vibrate) navigator.vibrate(10);
         }
 
-        // --- PARTICLE ENGINE ---
+        // --- ENHANCED PARTICLE SYSTEM ---
         const canvas = document.getElementById('particle-canvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
@@ -786,12 +841,12 @@
             constructor(x, y) {
                 this.x = x;
                 this.y = y;
-                this.size = Math.random() * 4 + 2;
-                this.speedX = (Math.random() - 0.5) * 4;
-                this.speedY = (Math.random() - 0.5) * 4 - 2;
+                this.size = Math.random() * 5 + 2;
+                this.speedX = (Math.random() - 0.5) * 5;
+                this.speedY = (Math.random() - 0.5) * 5 - 2;
                 this.color = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#fbbf24';
                 this.alpha = 1;
-                this.decay = Math.random() * 0.03 + 0.015;
+                this.decay = Math.random() * 0.025 + 0.015;
             }
             update() {
                 this.x += this.speedX;
@@ -809,7 +864,7 @@
             }
         }
 
-        function spawnParticles(x, y, count = 8) {
+        function spawnParticles(x, y, count = 10) {
             for (let i = 0; i < count; i++) particles.push(new Particle(x, y));
         }
 
@@ -824,7 +879,7 @@
         }
         handleParticles();
 
-        // --- CORE GAME LOGIC ---
+        // --- HELPERS & MATH ---
         function formatNumber(n) {
             if (n >= 1e33) return (n/1e33).toFixed(1) + 'Dc';
             if (n >= 1e30) return (n/1e30).toFixed(1) + 'No';
@@ -852,6 +907,11 @@
             return total * state.faith;
         }
 
+        function cCost(base, count) {
+            return base * Math.pow(PRICE_FACTOR, count);
+        }
+
+        // --- GAME ACTIONS ---
         function handleTap(e) {
             const rect = e.currentTarget.getBoundingClientRect();
             const x = e.clientX || (e.touches && e.touches[0].clientX) || (rect.left + rect.width / 2);
@@ -867,11 +927,11 @@
             floatText.style.left = `${x}px`;
             floatText.style.top = `${y}px`;
             document.body.appendChild(floatText);
-            setTimeout(() => floatText.remove(), 800);
+            setTimeout(() => floatText.remove(), 850);
 
             playClickSound();
             triggerHaptic();
-            spawnParticles(x, y, 6);
+            spawnParticles(x, y, 8);
 
             updateUI();
         }
@@ -892,8 +952,21 @@
             }
         }
 
-        function cCost(base, count) {
-            return base * Math.pow(PRICE_FACTOR, count);
+        function buyTheme(tId) {
+            const th = themeCatalog.find(x => x.id === tId);
+            if (!th) return;
+
+            if (state.ownedThemes.includes(tId)) {
+                setTheme(tId);
+            } else if (state.sp >= th.cost) {
+                state.sp -= th.cost;
+                state.ownedThemes.push(tId);
+                setTheme(tId);
+                triggerHaptic();
+                saveGame();
+            }
+            renderThemeShop();
+            updateUI();
         }
 
         function dedicateTemple() {
@@ -908,7 +981,7 @@
             }
         }
 
-        // --- RENDER FUNCTIONS ---
+        // --- RENDER LOGIC ---
         function updateUI() {
             document.getElementById('display-sp').innerText = formatNumber(state.sp);
             document.getElementById('display-sps').innerText = formatNumber(getSPS());
@@ -1003,9 +1076,35 @@
             });
         }
 
+        function renderThemeShop() {
+            const grid = document.getElementById('theme-shop-grid');
+            grid.innerHTML = '';
+
+            themeCatalog.forEach(th => {
+                const isOwned = state.ownedThemes.includes(th.id);
+                const isEquipped = state.theme === th.id;
+
+                const card = document.createElement('div');
+                card.className = 'theme-card';
+                card.onclick = () => buyTheme(th.id);
+
+                card.innerHTML = `
+                    <div class="theme-card-top">
+                        <span class="theme-name">${th.name}</span>
+                        <div class="theme-dot" style="background: ${th.color};"></div>
+                    </div>
+                    <button class="theme-buy-btn ${isEquipped ? 'equipped' : ''}">
+                        ${isEquipped ? 'EQUIPPED' : isOwned ? 'EQUIP' : formatNumber(th.cost) + ' SP'}
+                    </button>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
         function renderAll() {
             renderUpgrades();
             renderMap();
+            renderThemeShop();
             updateUI();
         }
 
@@ -1028,7 +1127,10 @@
             }
         }
 
-        function openModal(id) { document.getElementById(id).classList.add('active'); }
+        function openModal(id) { 
+            renderThemeShop();
+            document.getElementById(id).classList.add('active'); 
+        }
         function closeModal(id) { document.getElementById(id).classList.remove('active'); }
 
         function setTheme(t) {
@@ -1049,13 +1151,13 @@
             saveGame();
         }
 
-        // --- PERSISTENCE ENGINE ---
+        // --- SAVE/LOAD ---
         function saveGame() {
-            localStorage.setItem('TC_BALANCED_V1', JSON.stringify(state));
+            localStorage.setItem('TC_BALANCED_V2', JSON.stringify(state));
         }
 
         function loadGame() {
-            const data = localStorage.getItem('TC_BALANCED_V1');
+            const data = localStorage.getItem('TC_BALANCED_V2');
             if (data) {
                 try {
                     state = { ...state, ...JSON.parse(data) };
@@ -1071,12 +1173,12 @@
 
         function hardReset() {
             if (confirm("Are you sure you want to reset all spiritual progress?")) {
-                localStorage.removeItem('TC_BALANCED_V1');
+                localStorage.removeItem('TC_BALANCED_V2');
                 location.reload();
             }
         }
 
-        // --- LISTENERS ---
+        // --- EVENT INITIALIZATION ---
         document.getElementById('click-target').addEventListener('pointerdown', handleTap);
         document.getElementById('dedicate-btn').addEventListener('click', dedicateTemple);
 
