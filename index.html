@@ -9,84 +9,36 @@
     <style>
         :root {
             --bg-base: #0a0f1d;
-            --bg-card: rgba(16, 25, 46, 0.85);
+            --bg-card: rgba(16, 25, 46, 0.88);
             --bg-card-active: rgba(27, 40, 71, 0.95);
             --text-main: #f8fafc;
-            --text-sub: #829ab1;
+            --text-sub: #94a3b8;
             --primary: #d4af37;
-            --primary-glow: rgba(212, 175, 55, 0.45);
+            --primary-glow: rgba(212, 175, 55, 0.5);
             --accent: #38bdf8;
             --accent-glow: rgba(56, 189, 248, 0.4);
             --border: rgba(212, 175, 55, 0.25);
-            --radius-lg: 24px;
-            --radius-md: 16px;
+            --radius-lg: 20px;
+            --radius-md: 14px;
             --radius-sm: 10px;
-            --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             --safe-top: env(safe-area-inset-top, 0px);
             --safe-bottom: env(safe-area-inset-bottom, 0px);
         }
 
-        /* --- THEME VARIATIONS --- */
-        [data-theme="dark"] {
-            --bg-base: #050505; --bg-card: rgba(24, 24, 27, 0.85); --bg-card-active: rgba(39, 39, 42, 0.95);
-            --text-main: #fafafa; --text-sub: #a1a1aa; --primary: #a855f7; --primary-glow: rgba(168, 85, 247, 0.4);
-            --accent: #eab308; --accent-glow: rgba(234, 179, 8, 0.4); --border: rgba(255, 255, 255, 0.12);
-        }
-        [data-theme="celestial"] {
-            --bg-base: #0a0f1d; --bg-card: rgba(16, 25, 46, 0.85); --bg-card-active: rgba(27, 40, 71, 0.95);
-            --text-main: #f8fafc; --text-sub: #829ab1; --primary: #d4af37; --primary-glow: rgba(212, 175, 55, 0.45);
-            --accent: #38bdf8; --accent-glow: rgba(56, 189, 248, 0.4); --border: rgba(212, 175, 55, 0.25);
-        }
-        [data-theme="ironrod"] {
-            --bg-base: #111827; --bg-card: rgba(31, 41, 55, 0.85); --bg-card-active: rgba(55, 65, 81, 0.95);
-            --text-main: #f9fafb; --text-sub: #9ca3af; --primary: #9ba3af; --primary-glow: rgba(155, 163, 175, 0.4);
-            --accent: #10b981; --accent-glow: rgba(16, 185, 129, 0.4); --border: rgba(255, 255, 255, 0.15);
-        }
-        [data-theme="moroni"] {
-            --bg-base: #1c1303; --bg-card: rgba(45, 30, 8, 0.85); --bg-card-active: rgba(70, 48, 12, 0.95);
-            --text-main: #fffbeb; --text-sub: #d97706; --primary: #f59e0b; --primary-glow: rgba(245, 158, 11, 0.5);
-            --accent: #fef08a; --accent-glow: rgba(254, 240, 138, 0.5); --border: rgba(245, 158, 11, 0.3);
-        }
-        [data-theme="pioneer"] {
-            --bg-base: #1c1917; --bg-card: rgba(41, 37, 36, 0.85); --bg-card-active: rgba(68, 64, 60, 0.95);
-            --text-main: #f5f5f4; --text-sub: #a8a29e; --primary: #f97316; --primary-glow: rgba(249, 115, 22, 0.4);
-            --accent: #78350f; --accent-glow: rgba(120, 53, 15, 0.4); --border: rgba(249, 115, 22, 0.2);
-        }
-        [data-theme="zion"] {
-            --bg-base: #022c22; --bg-card: rgba(6, 78, 59, 0.85); --bg-card-active: rgba(4, 120, 87, 0.95);
-            --text-main: #ecfdf5; --text-sub: #6ee7b7; --primary: #34d399; --primary-glow: rgba(52, 211, 153, 0.45);
-            --accent: #facc15; --accent-glow: rgba(250, 204, 21, 0.45); --border: rgba(52, 211, 153, 0.3);
-        }
-        [data-theme="desert"] {
-            --bg-base: #2a1208; --bg-card: rgba(61, 31, 18, 0.85); --bg-card-active: rgba(85, 45, 27, 0.95);
-            --text-main: #fff7ed; --text-sub: #fdba74; --primary: #fb923c; --primary-glow: rgba(251, 146, 60, 0.45);
-            --accent: #f43f5e; --accent-glow: rgba(244, 63, 94, 0.45); --border: rgba(251, 146, 60, 0.3);
-        }
-        [data-theme="alpine"] {
-            --bg-base: #0f172a; --bg-card: rgba(30, 41, 59, 0.85); --bg-card-active: rgba(51, 65, 85, 0.95);
-            --text-main: #f8fafc; --text-sub: #cbd5e1; --primary: #38bdf8; --primary-glow: rgba(56, 189, 248, 0.45);
-            --accent: #818cf8; --accent-glow: rgba(129, 140, 248, 0.45); --border: rgba(56, 189, 248, 0.3);
-        }
-        [data-theme="rosegold"] {
-            --bg-base: #1a0c13; --bg-card: rgba(48, 22, 35, 0.85); --bg-card-active: rgba(74, 35, 55, 0.95);
-            --text-main: #fff1f2; --text-sub: #f43f5e; --primary: #fb7185; --primary-glow: rgba(251, 113, 133, 0.45);
-            --accent: #fecdd3; --accent-glow: rgba(254, 205, 211, 0.45); --border: rgba(251, 113, 133, 0.3);
-        }
-        [data-theme="ocean"] {
-            --bg-base: #03182b; --bg-card: rgba(8, 47, 73, 0.85); --bg-card-active: rgba(14, 116, 144, 0.95);
-            --text-main: #f0f9ff; --text-sub: #7dd3fc; --primary: #06b6d4; --primary-glow: rgba(6, 182, 212, 0.45);
-            --accent: #22d3ee; --accent-glow: rgba(34, 211, 238, 0.45); --border: rgba(6, 182, 212, 0.3);
-        }
-        [data-theme="neon"] {
-            --bg-base: #090014; --bg-card: rgba(31, 9, 56, 0.85); --bg-card-active: rgba(58, 17, 105, 0.95);
-            --text-main: #ffffff; --text-sub: #f0abfc; --primary: #f032e6; --primary-glow: rgba(240, 50, 230, 0.5);
-            --accent: #00f0ff; --accent-glow: rgba(0, 240, 255, 0.5); --border: rgba(240, 50, 230, 0.4);
-        }
-        [data-theme="ethereal"] {
-            --bg-base: #1e293b; --bg-card: rgba(51, 65, 85, 0.85); --bg-card-active: rgba(71, 85, 105, 0.95);
-            --text-main: #ffffff; --text-sub: #e2e8f0; --primary: #ffffff; --primary-glow: rgba(255, 255, 255, 0.6);
-            --accent: #cbd5e1; --accent-glow: rgba(203, 213, 225, 0.5); --border: rgba(255, 255, 255, 0.3);
-        }
+        /* --- LDS THEMES --- */
+        [data-theme="celestial"] { --bg-base: #0a0f1d; --bg-card: rgba(16, 25, 46, 0.88); --text-main: #f8fafc; --text-sub: #94a3b8; --primary: #d4af37; --primary-glow: rgba(212, 175, 55, 0.5); --accent: #38bdf8; --border: rgba(212, 175, 55, 0.3); }
+        [data-theme="cumorah"]   { --bg-base: #0a0512; --bg-card: rgba(25, 16, 40, 0.88); --text-main: #ffffff; --text-sub: #c084fc; --primary: #a855f7; --primary-glow: rgba(168, 85, 247, 0.5); --accent: #f43f5e; --border: rgba(168, 85, 247, 0.3); }
+        [data-theme="ironrod"]   { --bg-base: #0f172a; --bg-card: rgba(30, 41, 59, 0.88); --text-main: #f8fafc; --text-sub: #94a3b8; --primary: #94a3b8; --primary-glow: rgba(148, 163, 184, 0.5); --accent: #10b981; --border: rgba(148, 163, 184, 0.3); }
+        [data-theme="moroni"]    { --bg-base: #1c1303; --bg-card: rgba(45, 30, 8, 0.88); --text-main: #fffbeb; --text-sub: #d97706; --primary: #f59e0b; --primary-glow: rgba(245, 158, 11, 0.5); --accent: #fef08a; --border: rgba(245, 158, 11, 0.3); }
+        [data-theme="zion"]      { --bg-base: #022c22; --bg-card: rgba(6, 78, 59, 0.88); --text-main: #ecfdf5; --text-sub: #6ee7b7; --primary: #10b981; --primary-glow: rgba(16, 185, 129, 0.5); --accent: #facc15; --border: rgba(16, 185, 129, 0.3); }
+        [data-theme="liahona"]   { --bg-base: #221204; --bg-card: rgba(54, 28, 8, 0.88); --text-main: #fff7ed; --text-sub: #fdba74; --primary: #d97706; --primary-glow: rgba(217, 119, 6, 0.5); --accent: #f59e0b; --border: rgba(217, 119, 6, 0.3); }
+        [data-theme="deseret"]   { --bg-base: #0c1e2e; --bg-card: rgba(21, 43, 66, 0.88); --text-main: #f0f9ff; --text-sub: #7dd3fc; --primary: #38bdf8; --primary-glow: rgba(56, 189, 248, 0.5); --accent: #818cf8; --border: rgba(56, 189, 248, 0.3); }
+        [data-theme="rose"]      { --bg-base: #1f0d18; --bg-card: rgba(51, 24, 40, 0.88); --text-main: #fff1f2; --text-sub: #f43f5e; --primary: #fb7185; --primary-glow: rgba(251, 113, 133, 0.5); --accent: #ffe4e6; --border: rgba(251, 113, 133, 0.3); }
+        [data-theme="mormon"]    { --bg-base: #031b2e; --bg-card: rgba(10, 45, 74, 0.88); --text-main: #f0f9ff; --text-sub: #38bdf8; --primary: #06b6d4; --primary-glow: rgba(6, 182, 212, 0.5); --accent: #a5f3fc; --border: rgba(6, 182, 212, 0.3); }
+        [data-theme="refiner"]   { --bg-base: #0d001a; --bg-card: rgba(36, 8, 64, 0.88); --text-main: #ffffff; --text-sub: #f0abfc; --primary: #e024c3; --primary-glow: rgba(224, 36, 195, 0.6); --accent: #00f0ff; --border: rgba(224, 36, 195, 0.4); }
+        [data-theme="marble"]    { --bg-base: #18181b; --bg-card: rgba(39, 39, 42, 0.88); --text-main: #ffffff; --text-sub: #d4d4d8; --primary: #f4f4f5; --primary-glow: rgba(255, 255, 255, 0.5); --accent: #e4e4e7; --border: rgba(255, 255, 255, 0.3); }
+        [data-theme="priesthood"]{ --bg-base: #1e1b4b; --bg-card: rgba(49, 46, 129, 0.88); --text-main: #e0e7ff; --text-sub: #818cf8; --primary: #c084fc; --primary-glow: rgba(192, 132, 252, 0.5); --accent: #fbbf24; --border: rgba(192, 132, 252, 0.3); }
 
         * {
             box-sizing: border-box;
@@ -95,22 +47,18 @@
             -webkit-tap-highlight-color: transparent;
             user-select: none;
             -webkit-user-select: none;
-            touch-action: manipulation;
         }
 
-        body {
-            font-family: var(--font-sans);
-            background-color: var(--bg-base);
-            color: var(--text-main);
-            height: 100vh;
+        html, body {
+            width: 100%;
+            height: 100%;
             height: -webkit-fill-available;
-            width: 100vw;
             overflow: hidden;
+            background-color: var(--bg-base);
+            font-family: var(--font-sans);
+            color: var(--text-main);
             display: flex;
             flex-direction: column;
-            padding-top: var(--safe-top);
-            padding-bottom: var(--safe-bottom);
-            transition: background-color 0.4s ease;
         }
 
         #particle-canvas {
@@ -120,28 +68,26 @@
             height: 100%;
             pointer-events: none;
             z-index: 1;
-            will-change: transform;
         }
 
         .marquee-banner {
             width: 100%;
-            background: rgba(0, 0, 0, 0.45);
+            background: rgba(0, 0, 0, 0.5);
             border-bottom: 1px solid var(--border);
             overflow: hidden;
             white-space: nowrap;
-            padding: 7px 0;
+            padding: 6px 0;
             position: relative;
             z-index: 6;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(8px);
             flex-shrink: 0;
         }
 
         .marquee-content {
             display: inline-block;
             white-space: nowrap;
-            will-change: transform;
-            animation: marquee 24s linear infinite;
-            font-size: 0.75rem;
+            animation: marquee 26s linear infinite;
+            font-size: 0.72rem;
             font-weight: 800;
             letter-spacing: 2px;
             text-transform: uppercase;
@@ -157,73 +103,72 @@
         .top-nav {
             position: relative;
             z-index: 5;
-            padding: 12px 20px 8px;
+            padding: 10px 16px 6px;
             display: flex;
             flex-direction: column;
             align-items: center;
             flex-shrink: 0;
         }
 
-        .score-container { text-align: center; }
-
         .score-label {
             font-size: 0.65rem;
             text-transform: uppercase;
-            letter-spacing: 2.5px;
+            letter-spacing: 2px;
             color: var(--text-sub);
             font-weight: 800;
         }
 
         .score {
-            font-size: clamp(2.2rem, 7vw, 3.4rem);
+            font-size: clamp(2rem, 7vw, 3.2rem);
             font-weight: 900;
             letter-spacing: -1px;
             color: var(--text-main);
-            text-shadow: 0 0 25px var(--primary-glow);
+            text-shadow: 0 0 20px var(--primary-glow);
             line-height: 1.1;
             font-variant-numeric: tabular-nums;
         }
 
         .stats-strip {
             display: flex;
-            gap: 16px;
-            margin-top: 8px;
-            font-size: 0.8rem;
+            gap: 12px;
+            margin-top: 6px;
+            font-size: 0.78rem;
             font-weight: 700;
             color: var(--text-sub);
             background: var(--bg-card);
-            padding: 6px 18px;
+            padding: 5px 16px;
             border-radius: 20px;
             border: 1px solid var(--border);
-            backdrop-filter: blur(12px);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            backdrop-filter: blur(10px);
             font-variant-numeric: tabular-nums;
         }
 
-        .stat-item span {
-            color: var(--text-main);
-            font-weight: 800;
-        }
+        .stat-item span { color: var(--text-main); font-weight: 800; }
 
-        /* --- FIXED VIEWPORT & SCROLL MECHANICS FOR iOS --- */
         .app-viewport {
             position: relative;
             z-index: 2;
-            flex: 1;
+            flex: 1 1 auto;
             width: 100%;
+            height: 100%;
+            min-height: 0;
             overflow: hidden;
             display: flex;
+            flex-direction: column;
         }
 
         .view-panel {
             width: 100%;
             height: 100%;
+            min-height: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
             overflow-y: auto;
+            overflow-x: hidden;
             -webkit-overflow-scrolling: touch;
-            padding: 10px 20px 30px;
+            padding: 10px 16px 20px;
+            touch-action: pan-y;
         }
 
         #panel-clicker {
@@ -232,12 +177,12 @@
 
         .stage-header {
             text-align: center;
-            margin-bottom: 12px;
+            margin-bottom: 8px;
             flex-shrink: 0;
         }
 
         .temple-title {
-            font-size: 1.25rem;
+            font-size: 1.2rem;
             font-weight: 900;
             letter-spacing: 0.5px;
             text-transform: uppercase;
@@ -246,18 +191,17 @@
         }
 
         .status-msg {
-            font-size: 0.78rem;
+            font-size: 0.75rem;
             color: var(--accent);
             min-height: 1.2em;
-            margin-top: 3px;
+            margin-top: 2px;
             font-style: italic;
-            transition: opacity 0.3s;
         }
 
         .click-stage {
             position: relative;
-            width: clamp(210px, 50vw, 300px);
-            height: clamp(210px, 50vw, 300px);
+            width: clamp(200px, 48vw, 280px);
+            height: clamp(200px, 48vw, 280px);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -268,16 +212,16 @@
         .click-aura {
             position: absolute;
             inset: -15px;
-            border-radius: 50px;
+            border-radius: 50%;
             background: radial-gradient(circle, var(--primary-glow) 0%, rgba(0,0,0,0) 70%);
-            animation: pulseAura 3.5s infinite ease-in-out;
+            animation: pulseAura 3s infinite ease-in-out;
             z-index: 1;
             pointer-events: none;
         }
 
         @keyframes pulseAura {
             0%, 100% { transform: scale(0.92); opacity: 0.4; }
-            50% { transform: scale(1.1); opacity: 0.95; }
+            50% { transform: scale(1.1); opacity: 0.9; }
         }
 
         .click-target {
@@ -285,32 +229,27 @@
             z-index: 2;
             width: 100%;
             height: 100%;
-            border-radius: 36px;
+            border-radius: 32px;
             background: var(--bg-card);
-            border: 3px solid var(--border);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.6), inset 0 0 25px var(--primary-glow);
+            border: 2px solid var(--border);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5), inset 0 0 20px var(--primary-glow);
             overflow: hidden;
             cursor: pointer;
             will-change: transform;
-            transition: transform 0.06s cubic-bezier(0.2, 0.8, 0.2, 1);
+            transition: transform 0.05s ease-out;
             display: flex;
             align-items: center;
             justify-content: center;
+            touch-action: manipulation;
         }
 
-        .click-target:active { transform: scale(0.93); }
-
-        .temple-img {
-            width: 80%;
-            height: 80%;
-            object-fit: contain;
-            pointer-events: none;
-            filter: drop-shadow(0 0 10px var(--primary-glow));
+        .click-target.tap-active {
+            transform: scale(0.92);
         }
 
-        .temple-svg-fallback {
-            width: 65%;
-            height: 65%;
+        .temple-svg {
+            width: 70%;
+            height: 70%;
             fill: var(--primary);
             filter: drop-shadow(0 0 12px var(--primary-glow));
             pointer-events: none;
@@ -320,18 +259,18 @@
             position: absolute;
             pointer-events: none;
             font-weight: 900;
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             color: var(--accent);
-            text-shadow: 0 2px 10px rgba(0,0,0,0.9), 0 0 8px var(--accent-glow);
+            text-shadow: 0 2px 8px rgba(0,0,0,0.9), 0 0 8px var(--accent-glow);
             z-index: 10;
             will-change: transform, opacity;
-            animation: floatUp 0.75s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+            animation: floatUp 0.75s ease-out forwards;
         }
 
         @keyframes floatUp {
             0% { opacity: 1; transform: translate(-50%, -50%) scale(0.8) translateY(0); }
-            50% { transform: translate(-50%, -50%) scale(1.2) translateY(-30px); }
-            100% { opacity: 0; transform: translate(-50%, -50%) scale(1) translateY(-60px); }
+            50% { transform: translate(-50%, -50%) scale(1.2) translateY(-25px); }
+            100% { opacity: 0; transform: translate(-50%, -50%) scale(1) translateY(-50px); }
         }
 
         .progress-card {
@@ -340,25 +279,24 @@
             background: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: var(--radius-lg);
-            padding: 16px;
+            padding: 14px;
             backdrop-filter: blur(12px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             flex-shrink: 0;
         }
 
         .progress-header {
             display: flex;
             justify-content: space-between;
-            font-size: 0.8rem;
+            font-size: 0.78rem;
             font-weight: 800;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             color: var(--text-sub);
         }
 
         .bar-track {
             width: 100%;
             height: 14px;
-            background: rgba(0,0,0,0.45);
+            background: rgba(0,0,0,0.5);
             border-radius: 7px;
             overflow: hidden;
             position: relative;
@@ -371,31 +309,32 @@
             background: linear-gradient(90deg, var(--primary), var(--accent));
             border-radius: 7px;
             transition: width 0.2s ease-out;
-            box-shadow: 0 0 14px var(--accent-glow);
+            box-shadow: 0 0 12px var(--accent-glow);
         }
 
         .action-btn {
             width: 100%;
-            margin-top: 12px;
+            margin-top: 10px;
             padding: 14px;
             border-radius: var(--radius-md);
             border: none;
-            background: linear-gradient(135deg, var(--accent), #d97706);
+            background: linear-gradient(135deg, var(--primary), #eab308);
             color: #000;
             font-weight: 900;
             font-size: 0.95rem;
             letter-spacing: 0.5px;
             text-transform: uppercase;
             cursor: pointer;
-            box-shadow: 0 4px 20px var(--accent-glow);
+            box-shadow: 0 4px 20px var(--primary-glow);
             display: none;
-            animation: bounce 1.8s infinite;
+            animation: bounce 1.6s infinite;
+            touch-action: manipulation;
         }
 
         @keyframes bounce {
             0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-6px); }
-            60% { transform: translateY(-3px); }
+            40% { transform: translateY(-5px); }
+            60% { transform: translateY(-2px); }
         }
 
         .list-container {
@@ -403,22 +342,23 @@
             max-width: 480px;
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            padding-bottom: 40px;
+            gap: 10px;
+            padding-bottom: 30px;
+            touch-action: pan-y;
         }
 
         .upgrade-card {
             background: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: var(--radius-md);
-            padding: 12px 16px;
+            padding: 12px 14px;
             display: flex;
             align-items: center;
-            gap: 14px;
-            transition: background 0.15s, transform 0.08s;
-            cursor: pointer;
+            gap: 12px;
             backdrop-filter: blur(8px);
             flex-shrink: 0;
+            cursor: pointer;
+            touch-action: manipulation;
         }
 
         .upgrade-card:active {
@@ -427,15 +367,15 @@
         }
 
         .upgrade-card.disabled {
-            opacity: 0.45;
+            opacity: 0.4;
+            filter: grayscale(0.8);
             pointer-events: none;
-            filter: grayscale(0.7);
         }
 
         .upgrade-icon {
-            font-size: 1.8rem;
-            width: 48px;
-            height: 48px;
+            font-size: 1.6rem;
+            width: 44px;
+            height: 44px;
             background: rgba(0,0,0,0.3);
             border-radius: var(--radius-sm);
             display: flex;
@@ -446,19 +386,19 @@
         }
 
         .upgrade-info { flex: 1; }
-        .upgrade-title { font-size: 0.95rem; font-weight: 800; color: var(--text-main); }
-        .upgrade-sub { font-size: 0.75rem; color: var(--text-sub); margin-top: 2px; }
+        .upgrade-title { font-size: 0.9rem; font-weight: 800; color: var(--text-main); }
+        .upgrade-sub { font-size: 0.72rem; color: var(--text-sub); margin-top: 2px; }
 
         .upgrade-buy {
             background: var(--primary);
             color: #000;
             font-weight: 900;
-            font-size: 0.8rem;
-            padding: 9px 14px;
+            font-size: 0.78rem;
+            padding: 8px 12px;
             border-radius: var(--radius-sm);
-            box-shadow: 0 2px 12px var(--primary-glow);
+            box-shadow: 0 2px 10px var(--primary-glow);
             text-align: center;
-            min-width: 80px;
+            min-width: 75px;
             flex-shrink: 0;
         }
 
@@ -466,86 +406,50 @@
             background: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: var(--radius-md);
-            padding: 14px 16px;
+            padding: 14px;
             display: flex;
             align-items: center;
-            gap: 14px;
-            cursor: pointer;
+            gap: 12px;
             backdrop-filter: blur(8px);
             flex-shrink: 0;
-        }
-
-        .map-card.locked { opacity: 0.45; cursor: not-allowed; }
-
-        .bottom-nav {
-            position: relative;
-            z-index: 10;
-            height: 65px;
-            background: var(--bg-card);
-            border-top: 1px solid var(--border);
-            backdrop-filter: blur(20px);
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            padding-bottom: clamp(0px, var(--safe-bottom), 20px);
-            flex-shrink: 0;
-        }
-
-        .nav-item {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100%;
-            color: var(--text-sub);
-            font-size: 0.72rem;
-            font-weight: 800;
-            gap: 4px;
-            border: none;
-            background: transparent;
             cursor: pointer;
-            transition: color 0.2s, transform 0.1s;
+            touch-action: manipulation;
         }
 
-        .nav-item.active { color: var(--primary); }
-        .nav-item:active { transform: scale(0.93); }
-        .nav-item svg { width: 22px; height: 22px; fill: currentColor; }
+        .map-card.locked { opacity: 0.4; }
 
         .theme-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 12px;
+            gap: 10px;
             width: 100%;
         }
 
         .theme-card {
             background: var(--bg-card);
             border: 1px solid var(--border);
-            padding: 14px;
+            padding: 12px;
             border-radius: var(--radius-md);
-            color: var(--text-main);
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
             gap: 10px;
             cursor: pointer;
+            touch-action: manipulation;
         }
 
         .theme-card-top { display: flex; align-items: center; justify-content: space-between; }
-        .theme-name { font-weight: 800; font-size: 0.9rem; }
+        .theme-name { font-weight: 800; font-size: 0.85rem; }
         .theme-dot { width: 14px; height: 14px; border-radius: 50%; }
 
         .theme-buy-btn {
             background: var(--primary);
             color: #000;
             font-weight: 800;
-            font-size: 0.75rem;
-            padding: 8px 10px;
+            font-size: 0.72rem;
+            padding: 8px;
             border-radius: var(--radius-sm);
             border: none;
             text-align: center;
-            cursor: pointer;
         }
 
         .theme-buy-btn.equipped {
@@ -558,57 +462,145 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 16px 0;
+            padding: 14px 0;
             border-bottom: 1px solid var(--border);
             font-weight: 700;
+            font-size: 0.9rem;
             width: 100%;
         }
 
         .toggle {
-            width: 50px;
-            height: 28px;
+            width: 48px;
+            height: 26px;
             background: rgba(255,255,255,0.2);
-            border-radius: 14px;
+            border-radius: 13px;
             position: relative;
             cursor: pointer;
-            transition: background 0.25s;
+            transition: background 0.2s;
+            touch-action: manipulation;
         }
 
         .toggle.active { background: var(--primary); }
 
         .toggle-handle {
-            width: 22px;
-            height: 22px;
+            width: 20px;
+            height: 20px;
             background: #fff;
             border-radius: 50%;
             position: absolute;
             top: 3px;
             left: 3px;
-            transition: transform 0.25s ease;
+            transition: transform 0.2s ease;
         }
 
         .toggle.active .toggle-handle { transform: translateX(22px); }
 
-        /* --- CELESTIAL BLESSING BONUS EVENT --- */
-        .blessing-orb {
-            position: fixed;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: radial-gradient(circle, #fff, var(--primary));
-            box-shadow: 0 0 20px var(--primary-glow);
-            z-index: 99;
-            cursor: pointer;
+        .bottom-nav {
+            position: relative;
+            z-index: 10;
+            height: 60px;
+            background: var(--bg-card);
+            border-top: 1px solid var(--border);
+            backdrop-filter: blur(16px);
             display: flex;
+            justify-content: space-around;
             align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            animation: orbFloat 4s ease-in-out infinite alternate;
+            padding-bottom: clamp(0px, var(--safe-bottom), 16px);
+            flex-shrink: 0;
         }
 
-        @keyframes orbFloat {
-            0% { transform: translateY(0px) rotate(0deg); }
-            100% { transform: translateY(-20px) rotate(20deg); }
+        .nav-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: var(--text-sub);
+            font-size: 0.7rem;
+            font-weight: 800;
+            gap: 3px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            touch-action: manipulation;
+        }
+
+        .nav-item.active { color: var(--primary); }
+        .nav-item svg { width: 20px; height: 20px; fill: currentColor; }
+
+        .celebration-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(12px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            text-align: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+
+        .celebration-modal.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-card {
+            background: var(--bg-card);
+            border: 2px solid var(--primary);
+            border-radius: 28px;
+            padding: 30px 24px;
+            max-width: 360px;
+            width: 100%;
+            box-shadow: 0 0 50px var(--primary-glow);
+            transform: scale(0.8);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .celebration-modal.show .modal-card {
+            transform: scale(1);
+        }
+
+        .modal-icon {
+            font-size: 3.8rem;
+            margin-bottom: 12px;
+            animation: bounce 1.5s infinite;
+        }
+
+        .modal-title {
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: var(--primary);
+            text-shadow: 0 0 15px var(--primary-glow);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .modal-sub {
+            font-size: 0.9rem;
+            color: var(--text-main);
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+
+        .modal-btn {
+            width: 100%;
+            padding: 14px;
+            border-radius: var(--radius-md);
+            border: none;
+            background: var(--primary);
+            color: #000;
+            font-weight: 900;
+            font-size: 1rem;
+            text-transform: uppercase;
+            cursor: pointer;
+            box-shadow: 0 4px 20px var(--primary-glow);
         }
     </style>
 </head>
@@ -623,28 +615,25 @@
     </div>
 
     <header class="top-nav">
-        <div class="score-container">
-            <div class="score-label">Spiritual Power</div>
-            <div class="score" id="display-sp">0</div>
-        </div>
+        <div class="score-label">Spiritual Power</div>
+        <div class="score" id="display-sp">0</div>
         <div class="stats-strip">
             <div class="stat-item">⚡ <span id="display-sps">0</span>/s</div>
-            <div class="stat-item">✨ Faith: <span id="display-faith">1.0</span>x</div>
+            <div class="stat-item">✨ Faith Multiplier: <span id="display-faith">1.0</span>x</div>
         </div>
     </header>
 
     <main class="app-viewport">
         <section class="view-panel" id="panel-clicker">
             <div class="stage-header">
-                <h2 class="temple-title" id="display-tname">Loading...</h2>
+                <h2 class="temple-title" id="display-tname">Kirtland Temple</h2>
                 <div class="status-msg" id="display-status">A small spark of faith...</div>
             </div>
 
             <div class="click-stage">
                 <div class="click-aura"></div>
                 <div class="click-target" id="click-target">
-                    <img id="temple-img" class="temple-img" src="" alt="Temple" onerror="this.style.display='none'; document.getElementById('temple-svg-fallback').style.display='block';" />
-                    <svg id="temple-svg-fallback" class="temple-svg-fallback" viewBox="0 0 24 24" style="display: none;">
+                    <svg class="temple-svg" viewBox="0 0 24 24">
                         <path d="M12 2L10 6H14L12 2ZM11 7H13V10H11V7ZM4 21V11H20V21H18V13H15V21H9V13H6V21H4ZM11 15H13V21H11V15Z"/>
                     </svg>
                 </div>
@@ -665,7 +654,7 @@
         <section class="view-panel" id="panel-upgrades" style="display: none;">
             <div class="stage-header">
                 <h2 class="temple-title">Callings & Service</h2>
-                <div class="status-msg">Serve in callings & organize youth programs</div>
+                <div class="status-msg">Serve in callings to generate ongoing Spiritual Power</div>
             </div>
             <div class="list-container" id="upgrades-list"></div>
         </section>
@@ -673,7 +662,7 @@
         <section class="view-panel" id="panel-map" style="display: none;">
             <div class="stage-header">
                 <h2 class="temple-title">Global Map</h2>
-                <div class="status-msg">Travel to unlocked temples</div>
+                <div class="status-msg">Travel to unlocked holy sites</div>
             </div>
             <div class="list-container" id="map-list"></div>
         </section>
@@ -681,7 +670,7 @@
         <section class="view-panel" id="panel-shop" style="display: none;">
             <div class="stage-header">
                 <h2 class="temple-title">Theme Shop</h2>
-                <div class="status-msg">Customize your temple visual experience</div>
+                <div class="status-msg">Customize visual experience</div>
             </div>
             <div class="list-container">
                 <div class="theme-grid" id="theme-shop-grid"></div>
@@ -690,57 +679,59 @@
 
         <section class="view-panel" id="panel-settings" style="display: none;">
             <div class="stage-header">
-                <h2 class="temple-title">Game Settings</h2>
-                <div class="status-msg">Adjust audio, vibrations, and data</div>
+                <h2 class="temple-title">Settings</h2>
+                <div class="status-msg">Game audio and settings</div>
             </div>
             <div class="list-container">
                 <div class="setting-row">
-                    <span>Audio Feedback</span>
+                    <span>Sound Effects</span>
                     <div class="toggle active" id="toggle-audio" onclick="toggleAudioSetting()">
                         <div class="toggle-handle"></div>
                     </div>
                 </div>
 
-                <div class="setting-row">
-                    <span>Haptic Vibration</span>
-                    <div class="toggle active" id="toggle-haptics" onclick="toggleHapticsSetting()">
-                        <div class="toggle-handle"></div>
-                    </div>
-                </div>
-
-                <button style="width: 100%; margin-top: 35px; padding: 16px; background: rgba(239, 68, 68, 0.2); border: 1px solid rgba(239, 68, 68, 0.4); color: #ef4444; border-radius: var(--radius-md); font-weight: 800; cursor: pointer;" onclick="hardReset()">
-                    Reset Saved Progress
+                <button style="width: 100%; margin-top: 30px; padding: 14px; background: rgba(239, 68, 68, 0.2); border: 1px solid rgba(239, 68, 68, 0.4); color: #ef4444; border-radius: var(--radius-md); font-weight: 800; cursor: pointer;" onclick="hardReset()">
+                    Reset Saved Game
                 </button>
             </div>
         </section>
     </main>
 
     <nav class="bottom-nav">
-        <button class="nav-item active" onclick="switchTab('clicker')">
+        <button class="nav-item active" onclick="switchTab('clicker', event)">
             <svg viewBox="0 0 24 24"><path d="M12 2L2 12h3v8h14v-8h3L12 2z"/></svg>
             Temple
         </button>
-        <button class="nav-item" onclick="switchTab('upgrades')">
+        <button class="nav-item" onclick="switchTab('upgrades', event)">
             <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
             Callings
         </button>
-        <button class="nav-item" onclick="switchTab('map')">
+        <button class="nav-item" onclick="switchTab('map', event)">
             <svg viewBox="0 0 24 24"><path d="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM15 19l-6-2.11V5l6 2.11V19z"/></svg>
             Travel
         </button>
-        <button class="nav-item" onclick="switchTab('shop')">
+        <button class="nav-item" onclick="switchTab('shop', event)">
             <svg viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/></svg>
             Shop
         </button>
-        <button class="nav-item" onclick="switchTab('settings')">
+        <button class="nav-item" onclick="switchTab('settings', event)">
             <svg viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6-3.6z"/></svg>
             Settings
         </button>
     </nav>
 
+    <div class="celebration-modal" id="celebration-modal">
+        <div class="modal-card">
+            <div class="modal-icon">🏛️✨</div>
+            <div class="modal-title" id="modal-temple-title">TEMPLE DEDICATED!</div>
+            <div class="modal-sub" id="modal-temple-sub">Your devotion has brought divine light into the world. Faith Multiplier increased!</div>
+            <button class="modal-btn" onclick="closeCelebrationModal()">ONWARD TO VICTORY</button>
+        </div>
+    </div>
+
     <script>
-        const PRICE_FACTOR = 1.15;
-        
+        const PRICE_FACTOR = 1.16;
+
         let state = {
             sp: 0,
             currentT: 0,
@@ -750,175 +741,101 @@
             total: 0,
             theme: 'celestial',
             ownedThemes: ['celestial'],
-            audio: true,
-            haptics: true
+            audio: true
         };
 
+        // --- LDS THEMED CATALOG ---
         const themeCatalog = [
-            { id: 'celestial', name: 'Celestial', cost: 0, color: '#d4af37' },
-            { id: 'dark', name: 'Midnight', cost: 2500, color: '#a855f7' },
-            { id: 'ironrod', name: 'Iron Rod', cost: 50000, color: '#10b981' },
-            { id: 'moroni', name: 'Golden Moroni', cost: 1000000, color: '#f59e0b' },
-            { id: 'pioneer', name: 'Pioneer Trek', cost: 25000000, color: '#f97316' },
-            { id: 'zion', name: 'Zion Glow', cost: 500000000, color: '#34d399' },
-            { id: 'desert', name: 'Desert Sunset', cost: 2500000000, color: '#fb923c' },
-            { id: 'alpine', name: 'Alpine Peaks', cost: 15000000000, color: '#38bdf8' },
-            { id: 'rosegold', name: 'Rose Gold', cost: 100000000000, color: '#fb7185' },
-            { id: 'ocean', name: 'Deep Ocean', cost: 500000000000, color: '#06b6d4' },
-            { id: 'neon', name: 'Cyber Neon', cost: 2500000000000, color: '#f032e6' },
-            { id: 'ethereal', name: 'Ethereal White', cost: 10000000000000, color: '#ffffff' }
+            { id: 'celestial', name: 'Celestial Gold', cost: 0, color: '#d4af37' },
+            { id: 'cumorah', name: 'Cumorah Heights', cost: 50000, color: '#a855f7' },
+            { id: 'ironrod', name: 'Iron Rod', cost: 500000, color: '#94a3b8' },
+            { id: 'moroni', name: 'Golden Moroni', cost: 5000000, color: '#f59e0b' },
+            { id: 'zion', name: 'Zion Garden', cost: 50000000, color: '#10b981' },
+            { id: 'liahona', name: 'Liahona Compass', cost: 500000000, color: '#d97706' },
+            { id: 'deseret', name: 'Deseret Alpine', cost: 5000000000, color: '#38bdf8' },
+            { id: 'rose', name: 'Rose of Sharon', cost: 50000000000, color: '#fb7185' },
+            { id: 'mormon', name: 'Waters of Mormon', cost: 500000000000, color: '#06b6d4' },
+            { id: 'refiner', name: "Refiner's Fire", cost: 5000000000000, color: '#e024c3' },
+            { id: 'marble', name: 'White Marble', cost: 50000000000000, color: '#ffffff' },
+            { id: 'priesthood', name: 'Royal Priesthood', cost: 500000000000000, color: '#c084fc' }
         ];
 
         const temples = [
             { 
                 name: "Kirtland Ohio", 
-                file: "kirtland.png",
-                goal: 10000, 
+                goal: 1500000, 
                 callings: [
-                    {n: "Primary Teacher", c: 10, s: 1, i: "🎨"}, 
-                    {n: "Ward Hymn Leader", c: 150, s: 5, i: "🎼"}, 
-                    {n: "Youth Activity Chair", c: 1500, s: 20, i: "🏐"}, 
-                    {n: "Ward Missionary", c: 10000, s: 90, i: "🏷️"}, 
-                    {n: "Seminary Teacher", c: 75000, s: 400, i: "📖"}, 
-                    {n: "Elder's Quorum Leader", c: 500000, s: 2000, i: "🤝"}, 
-                    {n: "Relief Society Pres.", c: 3000000, s: 8000, i: "🌺"}, 
-                    {n: "Ward Bishop", c: 20000000, s: 35000, i: "🗝️"}, 
-                    {n: "Stake High Councilor", c: 150000000, s: 150000, i: "🏛️"}, 
-                    {n: "Stake President", c: 1000000000, s: 800000, i: "👔"}
+                    {n: "Primary Teacher", c: 15, s: 1, i: "🎨"}, 
+                    {n: "Ward Hymn Leader", c: 200, s: 8, i: "🎼"}, 
+                    {n: "Youth Activity Chair", c: 2500, s: 45, i: "🏐"}, 
+                    {n: "Ward Missionary", c: 25000, s: 220, i: "🏷️"}, 
+                    {n: "Seminary Teacher", c: 180000, s: 1100, i: "📖"}, 
+                    {n: "Elder's Quorum Leader", c: 1200000, s: 5500, i: "🤝"}, 
+                    {n: "Relief Society Pres.", c: 8000000, s: 28000, i: "🌺"}, 
+                    {n: "Ward Bishop", c: 50000000, s: 140000, i: "🗝️"}
                 ] 
             },
             { 
                 name: "Manti Utah", 
-                file: "manti.png",
-                goal: 400000, 
+                goal: 850000000, 
                 callings: [
-                    {n: "Pioneer Trek Youth", c: 8000, s: 30, i: "🤠"}, 
-                    {n: "Handcart Captain", c: 50000, s: 150, i: "🛒"}, 
-                    {n: "Trek Ma / Pa", c: 250000, s: 700, i: "⛺"}, 
-                    {n: "FSY Youth Counselor", c: 2000000, s: 3500, i: "🎽"}, 
-                    {n: "Youth Battalion Leader", c: 12000000, s: 15000, i: "🚩"}, 
-                    {n: "Service Missionary", c: 75000000, s: 80000, i: "🤝"}, 
-                    {n: "Full-Time Missionary", c: 500000000, s: 400000, i: "🏷️"}, 
-                    {n: "Zone Leader / AP", c: 3000000000, s: 2000000, i: "📋"}, 
-                    {n: "Mission President", c: 20000000000, s: 10000000, i: "🌍"}, 
-                    {n: "Stake Patriarch", c: 150000000000, s: 60000000, i: "🖐️"}
-                ] 
-            },
-            { 
-                name: "Logan Utah", 
-                file: "logan.png",
-                goal: 10000000, 
-                callings: [
-                    {n: "Youth Camp Specialist", c: 200000, s: 500, i: "🌲"}, 
-                    {n: "Gospel Doctrine Teacher", c: 1500000, s: 3500, i: "📖"}, 
-                    {n: "Ward Clerk", c: 10000000, s: 15000, i: "💻"}, 
-                    {n: "Young Women Pres.", c: 70000000, s: 75000, i: "🛡️"}, 
-                    {n: "Young Men Pres.", c: 400000000, s: 400000, i: "⛺"}, 
-                    {n: "Ward Choir Director", c: 2500000000, s: 2000000, i: "🎵"}, 
-                    {n: "Family History Specialist", c: 15000000000, s: 10000000, i: "🌳"}, 
-                    {n: "Ward Mission Leader", c: 100000000000, s: 60000000, i: "🗺️"}, 
-                    {n: "High Priests Group Leader", c: 750000000000, s: 350000000, i: "👴"}, 
-                    {n: "Temple Ordinance Worker", c: 5000000000000, s: 1500000000, i: "🏛️"}
+                    {n: "Pioneer Trek Youth", c: 50000, s: 200, i: "🤠"}, 
+                    {n: "Handcart Captain", c: 450000, s: 1200, i: "🛒"}, 
+                    {n: "Trek Ma / Pa", c: 3500000, s: 7500, i: "⛺"}, 
+                    {n: "FSY Youth Counselor", c: 25000000, s: 42000, i: "🎽"}, 
+                    {n: "Service Missionary", c: 180000000, s: 220000, i: "🤝"}, 
+                    {n: "Full-Time Missionary", c: 1200000000, s: 1100000, i: "🏷️"}, 
+                    {n: "Mission President", c: 9000000000, s: 6500000, i: "🌍"}
                 ] 
             },
             { 
                 name: "Mesa Arizona", 
-                file: "mesa.png",
-                goal: 500000000, 
+                goal: 500000000000, 
                 callings: [
-                    {n: "Nursery Leader", c: 5000000, s: 6000, i: "🧸"}, 
-                    {n: "Activities Committee Chair", c: 35000000, s: 30000, i: "🎉"}, 
-                    {n: "Institute Student Officer", c: 150000000, s: 200000, i: "🎓"}, 
-                    {n: "MTC District Leader", c: 1200000000, s: 1000000, i: "🏷️"}, 
-                    {n: "Sister Missionary", c: 8000000000, s: 6000000, i: "📚"}, 
-                    {n: "Senior Service Missionary", c: 50000000000, s: 35000000, i: "👵"}, 
-                    {n: "Branch President", c: 350000000000, s: 150000000, i: "🗝️"}, 
-                    {n: "Temple Recorder", c: 1500000000000, s: 800000000, i: "📜"}, 
-                    {n: "Stake Relief Society Pres.", c: 10000000000000, s: 4500000000, i: "👑"}, 
-                    {n: "Temple Matron", c: 75000000000000, s: 25000000000, i: "✨"}
-                ] 
-            },
-            { 
-                name: "Lehi Utah", 
-                file: "lehi.png",
-                goal: 5000000000, 
-                callings: [
-                    {n: "Tech / Audio Specialist", c: 80000000, s: 150000, i: "🎙️"}, 
-                    {n: "Self-Reliance Leader", c: 500000000, s: 900000, i: "📈"}, 
-                    {n: "Addiction Recovery Leader", c: 3500000000, s: 5000000, i: "🕊️"}, 
-                    {n: "Indexing Volunteer", c: 20000000000, s: 25000000, i: "💻"}, 
-                    {n: "Family History Director", c: 120000000000, s: 150000000, i: "🌳"}, 
-                    {n: "Ward Executive Secretary", c: 800000000000, s: 800000000, i: "📅"}, 
-                    {n: "Stake YM President", c: 5000000000000, s: 5000000000, i: "🏕️"}, 
-                    {n: "Stake YW President", c: 35000000000000, s: 25000000000, i: "🛡️"}, 
-                    {n: "Stake Clerk", c: 200000000000000, s: 150000000000, i: "📁"}, 
-                    {n: "Temple President", c: 1500000000000000, s: 800000000000, i: "🗝️"}
+                    {n: "Youth Camp Specialist", c: 2500000, s: 8000, i: "🌲"}, 
+                    {n: "Gospel Doctrine Teacher", c: 20000000, s: 50000, i: "📖"}, 
+                    {n: "Ward Clerk", c: 150000000, s: 300000, i: "💻"}, 
+                    {n: "Young Women Pres.", c: 1000000000, s: 1800000, i: "🛡️"}, 
+                    {n: "Family History Specialist", c: 8000000000, s: 12000000, i: "🌳"}, 
+                    {n: "Temple Worker", c: 60000000000, s: 75000000, i: "🏛️"}
                 ] 
             },
             { 
                 name: "Nauvoo Illinois", 
-                file: "nauvoo.png",
-                goal: 100000000000, 
+                goal: 250000000000000, 
                 callings: [
-                    {n: "Baptistry Worker", c: 2500000000, s: 2000000, i: "🌊"}, 
-                    {n: "Initiatory Officiator", c: 15000000000, s: 10000000, i: "🕯️"}, 
-                    {n: "Historic Site Senior Guide", c: 100000000000, s: 60000000, i: "🏛️"}, 
-                    {n: "Sealer / Officiator", c: 750000000000, s: 350000000, i: "💍"}, 
-                    {n: "Temple Linen Coordinator", c: 4000000000000, s: 1500000000, i: "🧺"}, 
-                    {n: "Temple Organist", c: 25000000000000, s: 8000000000, i: "🎹"}, 
-                    {n: "Shift Coordinator", c: 150000000000000, s: 35000000000, i: "🕒"}, 
-                    {n: "Stake Primary Director", c: 1000000000000000, s: 150000000000, i: "🎨"}, 
-                    {n: "Area Seventy", c: 7500000000000000, s: 800000000000, i: "🌍"}, 
-                    {n: "General Authority", c: 50000000000000000, s: 4000000000000, i: "🕊️"}
-                ] 
-            },
-            { 
-                name: "Phoenix Arizona", 
-                file: "phoenix.png",
-                goal: 2000000000000, 
-                callings: [
-                    {n: "Early Morning Seminary Pres.", c: 75000000000, s: 300000000, i: "🌅"}, 
-                    {n: "JustServe Director", c: 500000000000, s: 1500000000, i: "🤝"}, 
-                    {n: "FSY Session Director", c: 3500000000000, s: 10000000000, i: "🎙️"}, 
-                    {n: "Youth Camp Director", c: 25000000000000, s: 55000000000, i: "🏕️"}, 
-                    {n: "Missionary Training Teacher", c: 150000000000000, s: 250000000000, i: "📖"}, 
-                    {n: "Stake Mission Director", c: 1000000000000000, s: 1500000000000, i: "🗺️"}, 
-                    {n: "Stake Relief Society Pres.", c: 6000000000000000, s: 7500000000000, i: "🌺"}, 
-                    {n: "Regional Public Affairs", c: 40000000000000000, s: 35000000000000, i: "📢"}, 
-                    {n: "MTC President", c: 250000000000000000, s: 200000000000000, i: "🏛️"}, 
-                    {n: "Pioneer Heritage Chair", c: 1500000000000000000, s: 1000000000000000, i: "🛒"}
+                    {n: "Nursery Leader", c: 100000000, s: 250000, i: "🧸"}, 
+                    {n: "Self-Reliance Leader", c: 800000000, s: 1800000, i: "📈"}, 
+                    {n: "Stake High Councilor", c: 6000000000, s: 12000000, i: "🏛️"}, 
+                    {n: "Branch President", c: 45000000000, s: 75000000, i: "🗝️"}, 
+                    {n: "Temple Recorder", c: 350000000000, s: 500000000, i: "📜"}, 
+                    {n: "General Authority", c: 2500000000000, s: 3200000000, i: "🕊️"}
                 ] 
             },
             { 
                 name: "Salt Lake City", 
-                file: "salt.png",
-                goal: 50000000000000, 
+                goal: 100000000000000000, 
                 callings: [
-                    {n: "Tabernacle Choir Member", c: 2000000000000, s: 15000000000, i: "🎵"}, 
-                    {n: "Square Visitor Guide", c: 12000000000000, s: 75000000000, i: "🏛️"}, 
-                    {n: "FamilySearch Director", c: 75000000000000, s: 350000000000, i: "🌳"}, 
-                    {n: "Church Host / Usher", c: 500000000000000, s: 1500000000000, i: "👔"}, 
-                    {n: "Church Historian", c: 3500000000000000, s: 12000000000000, i: "📜"}, 
-                    {n: "Presiding Bishopric", c: 20000000000000000, s: 65000000000000, i: "🗝️"}, 
-                    {n: "Quorum of the Seventy", c: 120000000000000000, s: 350000000000000, i: "🌍"}, 
-                    {n: "Quorum of the Twelve", c: 800000000000000000, s: 1800000000000000, i: "🕊️"}, 
-                    {n: "First Presidency", c: 5000000000000000000, s: 12000000000000000, i: "📜"}, 
-                    {n: "President of the Church", c: 35000000000000000000, s: 75000000000000000, i: "🌎"}
+                    {n: "Tabernacle Choir Member", c: 50000000000, s: 85000000, i: "🎵"}, 
+                    {n: "Square Visitor Guide", c: 400000000000, s: 600000000, i: "🏛️"}, 
+                    {n: "FamilySearch Director", c: 3000000000000, s: 4200000000, i: "🌳"}, 
+                    {n: "Quorum of the Seventy", c: 25000000000000, s: 32000000000, i: "🌍"}, 
+                    {n: "Quorum of the Twelve", c: 200000000000000, s: 240000000000, i: "🕊️"}, 
+                    {n: "President of the Church", c: 1500000000000000, s: 1800000000000, i: "🌎"}
                 ] 
             }
         ];
 
         const flavorMessages = [
-            "A small spark of faith.",
-            "The ward is growing day by day.",
-            "Finding pure joy in service.",
-            "Youth activities are lively and bright.",
-            "Full-time missionaries are teaching daily.",
+            "A small spark of faith...",
+            "The ward community is thriving.",
+            "Youth activities are full of joy.",
+            "Missionaries are serving daily.",
             "A beacon of light to all nations."
         ];
 
-        // --- RELIABLE AUDIO ENGINE FOR iOS ---
         let audioCtx = null;
+
         function initAudio() { 
             if (!audioCtx) {
                 audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -928,21 +845,21 @@
             }
         }
 
-        function playClickSound() {
+        function playTapSound() {
             if (!state.audio) return;
             initAudio();
             try {
                 const osc = audioCtx.createOscillator();
                 const gain = audioCtx.createGain();
                 osc.type = 'sine';
-                osc.frequency.setValueAtTime(520, audioCtx.currentTime);
-                osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.05);
+                osc.frequency.setValueAtTime(540, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.04);
                 gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.05);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.04);
                 osc.connect(gain);
                 gain.connect(audioCtx.destination);
                 osc.start();
-                osc.stop(audioCtx.currentTime + 0.05);
+                osc.stop(audioCtx.currentTime + 0.04);
             } catch (e) {}
         }
 
@@ -950,36 +867,25 @@
             if (!state.audio) return;
             initAudio();
             try {
-                const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
-                notes.forEach((freq, idx) => {
+                const chords = [523.25, 659.25, 783.99, 1046.50, 1318.51];
+                chords.forEach((freq, idx) => {
                     const osc = audioCtx.createOscillator();
                     const gain = audioCtx.createGain();
                     osc.type = 'triangle';
-                    osc.frequency.setValueAtTime(freq, audioCtx.currentTime + (idx * 0.1));
-                    gain.gain.setValueAtTime(0.2, audioCtx.currentTime + (idx * 0.1));
-                    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + (idx * 0.1) + 0.3);
+                    osc.frequency.setValueAtTime(freq, audioCtx.currentTime + (idx * 0.08));
+                    gain.gain.setValueAtTime(0.2, audioCtx.currentTime + (idx * 0.08));
+                    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + (idx * 0.08) + 0.4);
                     osc.connect(gain);
                     gain.connect(audioCtx.destination);
-                    osc.start(audioCtx.currentTime + (idx * 0.1));
-                    osc.stop(audioCtx.currentTime + (idx * 0.1) + 0.3);
+                    osc.start(audioCtx.currentTime + (idx * 0.08));
+                    osc.stop(audioCtx.currentTime + (idx * 0.08) + 0.4);
                 });
             } catch(e) {}
         }
 
-        function triggerHaptic(type = 'tap') {
-            if (state.haptics && navigator.vibrate) {
-                if (type === 'victory') {
-                    navigator.vibrate([100, 50, 100, 50, 200]);
-                } else {
-                    navigator.vibrate(12);
-                }
-            }
-        }
-
-        // --- PARTICLE SYSTEM ---
         const canvas = document.getElementById('particle-canvas');
         const ctx = canvas.getContext('2d');
-        const MAX_PARTICLES = 150;
+        const MAX_PARTICLES = 120;
         const particlePool = [];
 
         function resizeCanvas() {
@@ -994,17 +900,14 @@
             spawn(x, y, primaryColor, accentColor) {
                 this.x = x;
                 this.y = y;
-                this.type = Math.random() > 0.3 ? 'burst' : 'sparkle';
-                this.size = this.type === 'sparkle' ? Math.random() * 4 + 3 : Math.random() * 6 + 4;
+                this.size = Math.random() * 5 + 3;
                 const angle = Math.random() * Math.PI * 2;
                 const speed = Math.random() * 6 + 2;
                 this.vx = Math.cos(angle) * speed;
                 this.vy = Math.sin(angle) * speed - 1.5;
                 this.color = Math.random() > 0.5 ? primaryColor : accentColor;
                 this.alpha = 1;
-                this.decay = Math.random() * 0.03 + 0.02;
-                this.rotation = Math.random() * Math.PI * 2;
-                this.vRot = (Math.random() - 0.5) * 0.2;
+                this.decay = Math.random() * 0.03 + 0.025;
                 this.active = true;
             }
             update(dt) {
@@ -1012,7 +915,6 @@
                 this.x += this.vx * dt * 60;
                 this.y += this.vy * dt * 60;
                 this.vy += 0.12 * dt * 60;
-                this.rotation += this.vRot;
                 this.alpha -= this.decay * dt * 60;
                 if (this.alpha <= 0) this.active = false;
             }
@@ -1020,32 +922,17 @@
                 if (!this.active) return;
                 ctx.save();
                 ctx.globalAlpha = Math.max(0, this.alpha);
-                ctx.translate(this.x, this.y);
-                ctx.rotate(this.rotation);
                 ctx.fillStyle = this.color;
-
-                if (this.type === 'sparkle') {
-                    ctx.beginPath();
-                    for (let i = 0; i < 4; i++) {
-                        ctx.lineTo(Math.cos(i * Math.PI / 2) * this.size, Math.sin(i * Math.PI / 2) * this.size);
-                        ctx.lineTo(Math.cos((i + 0.5) * Math.PI / 2) * (this.size * 0.3), Math.sin((i + 0.5) * Math.PI / 2) * (this.size * 0.3));
-                    }
-                    ctx.closePath();
-                    ctx.fill();
-                } else {
-                    ctx.beginPath();
-                    ctx.arc(0, 0, this.size, 0, Math.PI * 2);
-                    ctx.fill();
-                }
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
                 ctx.restore();
             }
         }
 
-        for (let i = 0; i < MAX_PARTICLES; i++) {
-            particlePool.push(new Particle());
-        }
+        for (let i = 0; i < MAX_PARTICLES; i++) particlePool.push(new Particle());
 
-        function spawnFX(x, y, count = 12) {
+        function spawnFX(x, y, count = 10) {
             const style = getComputedStyle(document.documentElement);
             const pColor = style.getPropertyValue('--primary').trim() || '#d4af37';
             const aColor = style.getPropertyValue('--accent').trim() || '#38bdf8';
@@ -1064,7 +951,6 @@
         function renderLoop(now) {
             const dt = Math.min((now - lastTime) / 1000, 0.1);
             lastTime = now;
-
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             for (let i = 0; i < MAX_PARTICLES; i++) {
                 if (particlePool[i].active) {
@@ -1076,18 +962,12 @@
         }
         requestAnimationFrame(renderLoop);
 
-        // --- MATH HELPERS ---
         function formatNumber(n) {
-            if (n >= 1e33) return (n/1e33).toFixed(1) + 'Dc';
-            if (n >= 1e30) return (n/1e30).toFixed(1) + 'No';
-            if (n >= 1e27) return (n/1e27).toFixed(1) + 'Oc';
-            if (n >= 1e24) return (n/1e24).toFixed(1) + 'Sp';
-            if (n >= 1e21) return (n/1e21).toFixed(1) + 'Sx';
-            if (n >= 1e18) return (n/1e18).toFixed(1) + 'Qi';
-            if (n >= 1e15) return (n/1e15).toFixed(1) + 'Qa';
-            if (n >= 1e12) return (n/1e12).toFixed(1) + 'T';
-            if (n >= 1e9) return (n/1e9).toFixed(1) + 'B';
-            if (n >= 1e6) return (n/1e6).toFixed(1) + 'M';
+            if (n >= 1e18) return (n/1e18).toFixed(2) + 'Qi';
+            if (n >= 1e15) return (n/1e15).toFixed(2) + 'Qa';
+            if (n >= 1e12) return (n/1e12).toFixed(2) + 'T';
+            if (n >= 1e9) return (n/1e9).toFixed(2) + 'B';
+            if (n >= 1e6) return (n/1e6).toFixed(2) + 'M';
             if (n >= 1e3) return (n/1e3).toFixed(1) + 'k';
             return Math.floor(n);
         }
@@ -1108,16 +988,19 @@
             return base * Math.pow(PRICE_FACTOR, count);
         }
 
-        // --- GAME ACTIONS ---
         function handleTap(e) {
             initAudio();
             const rect = e.currentTarget.getBoundingClientRect();
             const x = e.clientX || (e.touches && e.touches[0].clientX) || (rect.left + rect.width / 2);
             const y = e.clientY || (e.touches && e.touches[0].clientY) || (rect.top + rect.height / 2);
 
-            const gain = Math.max(1, getSPS() * 0.1) * state.faith;
+            const gain = Math.max(1, getSPS() * 0.08) * state.faith;
             state.sp += gain;
             state.total += gain;
+
+            const target = document.getElementById('click-target');
+            target.classList.add('tap-active');
+            setTimeout(() => target.classList.remove('tap-active'), 60);
 
             const floatText = document.createElement('div');
             floatText.className = 'floating-text';
@@ -1127,11 +1010,9 @@
             document.body.appendChild(floatText);
             setTimeout(() => floatText.remove(), 750);
 
-            playClickSound();
-            triggerHaptic('tap');
-            spawnFX(x, y, 14);
-
-            updateUIThrottled();
+            playTapSound();
+            spawnFX(x, y, 10);
+            updateUI();
         }
 
         function buyCalling(i) {
@@ -1144,8 +1025,7 @@
             if (state.sp >= cost) {
                 state.sp -= cost;
                 state.counts[state.currentT][i] = count + 1;
-                playClickSound();
-                triggerHaptic('tap');
+                playTapSound();
                 renderUpgrades();
                 updateUI();
                 saveGame();
@@ -1163,8 +1043,7 @@
                 state.sp -= th.cost;
                 state.ownedThemes.push(tId);
                 setTheme(tId);
-                triggerHaptic('tap');
-                playClickSound();
+                playTapSound();
                 saveGame();
             }
             renderThemeShop();
@@ -1174,60 +1053,26 @@
         function dedicateTemple() {
             if (state.currentT === state.unlockedT && state.unlockedT < temples.length - 1) {
                 state.unlockedT++;
-                state.faith += 2.0;
-                state.currentT = state.unlockedT;
-
-                // CELEBRATION EFFECTS
+                state.faith += 1.5;
+                
                 playVictorySound();
-                triggerHaptic('victory');
                 if (typeof confetti === 'function') {
-                    confetti({
-                        particleCount: 120,
-                        spread: 80,
-                        origin: { y: 0.6 }
-                    });
+                    confetti({ particleCount: 150, spread: 90, origin: { y: 0.6 } });
                 }
 
-                switchTab('clicker');
+                document.getElementById('modal-temple-title').innerText = `${temples[state.currentT].name} Dedicated!`;
+                document.getElementById('modal-temple-sub').innerText = `You have dedicated this temple! Your Faith Multiplier is now ${state.faith.toFixed(1)}x. You can now travel to ${temples[state.unlockedT].name}.`;
+                document.getElementById('celebration-modal').classList.add('show');
+
+                state.currentT = state.unlockedT;
                 renderAll();
                 saveGame();
             }
         }
 
-        // --- RANDOM BONUS ORB ---
-        function spawnBlessingOrb() {
-            if (document.querySelector('.blessing-orb')) return;
-            const orb = document.createElement('div');
-            orb.className = 'blessing-orb';
-            orb.innerHTML = '✨';
-            orb.style.left = Math.random() * (window.innerWidth - 70) + 10 + 'px';
-            orb.style.top = Math.random() * (window.innerHeight - 200) + 100 + 'px';
-
-            orb.onclick = (e) => {
-                e.stopPropagation();
-                initAudio();
-                const bonus = Math.max(50, getSPS() * 15 + 100);
-                state.sp += bonus;
-                playVictorySound();
-                triggerHaptic('victory');
-                spawnFX(e.clientX, e.clientY, 30);
-                orb.remove();
-                updateUI();
-            };
-
-            document.body.appendChild(orb);
-            setTimeout(() => { if (orb.parentNode) orb.remove(); }, 8000);
-        }
-        setInterval(spawnBlessingOrb, 28000);
-
-        // --- DOM UPDATES ---
-        let lastUIUpdate = 0;
-        function updateUIThrottled() {
-            const now = performance.now();
-            if (now - lastUIUpdate > 50) {
-                updateUI();
-                lastUIUpdate = now;
-            }
+        function closeCelebrationModal() {
+            document.getElementById('celebration-modal').classList.remove('show');
+            switchTab('clicker');
         }
 
         function updateUI() {
@@ -1237,12 +1082,6 @@
 
             const t = temples[state.currentT];
             document.getElementById('display-tname').innerText = t.name + (state.currentT < state.unlockedT ? " (✓)" : "");
-
-            const imgEl = document.getElementById('temple-img');
-            const fallbackEl = document.getElementById('temple-svg-fallback');
-            imgEl.src = `./temples/${t.file}`;
-            imgEl.style.display = 'block';
-            fallbackEl.style.display = 'none';
 
             const prog = Math.min((state.sp / t.goal) * 100, 100);
             document.getElementById('fill-bar').style.width = `${prog}%`;
@@ -1314,9 +1153,9 @@
                     <div class="upgrade-icon">🏛️</div>
                     <div style="flex: 1;">
                         <div style="font-weight: 800; font-size: 0.95rem;">${t.name}</div>
-                        <div style="font-size: 0.75rem; color: var(--text-sub);">Goal: ${formatNumber(t.goal)} SP</div>
+                        <div style="font-size: 0.72rem; color: var(--text-sub);">Goal: ${formatNumber(t.goal)} SP</div>
                     </div>
-                    <div style="font-weight: 800; font-size: 0.8rem; color: var(--primary);">
+                    <div style="font-weight: 800; font-size: 0.78rem; color: var(--primary);">
                         ${i === state.currentT ? 'ACTIVE' : isUnlocked ? 'TRAVEL' : 'LOCKED'}
                     </div>
                 `;
@@ -1356,8 +1195,7 @@
             updateUI();
         }
 
-        // --- TAB SWITCHING ---
-        function switchTab(tabId) {
+        function switchTab(tabId, evt) {
             initAudio();
             document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
             document.querySelectorAll('.view-panel').forEach(el => el.style.display = 'none');
@@ -1378,8 +1216,8 @@
                 if (tabId === 'shop') renderThemeShop();
             }
 
-            if (event && event.currentTarget && event.currentTarget.classList) {
-                event.currentTarget.classList.add('active');
+            if (evt && evt.currentTarget) {
+                evt.currentTarget.classList.add('active');
             }
         }
 
@@ -1395,36 +1233,27 @@
             saveGame();
         }
 
-        function toggleHapticsSetting() {
-            state.haptics = !state.haptics;
-            document.getElementById('toggle-haptics').classList.toggle('active', state.haptics);
-            saveGame();
-        }
-
-        // --- SAVE / LOAD ---
         function saveGame() {
-            localStorage.setItem('TC_BALANCED_V5', JSON.stringify(state));
+            localStorage.setItem('TC_BALANCED_V6', JSON.stringify(state));
         }
 
         function loadGame() {
-            const data = localStorage.getItem('TC_BALANCED_V5');
+            const data = localStorage.getItem('TC_BALANCED_V6');
             if (data) {
                 try { state = { ...state, ...JSON.parse(data) }; } catch (e) {}
             }
             setTheme(state.theme || 'celestial');
             document.getElementById('toggle-audio').classList.toggle('active', state.audio);
-            document.getElementById('toggle-haptics').classList.toggle('active', state.haptics);
             renderAll();
         }
 
         function hardReset() {
-            if (confirm("Are you sure you want to reset all spiritual progress?")) {
-                localStorage.removeItem('TC_BALANCED_V5');
+            if (confirm("Reset all saved temple progress?")) {
+                localStorage.removeItem('TC_BALANCED_V6');
                 location.reload();
             }
         }
 
-        // --- INITIALIZATION ---
         const clickTarget = document.getElementById('click-target');
         clickTarget.addEventListener('pointerdown', handleTap);
         document.getElementById('dedicate-btn').addEventListener('click', dedicateTemple);
@@ -1436,19 +1265,15 @@
                 const sps = getSPS();
                 state.sp += sps / 10;
                 state.total += sps / 10;
-                updateUIThrottled();
+                updateUI();
             }, 100);
 
             setInterval(saveGame, 5000);
 
             setInterval(() => {
                 const el = document.getElementById('display-status');
-                el.style.opacity = '0';
-                setTimeout(() => {
-                    el.innerText = flavorMessages[Math.floor(Math.random() * flavorMessages.length)];
-                    el.style.opacity = '1';
-                }, 300);
-            }, 6000);
+                el.innerText = flavorMessages[Math.floor(Math.random() * flavorMessages.length)];
+            }, 7000);
         };
     </script>
 </body>
