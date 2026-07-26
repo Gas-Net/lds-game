@@ -458,43 +458,6 @@
             color: var(--primary);
         }
 
-        .setting-row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 14px 0;
-            border-bottom: 1px solid var(--border);
-            font-weight: 700;
-            font-size: 0.9rem;
-            width: 100%;
-        }
-
-        .toggle {
-            width: 48px;
-            height: 26px;
-            background: rgba(255,255,255,0.2);
-            border-radius: 13px;
-            position: relative;
-            cursor: pointer;
-            transition: background 0.2s;
-            touch-action: manipulation;
-        }
-
-        .toggle.active { background: var(--primary); }
-
-        .toggle-handle {
-            width: 20px;
-            height: 20px;
-            background: #fff;
-            border-radius: 50%;
-            position: absolute;
-            top: 3px;
-            left: 3px;
-            transition: transform 0.2s ease;
-        }
-
-        .toggle.active .toggle-handle { transform: translateX(22px); }
-
         .bottom-nav {
             position: relative;
             z-index: 10;
@@ -679,15 +642,17 @@
 
         <section class="view-panel" id="panel-settings" style="display: none;">
             <div class="stage-header">
-                <h2 class="temple-title">Settings</h2>
-                <div class="status-msg">Game audio and settings</div>
+                <h2 class="temple-title">Settings & Backup</h2>
+                <div class="status-msg">Manage your save data and backups</div>
             </div>
             <div class="list-container">
-                <div class="setting-row">
-                    <span>Sound Effects</span>
-                    <div class="toggle active" id="toggle-audio" onclick="toggleAudioSetting()">
-                        <div class="toggle-handle"></div>
-                    </div>
+                <div style="display: flex; gap: 10px; margin-top: 10px;">
+                    <button onclick="exportSave()" style="flex: 1; padding: 14px; background: var(--primary); color: #000; font-weight: 800; border-radius: var(--radius-md); border: none; cursor: pointer;">
+                        📋 Export Save
+                    </button>
+                    <button onclick="importSave()" style="flex: 1; padding: 14px; background: var(--bg-card); color: var(--text-main); font-weight: 800; border-radius: var(--radius-md); border: 1px solid var(--border); cursor: pointer;">
+                        📥 Import Save
+                    </button>
                 </div>
 
                 <button style="width: 100%; margin-top: 30px; padding: 14px; background: rgba(239, 68, 68, 0.2); border: 1px solid rgba(239, 68, 68, 0.4); color: #ef4444; border-radius: var(--radius-md); font-weight: 800; cursor: pointer;" onclick="hardReset()">
@@ -740,8 +705,7 @@
             counts: {},
             total: 0,
             theme: 'celestial',
-            ownedThemes: ['celestial'],
-            audio: true
+            ownedThemes: ['celestial']
         };
 
         // --- LDS THEMED CATALOG ---
@@ -833,55 +797,6 @@
             "Missionaries are serving daily.",
             "A beacon of light to all nations."
         ];
-
-        let audioCtx = null;
-
-        function initAudio() { 
-            if (!audioCtx) {
-                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            }
-            if (audioCtx.state === 'suspended') {
-                audioCtx.resume();
-            }
-        }
-
-        function playTapSound() {
-            if (!state.audio) return;
-            initAudio();
-            try {
-                const osc = audioCtx.createOscillator();
-                const gain = audioCtx.createGain();
-                osc.type = 'sine';
-                osc.frequency.setValueAtTime(540, audioCtx.currentTime);
-                osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.04);
-                gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.04);
-                osc.connect(gain);
-                gain.connect(audioCtx.destination);
-                osc.start();
-                osc.stop(audioCtx.currentTime + 0.04);
-            } catch (e) {}
-        }
-
-        function playVictorySound() {
-            if (!state.audio) return;
-            initAudio();
-            try {
-                const chords = [523.25, 659.25, 783.99, 1046.50, 1318.51];
-                chords.forEach((freq, idx) => {
-                    const osc = audioCtx.createOscillator();
-                    const gain = audioCtx.createGain();
-                    osc.type = 'triangle';
-                    osc.frequency.setValueAtTime(freq, audioCtx.currentTime + (idx * 0.08));
-                    gain.gain.setValueAtTime(0.2, audioCtx.currentTime + (idx * 0.08));
-                    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + (idx * 0.08) + 0.4);
-                    osc.connect(gain);
-                    gain.connect(audioCtx.destination);
-                    osc.start(audioCtx.currentTime + (idx * 0.08));
-                    osc.stop(audioCtx.currentTime + (idx * 0.08) + 0.4);
-                });
-            } catch(e) {}
-        }
 
         const canvas = document.getElementById('particle-canvas');
         const ctx = canvas.getContext('2d');
@@ -989,7 +904,6 @@
         }
 
         function handleTap(e) {
-            initAudio();
             const rect = e.currentTarget.getBoundingClientRect();
             const x = e.clientX || (e.touches && e.touches[0].clientX) || (rect.left + rect.width / 2);
             const y = e.clientY || (e.touches && e.touches[0].clientY) || (rect.top + rect.height / 2);
@@ -1010,13 +924,11 @@
             document.body.appendChild(floatText);
             setTimeout(() => floatText.remove(), 750);
 
-            playTapSound();
             spawnFX(x, y, 10);
             updateUI();
         }
 
         function buyCalling(i) {
-            initAudio();
             const t = temples[state.currentT];
             if (!state.counts[state.currentT]) state.counts[state.currentT] = [];
             const count = state.counts[state.currentT][i] || 0;
@@ -1025,7 +937,6 @@
             if (state.sp >= cost) {
                 state.sp -= cost;
                 state.counts[state.currentT][i] = count + 1;
-                playTapSound();
                 renderUpgrades();
                 updateUI();
                 saveGame();
@@ -1033,7 +944,6 @@
         }
 
         function buyTheme(tId) {
-            initAudio();
             const th = themeCatalog.find(x => x.id === tId);
             if (!th) return;
 
@@ -1043,7 +953,6 @@
                 state.sp -= th.cost;
                 state.ownedThemes.push(tId);
                 setTheme(tId);
-                playTapSound();
                 saveGame();
             }
             renderThemeShop();
@@ -1055,7 +964,6 @@
                 state.unlockedT++;
                 state.faith += 1.5;
                 
-                playVictorySound();
                 if (typeof confetti === 'function') {
                     confetti({ particleCount: 150, spread: 90, origin: { y: 0.6 } });
                 }
@@ -1196,7 +1104,6 @@
         }
 
         function switchTab(tabId, evt) {
-            initAudio();
             document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
             document.querySelectorAll('.view-panel').forEach(el => el.style.display = 'none');
 
@@ -1227,10 +1134,27 @@
             saveGame();
         }
 
-        function toggleAudioSetting() {
-            state.audio = !state.audio;
-            document.getElementById('toggle-audio').classList.toggle('active', state.audio);
-            saveGame();
+        function exportSave() {
+            const saveData = JSON.stringify(state);
+            navigator.clipboard.writeText(saveData).then(() => {
+                alert("Save data copied to clipboard! Keep it safe before updating.");
+            }).catch(err => {
+                prompt("Copy your save string manually:", saveData);
+            });
+        }
+
+        function importSave() {
+            const userInput = prompt("Paste your exported save code here:");
+            if (userInput) {
+                try {
+                    const parsed = JSON.parse(userInput);
+                    state = { ...state, ...parsed };
+                    saveGame();
+                    location.reload();
+                } catch (e) {
+                    alert("Invalid save code! Please try again.");
+                }
+            }
         }
 
         function saveGame() {
@@ -1243,7 +1167,6 @@
                 try { state = { ...state, ...JSON.parse(data) }; } catch (e) {}
             }
             setTheme(state.theme || 'celestial');
-            document.getElementById('toggle-audio').classList.toggle('active', state.audio);
             renderAll();
         }
 
