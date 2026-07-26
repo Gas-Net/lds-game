@@ -307,7 +307,15 @@
 
         .click-target:active { transform: scale(0.93); }
 
-        .temple-svg-icon {
+        .temple-img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+            pointer-events: none;
+            filter: drop-shadow(0 0 10px var(--primary-glow));
+        }
+
+        .temple-svg-fallback {
             width: 65%;
             height: 65%;
             fill: var(--primary);
@@ -656,7 +664,8 @@
             <div class="click-stage">
                 <div class="click-aura"></div>
                 <div class="click-target" id="click-target">
-                    <svg class="temple-svg-icon" viewBox="0 0 24 24">
+                    <img id="temple-img" class="temple-img" src="" alt="Temple" onerror="this.style.display='none'; document.getElementById('temple-svg-fallback').style.display='block';" />
+                    <svg id="temple-svg-fallback" class="temple-svg-fallback" viewBox="0 0 24 24" style="display: none;">
                         <path d="M12 2L10 6H14L12 2ZM11 7H13V10H11V7ZM4 21V11H20V21H18V13H15V21H9V13H6V21H4ZM11 15H13V21H11V15Z"/>
                     </svg>
                 </div>
@@ -677,7 +686,7 @@
         <section class="view-panel" id="panel-upgrades" style="display: none;">
             <div class="stage-header">
                 <h2 class="temple-title">Callings & Service</h2>
-                <div class="status-msg">Expand ward strength and capacity</div>
+                <div class="status-msg">Serve in callings & organize youth programs</div>
             </div>
             <div class="list-container" id="upgrades-list"></div>
         </section>
@@ -765,23 +774,152 @@
             { id: 'zion', name: 'Zion Glow', cost: 500000000, color: '#34d399' }
         ];
 
+        // --- REAL-LIFE LDS CALLINGS, MISSIONARY & YOUTH TREK ROLES ---
         const temples = [
-            { name: "Kirtland Ohio", goal: 10000, callings: [{n: "Clerk", c: 10, s: 1, i: "✍️"}, {n: "Exec Sec", c: 150, s: 5, i: "📅"}, {n: "2nd Counselor", c: 1500, s: 20, i: "📋"}, {n: "1st Counselor", c: 10000, s: 90, i: "💼"}, {n: "Bishop", c: 75000, s: 400, i: "🗝️"}, {n: "Recorder", c: 500000, s: 2000, i: "💰"}, {n: "Librarian", c: 3000000, s: 8000, i: "📚"}, {n: "Building Rep", c: 20000000, s: 35000, i: "🔑"}, {n: "High Councilor", c: 150000000, s: 150000, i: "🏛️"}, {n: "Stake President", c: 1000000000, s: 800000, i: "👔"}] },
-            { name: "Manti Utah", goal: 400000, callings: [{n: "Gardener", c: 8000, s: 30, i: "🌻"}, {n: "Carpenter", c: 50000, s: 150, i: "🪵"}, {n: "Mason", c: 250000, s: 700, i: "🧱"}, {n: "Dancer", c: 2000000, s: 3500, i: "💃"}, {n: "Cast Member", c: 12000000, s: 15000, i: "🎭"}, {n: "Farmer", c: 75000000, s: 80000, i: "🚜"}, {n: "Chorister", c: 500000000, s: 400000, i: "🎼"}, {n: "Guide", c: 3000000000, s: 2000000, i: "⛪"}, {n: "Patriarch", c: 20000000000, s: 10000000, i: "🖐️"}, {n: "Architect", c: 150000000000, s: 60000000, i: "📐"}] },
-            { name: "Logan Utah", goal: 10000000, callings: [{n: "Mt Guide", c: 200000, s: 500, i: "🏔️"}, {n: "Sawyer", c: 1500000, s: 3500, i: "⚙️"}, {n: "Settler", c: 10000000, s: 15000, i: "🚜"}, {n: "Quarryman", c: 70000000, s: 75000, i: "⛏️"}, {n: "Janitor", c: 400000000, s: 400000, i: "🧹"}, {n: "Singer", c: 2500000000, s: 2000000, i: "🎵"}, {n: "Farmer", c: 15000000000, s: 10000000, i: "🐄"}, {n: "Clerk", c: 100000000000, s: 60000000, i: "📂"}, {n: "HP Leader", c: 750000000000, s: 350000000, i: "👴"}, {n: "Castle Builder", c: 5000000000000, s: 1500000000, i: "🏰"}] },
-            { name: "Mesa Arizona", goal: 500000000, callings: [{n: "Picker", c: 5000000, s: 6000, i: "🍊"}, {n: "Crew", c: 35000000, s: 30000, i: "🧵"}, {n: "Cast", c: 150000000, s: 200000, i: "🎭"}, {n: "Decorator", c: 1200000000, s: 1000000, i: "✨"}, {n: "Missionary", c: 8000000000, s: 6000000, i: "☀️"}, {n: "Branch Clerk", c: 50000000000, s: 35000000, i: "🇲🇽"}, {n: "Historian", c: 350000000000, s: 150000000, i: "🌳"}, {n: "Stake Pres", c: 1500000000000, s: 800000000, i: "👔"}, {n: "Gardener", c: 10000000000000, s: 4500000000, i: "🌵"}, {n: "Pioneer", c: 75000000000000, s: 25000000000, i: "🏜️"}] },
-            { name: "Lehi Utah", goal: 5000000000, callings: [{n: "Support", c: 80000000, s: 150000, i: "💻"}, {n: "Dev", c: 500000000, s: 900000, i: "🖥️"}, {n: "Cooling", c: 3500000000, s: 5000000, i: "❄️"}, {n: "Volunteer", c: 20000000000, s: 25000000, i: "⌨️"}, {n: "Researcher", c: 120000000000, s: 150000000, i: "🌳"}, {n: "CEO", c: 800000000000, s: 800000000, i: "🏢"}, {n: "Historian", c: 5000000000000, s: 5000000000, i: "📜"}, {n: "Fiber Tech", c: 35000000000000, s: 25000000000, i: "🔌"}, {n: "Lead", c: 200000000000000, s: 150000000000, i: "💾"}, {n: "Virtual", c: 1500000000000000, s: 800000000000, i: "🌐"}] },
-            { name: "Nauvoo Illinois", goal: 100000000000, callings: [{n: "Baptistry", c: 2500000000, s: 2000000, i: "🌊"}, {n: "Initiatory", c: 15000000000, s: 10000000, i: "🕯️"}, {n: "Guide", c: 100000000000, s: 60000000, i: "✨"}, {n: "Witness", c: 750000000000, s: 350000000, i: "💍"}, {n: "Linen", c: 4000000000000, s: 1500000000, i: "👕"}, {n: "Organist", c: 25000000000000, s: 8000000000, i: "🎹"}, {n: "Coord.", c: 150000000000000, s: 35000000000, i: "🕒"}, {n: "Recorder", c: 1000000000000000, s: 150000000000, i: "📜"}, {n: "Counselor", c: 7500000000000000, s: 800000000000, i: "🏛️"}, {n: "President", c: 50000000000000000, s: 4000000000000, i: "🗝️"}] },
-            { name: "Phoenix Arizona", goal: 2000000000000, callings: [{n: "Teacher", c: 75000000000, s: 300000000, i: "🍎"}, {n: "FHE", c: 500000000000, s: 1500000000, i: "🏠"}, {n: "Chair", c: 3500000000000, s: 10000000000, i: "🎈"}, {n: "YM Pres", c: 25000000000000, s: 55000000000, i: "🏕️"}, {n: "YW Pres", c: 150000000000000, s: 250000000000, i: "🛡️"}, {n: "Clerk", c: 1000000000000000, s: 1500000000000, i: "📁"}, {n: "RS Pres", c: 6000000000000000, s: 7500000000000, i: "🍲"}, {n: "Leader", c: 40000000000000000, s: 35000000000000, i: "👔"}, {n: "Director", c: 250000000000000000, s: 200000000000000, i: "🗺️"}, {n: "Pioneer", c: 1500000000000000000, s: 1000000000000000, i: "🌵"}] },
-            { name: "Salt Lake City", goal: 50000000000000, callings: [{n: "Choir", c: 2000000000000, s: 15000000000, i: "🎵"}, {n: "Grounds", c: 12000000000000, s: 75000000000, i: "🌷"}, {n: "Center", c: 75000000000000, s: 350000000000, i: "🗺️"}, {n: "Usher", c: 500000000000000, s: 1500000000000, i: "👔"}, {n: "Historian", c: 3500000000000000, s: 12000000000000, i: "📜"}, {n: "Seventy", c: 20000000000000000, s: 65000000000000, i: "🌍"}, {n: "Apostle", c: 120000000000000000, s: 350000000000000, i: "🕊️"}, {n: "Counsel", c: 800000000000000000, s: 1800000000000000, i: "🗝️"}, {n: "Prophet", c: 5000000000000000000, s: 12000000000000000, i: "📜"}, {n: "Faith", c: 35000000000000000000, s: 75000000000000000, i: "🌎"}] }
+            { 
+                name: "Kirtland Ohio", 
+                file: "kirtland.png",
+                goal: 10000, 
+                callings: [
+                    {n: "Primary Teacher", c: 10, s: 1, i: "🎨"}, 
+                    {n: "Ward Hymn Leader", c: 150, s: 5, i: "🎼"}, 
+                    {n: "Youth Activity Chair", c: 1500, s: 20, i: "🏐"}, 
+                    {n: "Ward Missionary", c: 10000, s: 90, i: "🏷️"}, 
+                    {n: "Seminary Teacher", c: 75000, s: 400, i: "📖"}, 
+                    {n: "Elder's Quorum Leader", c: 500000, s: 2000, i: "🤝"}, 
+                    {n: "Relief Society Pres.", c: 3000000, s: 8000, i: "🌺"}, 
+                    {n: "Ward Bishop", c: 20000000, s: 35000, i: "🗝️"}, 
+                    {n: "Stake High Councilor", c: 150000000, s: 150000, i: "🏛️"}, 
+                    {n: "Stake President", c: 1000000000, s: 800000, i: "👔"}
+                ] 
+            },
+            { 
+                name: "Manti Utah", 
+                file: "manti.png",
+                goal: 400000, 
+                callings: [
+                    {n: "Pioneer Trek Youth", c: 8000, s: 30, i: "🤠"}, 
+                    {n: "Handcart Captain", c: 50000, s: 150, i: "🛒"}, 
+                    {n: "Trek Ma / Pa", c: 250000, s: 700, i: "⛺"}, 
+                    {n: "FSY Youth Counselor", c: 2000000, s: 3500, i: "🎽"}, 
+                    {n: "Youth Battalion Leader", c: 12000000, s: 15000, i: "🚩"}, 
+                    {n: "Service Missionary", c: 75000000, s: 80000, i: "🤝"}, 
+                    {n: "Full-Time Missionary", c: 500000000, s: 400000, i: "🏷️"}, 
+                    {n: "Zone Leader / AP", c: 3000000000, s: 2000000, i: "📋"}, 
+                    {n: "Mission President", c: 20000000000, s: 10000000, i: "🌍"}, 
+                    {n: "Stake Patriarch", c: 150000000000, s: 60000000, i: "🖐️"}
+                ] 
+            },
+            { 
+                name: "Logan Utah", 
+                file: "logan.png",
+                goal: 10000000, 
+                callings: [
+                    {n: "Youth Camp Specialist", c: 200000, s: 500, i: "🌲"}, 
+                    {n: "Gospel Doctrine Teacher", c: 1500000, s: 3500, i: "📖"}, 
+                    {n: "Ward Clerk", c: 10000000, s: 15000, i: "💻"}, 
+                    {n: "Young Women Pres.", c: 70000000, s: 75000, i: "🛡️"}, 
+                    {n: "Young Men Pres.", c: 400000000, s: 400000, i: "⛺"}, 
+                    {n: "Ward Choir Director", c: 2500000000, s: 2000000, i: "🎵"}, 
+                    {n: "Family History Specialist", c: 15000000000, s: 10000000, i: "🌳"}, 
+                    {n: "Ward Mission Leader", c: 100000000000, s: 60000000, i: "🗺️"}, 
+                    {n: "High Priests Group Leader", c: 750000000000, s: 350000000, i: "👴"}, 
+                    {n: "Temple Ordinance Worker", c: 5000000000000, s: 1500000000, i: "🏛️"}
+                ] 
+            },
+            { 
+                name: "Mesa Arizona", 
+                file: "mesa.png",
+                goal: 500000000, 
+                callings: [
+                    {n: "Nursery Leader", c: 5000000, s: 6000, i: "🧸"}, 
+                    {n: "Activities Committee Chair", c: 35000000, s: 30000, i: "🎉"}, 
+                    {n: "Institute Student Officer", c: 150000000, s: 200000, i: "🎓"}, 
+                    {n: "MTC District Leader", c: 1200000000, s: 1000000, i: "🏷️"}, 
+                    {n: "Sister Missionary", c: 8000000000, s: 6000000, i: "📚"}, 
+                    {n: "Senior Service Missionary", c: 50000000000, s: 35000000, i: "👵"}, 
+                    {n: "Branch President", c: 350000000000, s: 150000000, i: "🗝️"}, 
+                    {n: "Temple Recorder", c: 1500000000000, s: 800000000, i: "📜"}, 
+                    {n: "Stake Relief Society Pres.", c: 10000000000000, s: 4500000000, i: "👑"}, 
+                    {n: "Temple Matron", c: 75000000000000, s: 25000000000, i: "✨"}
+                ] 
+            },
+            { 
+                name: "Lehi Utah", 
+                file: "lehi.png",
+                goal: 5000000000, 
+                callings: [
+                    {n: "Tech / Audio Specialist", c: 80000000, s: 150000, i: "🎙️"}, 
+                    {n: "Self-Reliance Leader", c: 500000000, s: 900000, i: "📈"}, 
+                    {n: "Addiction Recovery Leader", c: 3500000000, s: 5000000, i: "🕊️"}, 
+                    {n: "Indexing Volunteer", c: 20000000000, s: 25000000, i: "💻"}, 
+                    {n: "Family History Director", c: 120000000000, s: 150000000, i: "🌳"}, 
+                    {n: "Ward Executive Secretary", c: 800000000000, s: 800000000, i: "📅"}, 
+                    {n: "Stake YM President", c: 5000000000000, s: 5000000000, i: "🏕️"}, 
+                    {n: "Stake YW President", c: 35000000000000, s: 25000000000, i: "🛡️"}, 
+                    {n: "Stake Clerk", c: 200000000000000, s: 150000000000, i: "📁"}, 
+                    {n: "Temple President", c: 1500000000000000, s: 800000000000, i: "🗝️"}
+                ] 
+            },
+            { 
+                name: "Nauvoo Illinois", 
+                file: "nauvoo.png",
+                goal: 100000000000, 
+                callings: [
+                    {n: "Baptistry Worker", c: 2500000000, s: 2000000, i: "🌊"}, 
+                    {n: "Initiatory Officiator", c: 15000000000, s: 10000000, i: "🕯️"}, 
+                    {n: "Historic Site Senior Guide", c: 100000000000, s: 60000000, i: "🏛️"}, 
+                    {n: "Sealer / Officiator", c: 750000000000, s: 350000000, i: "💍"}, 
+                    {n: "Temple Linen Coordinator", c: 4000000000000, s: 1500000000, i: "🧺"}, 
+                    {n: "Temple Organist", c: 25000000000000, s: 8000000000, i: "🎹"}, 
+                    {n: "Shift Coordinator", c: 150000000000000, s: 35000000000, i: "🕒"}, 
+                    {n: "Stake Primary Director", c: 1000000000000000, s: 150000000000, i: "🎨"}, 
+                    {n: "Area Seventy", c: 7500000000000000, s: 800000000000, i: "🌍"}, 
+                    {n: "General Authority", c: 50000000000000000, s: 4000000000000, i: "🕊️"}
+                ] 
+            },
+            { 
+                name: "Phoenix Arizona", 
+                file: "phoenix.png",
+                goal: 2000000000000, 
+                callings: [
+                    {n: "Early Morning Seminary Pres.", c: 75000000000, s: 300000000, i: "🌅"}, 
+                    {n: "JustServe Director", c: 500000000000, s: 1500000000, i: "🤝"}, 
+                    {n: "FSY Session Director", c: 3500000000000, s: 10000000000, i: "🎙️"}, 
+                    {n: "Youth Camp Director", c: 25000000000000, s: 55000000000, i: "🏕️"}, 
+                    {n: "Missionary Training Teacher", c: 150000000000000, s: 250000000000, i: "📖"}, 
+                    {n: "Stake Mission Director", c: 1000000000000000, s: 1500000000000, i: "🗺️"}, 
+                    {n: "Stake Relief Society Pres.", c: 6000000000000000, s: 7500000000000, i: "🌺"}, 
+                    {n: "Regional Public Affairs", c: 40000000000000000, s: 35000000000000, i: "📢"}, 
+                    {n: "MTC President", c: 250000000000000000, s: 200000000000000, i: "🏛️"}, 
+                    {n: "Pioneer Heritage Chair", c: 1500000000000000000, s: 1000000000000000, i: "🛒"}
+                ] 
+            },
+            { 
+                name: "Salt Lake City", 
+                file: "salt.png",
+                goal: 50000000000000, 
+                callings: [
+                    {n: "Tabernacle Choir Member", c: 2000000000000, s: 15000000000, i: "🎵"}, 
+                    {n: "Square Visitor Guide", c: 12000000000000, s: 75000000000, i: "🏛️"}, 
+                    {n: "FamilySearch Director", c: 75000000000000, s: 350000000000, i: "🌳"}, 
+                    {n: "Church Host / Usher", c: 500000000000000, s: 1500000000000, i: "👔"}, 
+                    {n: "Church Historian", c: 3500000000000000, s: 12000000000000, i: "📜"}, 
+                    {n: "Presiding Bishopric", c: 20000000000000000, s: 65000000000000, i: "🗝️"}, 
+                    {n: "Quorum of the Seventy", c: 120000000000000000, s: 350000000000000, i: "🌍"}, 
+                    {n: "Quorum of the Twelve", c: 800000000000000000, s: 1800000000000000, i: "🕊️"}, 
+                    {n: "First Presidency", c: 5000000000000000000, s: 12000000000000000, i: "📜"}, 
+                    {n: "President of the Church", c: 35000000000000000000, s: 75000000000000000, i: "🌎"}
+                ] 
+            }
         ];
 
         const flavorMessages = [
             "A small spark of faith.",
             "The ward is growing day by day.",
             "Finding pure joy in service.",
-            "Ward activities are lively and bright.",
-            "International growth is surging.",
+            "Youth activities are lively and bright.",
+            "Full-time missionaries are teaching daily.",
             "A beacon of light to all nations."
         ];
 
@@ -853,7 +991,7 @@
                 if (!this.active) return;
                 this.x += this.vx * dt * 60;
                 this.y += this.vy * dt * 60;
-                this.vy += 0.12 * dt * 60; // Soft gravity
+                this.vy += 0.12 * dt * 60;
                 this.rotation += this.vRot;
                 this.alpha -= this.decay * dt * 60;
                 if (this.alpha <= 0) this.active = false;
@@ -867,7 +1005,6 @@
                 ctx.fillStyle = this.color;
 
                 if (this.type === 'sparkle') {
-                    // Draw 4-point star
                     ctx.beginPath();
                     for (let i = 0; i < 4; i++) {
                         ctx.lineTo(Math.cos(i * Math.PI / 2) * this.size, Math.sin(i * Math.PI / 2) * this.size);
@@ -884,7 +1021,6 @@
             }
         }
 
-        // Pre-allocate particle pool
         for (let i = 0; i < MAX_PARTICLES; i++) {
             particlePool.push(new Particle());
         }
@@ -1027,7 +1163,7 @@
         let lastUIUpdate = 0;
         function updateUIThrottled() {
             const now = performance.now();
-            if (now - lastUIUpdate > 50) { // Max 20 DOM updates/sec
+            if (now - lastUIUpdate > 50) {
                 updateUI();
                 lastUIUpdate = now;
             }
@@ -1040,6 +1176,13 @@
 
             const t = temples[state.currentT];
             document.getElementById('display-tname').innerText = t.name + (state.currentT < state.unlockedT ? " (✓)" : "");
+
+            // Update Temple Image from repository assets
+            const imgEl = document.getElementById('temple-img');
+            const fallbackEl = document.getElementById('temple-svg-fallback');
+            imgEl.src = `./temples/${t.file}`;
+            imgEl.style.display = 'block';
+            fallbackEl.style.display = 'none';
 
             const prog = Math.min((state.sp / t.goal) * 100, 100);
             document.getElementById('fill-bar').style.width = `${prog}%`;
@@ -1198,11 +1341,11 @@
 
         // --- SAVE/LOAD ---
         function saveGame() {
-            localStorage.setItem('TC_BALANCED_V3', JSON.stringify(state));
+            localStorage.setItem('TC_BALANCED_V4', JSON.stringify(state));
         }
 
         function loadGame() {
-            const data = localStorage.getItem('TC_BALANCED_V3');
+            const data = localStorage.getItem('TC_BALANCED_V4');
             if (data) {
                 try {
                     state = { ...state, ...JSON.parse(data) };
@@ -1218,7 +1361,7 @@
 
         function hardReset() {
             if (confirm("Are you sure you want to reset all spiritual progress?")) {
-                localStorage.removeItem('TC_BALANCED_V3');
+                localStorage.removeItem('TC_BALANCED_V4');
                 location.reload();
             }
         }
@@ -1231,7 +1374,6 @@
         window.onload = () => {
             loadGame();
 
-            // Passive gain loop (10Hz)
             setInterval(() => {
                 const sps = getSPS();
                 state.sp += sps / 10;
@@ -1239,10 +1381,8 @@
                 updateUIThrottled();
             }, 100);
 
-            // Auto-save loop (5s)
             setInterval(saveGame, 5000);
 
-            // Text flavor ticker
             setInterval(() => {
                 const el = document.getElementById('display-status');
                 el.style.opacity = '0';
