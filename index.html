@@ -6,11 +6,11 @@
     <meta name="theme-color" content="#0a0f1d">
     <title>Temple Clicker Deluxe</title>
 
-    <link rel="apple-touch-icon" href="logo1024x1024.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="logo1024x1024.png">
-
+    <link rel="apple-touch-icon" href="icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="icon.png">
     <link rel="icon" type="image/x-icon" href="icon.ico">
+    <link rel="shortcut icon" href="icon.ico">
 
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -265,6 +265,27 @@
             object-fit: contain;
             filter: drop-shadow(0 0 12px var(--primary-glow));
             pointer-events: none;
+        }
+
+        /* --- RANDOM BLESSING STAR (MINI-GAME) --- */
+        .blessing-star {
+            position: absolute;
+            z-index: 20;
+            width: 50px;
+            height: 50px;
+            font-size: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            animation: pulseStar 1s infinite alternate;
+            filter: drop-shadow(0 0 15px var(--primary));
+            touch-action: manipulation;
+        }
+
+        @keyframes pulseStar {
+            0% { transform: scale(0.9) rotate(-5deg); }
+            100% { transform: scale(1.2) rotate(10deg); }
         }
 
         .floating-text {
@@ -725,6 +746,9 @@
             ownedThemes: ['celestial']
         };
 
+        let tempMultiplier = 1;
+        let tempMultTimer = null;
+
         // --- LDS THEMED CATALOG ---
         const themeCatalog = [
             { id: 'celestial', name: 'Celestial Gold', cost: 0, color: '#d4af37' },
@@ -918,7 +942,7 @@
                     });
                 }
             }
-            return total * state.faith;
+            return total * state.faith * tempMultiplier;
         }
 
         function cCost(base, count) {
@@ -930,7 +954,7 @@
             const x = e.clientX || (e.touches && e.touches[0].clientX) || (rect.left + rect.width / 2);
             const y = e.clientY || (e.touches && e.touches[0].clientY) || (rect.top + rect.height / 2);
 
-            const gain = Math.max(1, getSPS() * 0.08) * state.faith;
+            const gain = Math.max(1, getSPS() * 0.08) * state.faith * tempMultiplier;
             state.sp += gain;
             state.total += gain;
 
@@ -949,6 +973,53 @@
             spawnFX(x, y, 10);
             updateUI();
         }
+
+        /* --- DYNAMIC FAITH BLESSINGS MINI-GAME --- */
+        function spawnBlessingStar() {
+            if (document.querySelector('.blessing-star')) return;
+
+            const star = document.createElement('div');
+            star.className = 'blessing-star';
+            star.innerText = '⭐';
+            
+            const stage = document.getElementById('panel-clicker');
+            const x = Math.random() * (window.innerWidth - 80) + 40;
+            const y = Math.random() * (window.innerHeight - 200) + 80;
+
+            star.style.left = `${x}px`;
+            star.style.top = `${y}px`;
+
+            star.onclick = (e) => {
+                e.stopPropagation();
+                triggerBlessingReward(x, y);
+                star.remove();
+            };
+
+            document.body.appendChild(star);
+            setTimeout(() => { if (star.parentNode) star.remove(); }, 10000);
+        }
+
+        function triggerBlessingReward(x, y) {
+            const isBurst = Math.random() > 0.5;
+            if (isBurst) {
+                const burst = Math.max(100, getSPS() * 60);
+                state.sp += burst;
+                state.total += burst;
+                spawnFX(x, y, 25);
+                alert(`✨ BLESSING: Instant SP Burst! +${formatNumber(burst)} SP`);
+            } else {
+                tempMultiplier = 10;
+                clearTimeout(tempMultTimer);
+                tempMultTimer = setTimeout(() => { tempMultiplier = 1; updateUI(); }, 15000);
+                spawnFX(x, y, 25);
+                alert('⚡ DIVINE BLESSING: 10x Power Multiplier for 15 Seconds!');
+            }
+            updateUI();
+        }
+
+        setInterval(() => {
+            if (Math.random() < 0.4) spawnBlessingStar();
+        }, 35000);
 
         function buyCalling(i) {
             const t = temples[state.currentT];
@@ -1008,7 +1079,7 @@
         function updateUI() {
             document.getElementById('display-sp').innerText = formatNumber(state.sp);
             document.getElementById('display-sps').innerText = formatNumber(getSPS());
-            document.getElementById('display-faith').innerText = state.faith.toFixed(1);
+            document.getElementById('display-faith').innerText = (state.faith * tempMultiplier).toFixed(1);
 
             const t = temples[state.currentT];
             document.getElementById('display-tname').innerText = t.name + (state.currentT < state.unlockedT ? " (✓)" : "");
