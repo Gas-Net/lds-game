@@ -1,248 +1,1126 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="celestial">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>Temple Clicker: Global Legend</title>
     <style>
         :root {
-            --bg: #f8f9fa; --card: rgba(255, 255, 255, 0.9); --text: #1d1d1f; --sub: #86868b;
-            --primary: #0071e3; --accent: #bf953f; --border: rgba(0,0,0,0.1);
+            --bg-base: #0f172a;
+            --bg-card: rgba(30, 41, 59, 0.7);
+            --bg-card-active: rgba(51, 65, 85, 0.8);
+            --text-main: #f8fafc;
+            --text-sub: #94a3b8;
+            --primary: #38bdf8;
+            --primary-glow: rgba(56, 189, 248, 0.35);
+            --accent: #fbbf24;
+            --accent-glow: rgba(251, 191, 36, 0.4);
+            --border: rgba(255, 255, 255, 0.08);
+            --radius-lg: 24px;
+            --radius-md: 16px;
+            --radius-sm: 10px;
+            --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            --safe-area-top: env(safe-area-inset-top, 0px);
+            --safe-area-bottom: env(safe-area-inset-bottom, 0px);
         }
-        [data-theme="dark"] { --bg: #000; --card: rgba(28, 28, 30, 0.9); --text: #f5f5f7; --primary: #0a84ff; --accent: #ffd700; --border: rgba(255,255,255,0.1); }
-        [data-theme="ctr"] { --bg: #e8f5e9; --card: #ffffff; --text: #1b5e20; --primary: #2e7d32; --accent: #9e9e9e; --border: #c8e6c9; }
-        [data-theme="liahona"] { --bg: #f4e4bc; --card: #fffdf5; --text: #5d4037; --primary: #bf953f; --accent: #8d6e63; --border: #d7ccc8; }
-        [data-theme="ironrod"] { --bg: #263238; --card: #37474f; --text: #eceff1; --primary: #90a4ae; --accent: #cfd8dc; --border: #455a64; }
-        [data-theme="celestial"] { --bg: #ffffff; --card: #fff; --text: #222; --primary: #d4af37; --accent: #f9f9f9; --border: #eee; }
-        [data-theme="ensign"] { --bg: #fdfaf5; --card: #fff; --text: #333; --primary: #800000; --accent: #d2b48c; --border: #e0d7c6; }
-        
-        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; user-select: none; touch-action: manipulation; }
-        body { font-family: -apple-system, sans-serif; background: var(--bg); margin: 0; color: var(--text); height: 100vh; overflow: hidden; display: flex; flex-direction: column; transition: 0.3s; }
 
-        .header { padding: 10px 15px; text-align: center; border-bottom: 1px solid var(--border); background: var(--bg); z-index: 10; }
-        .score { font-size: 2.2rem; font-weight: 800; letter-spacing: -1px; }
-        .status-msg { font-size: 0.8rem; color: var(--sub); margin-top: 2px; height: 1.2em; transition: 0.5s; font-style: italic; }
-
-        .container { display: flex; flex: 1; overflow: hidden; flex-direction: column; }
-        @media (min-width: 900px) { .container { flex-direction: row; } .menu-side { width: 420px; border-left: 1px solid var(--border); } }
-
-        .game-side { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; }
-        #click-area {
-            width: clamp(180px, 35vw, 280px); height: clamp(180px, 35vw, 280px);
-            cursor: pointer; border-radius: 40px; overflow: hidden;
-            transition: transform 0.05s; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border: 4px solid var(--card);
+        [data-theme="dark"] {
+            --bg-base: #050505;
+            --bg-card: rgba(24, 24, 27, 0.75);
+            --bg-card-active: rgba(39, 39, 42, 0.9);
+            --text-main: #fafafa;
+            --text-sub: #a1a1aa;
+            --primary: #a855f7;
+            --primary-glow: rgba(168, 85, 247, 0.35);
+            --accent: #eab308;
+            --accent-glow: rgba(234, 179, 8, 0.4);
+            --border: rgba(255, 255, 255, 0.08);
         }
-        #click-area:active { transform: scale(0.95); }
-        #temple-img { width: 100%; height: 100%; object-fit: cover; pointer-events: none; background: #eee; }
 
-        .menu-side { background: var(--card); display: flex; flex-direction: column; overflow-y: auto; padding: 15px; }
-        
-        .upgrade-btn { 
-            background: var(--bg); padding: 12px; border-radius: 18px; margin-bottom: 10px; 
-            display: flex; align-items: center; border: 1px solid var(--border); 
-            cursor: pointer; transition: 0.1s; width: 100%; text-align: left; color: var(--text);
+        [data-theme="celestial"] {
+            --bg-base: #0a0f1d;
+            --bg-card: rgba(16, 25, 46, 0.75);
+            --bg-card-active: rgba(27, 40, 71, 0.9);
+            --text-main: #f8fafc;
+            --text-sub: #829ab1;
+            --primary: #d4af37;
+            --primary-glow: rgba(212, 175, 55, 0.4);
+            --accent: #38bdf8;
+            --accent-glow: rgba(56, 189, 248, 0.35);
+            --border: rgba(212, 175, 55, 0.15);
         }
-        .upgrade-btn:active { transform: scale(0.98); }
-        .upgrade-btn.disabled { opacity: 0.4; cursor: not-allowed; pointer-events: none; }
 
-        .icon { font-size: 1.8rem; margin-right: 12px; }
-        .details { flex: 1; }
-        .details b { display: block; font-size: 0.9rem; }
-        .details span { font-size: 0.75rem; color: var(--sub); }
-        .price { background: var(--primary); color: white; padding: 10px 14px; border-radius: 12px; font-weight: 800; font-size: 0.85rem; min-width: 90px; text-align: center; }
+        [data-theme="ironrod"] {
+            --bg-base: #111827;
+            --bg-card: rgba(31, 41, 55, 0.75);
+            --bg-card-active: rgba(55, 65, 81, 0.9);
+            --text-main: #f9fafb;
+            --text-sub: #9ca3af;
+            --primary: #9ba3af;
+            --primary-glow: rgba(155, 163, 175, 0.35);
+            --accent: #10b981;
+            --accent-glow: rgba(16, 185, 129, 0.35);
+            --border: rgba(255, 255, 255, 0.1);
+        }
 
-        .prog-container { width: 100%; max-width: 300px; margin-top: 15px; text-align: center; }
-        .bar { background: var(--border); height: 10px; border-radius: 10px; overflow: hidden; }
-        #fill { background: var(--primary); width: 0%; height: 100%; transition: 0.3s; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: manipulation;
+        }
 
-        .modal-bg { position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); display: none; align-items: center; justify-content: center; z-index: 100; }
-        .modal { background: var(--card); padding: 25px; border-radius: 30px; width: 90%; max-width: 350px; text-align: center; max-height: 80vh; overflow-y: auto; }
-        .item-btn { background: var(--bg); padding: 12px; margin: 8px 0; border-radius: 15px; cursor: pointer; font-weight: bold; border: 1px solid var(--border); color: var(--text); display: block; width: 100%; }
-        
-        .toolbar { display: flex; justify-content: center; gap: 10px; margin-top: 10px; }
-        .tool-btn { background: var(--card); border: 1px solid var(--border); color: var(--text); padding: 8px 12px; border-radius: 10px; cursor: pointer; font-size: 0.75rem; font-weight: bold; }
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            height: 100vh;
+            height: -webkit-fill-available;
+            width: 100vw;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            padding-top: var(--safe-area-top);
+            padding-bottom: var(--safe-area-bottom);
+        }
+
+        /* Ambient Particle Canvas */
+        #particle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Top Bar Dynamic Display */
+        .top-nav {
+            position: relative;
+            z-index: 5;
+            padding: 12px 20px 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: linear-gradient(180deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0) 100%);
+        }
+
+        .score-container {
+            text-align: center;
+        }
+
+        .score-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-sub);
+            font-weight: 700;
+        }
+
+        .score {
+            font-size: clamp(2.2rem, 6vw, 3.2rem);
+            font-weight: 900;
+            letter-spacing: -1px;
+            color: var(--text-main);
+            text-shadow: 0 0 20px var(--primary-glow);
+            line-height: 1.1;
+        }
+
+        .stats-strip {
+            display: flex;
+            gap: 16px;
+            margin-top: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-sub);
+            background: var(--bg-card);
+            padding: 6px 16px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            backdrop-filter: blur(10px);
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .stat-item span {
+            color: var(--text-main);
+            font-weight: 700;
+        }
+
+        /* Main Viewport Slider */
+        .app-viewport {
+            position: relative;
+            z-index: 2;
+            flex: 1;
+            display: flex;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .view-panel {
+            min-width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px 20px;
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow-y: auto;
+        }
+
+        /* Clicker Stage */
+        .stage-header {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .temple-title {
+            font-size: 1.2rem;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, var(--text-main), var(--text-sub));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .status-msg {
+            font-size: 0.75rem;
+            color: var(--accent);
+            min-height: 1.2em;
+            margin-top: 2px;
+            font-style: italic;
+            transition: opacity 0.3s;
+        }
+
+        .click-stage {
+            position: relative;
+            width: clamp(220px, 55vw, 320px);
+            height: clamp(220px, 55vw, 320px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: auto 0;
+        }
+
+        .click-aura {
+            position: absolute;
+            inset: -10px;
+            border-radius: 50%;
+            background: radial-gradient(circle, var(--primary-glow) 0%, rgba(0,0,0,0) 70%);
+            animation: pulseAura 4s infinite ease-in-out;
+            z-index: 1;
+        }
+
+        @keyframes pulseAura {
+            0%, 100% { transform: scale(0.95); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.9; }
+        }
+
+        .click-target {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: var(--bg-card);
+            border: 4px solid var(--border);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5), inset 0 0 20px var(--primary-glow);
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.08s ease, border-color 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .click-target:active {
+            transform: scale(0.93);
+        }
+
+        .temple-icon-svg {
+            width: 65%;
+            height: 65%;
+            fill: var(--primary);
+            filter: drop-shadow(0 0 12px var(--primary-glow));
+            transition: fill 0.3s ease;
+        }
+
+        /* Dynamic Click Floating Text */
+        .floating-text {
+            position: absolute;
+            pointer-events: none;
+            font-weight: 900;
+            font-size: 1.4rem;
+            color: var(--accent);
+            text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+            z-index: 10;
+            animation: floatUp 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        }
+
+        @keyframes floatUp {
+            0% { opacity: 1; transform: translate(-50%, -50%) scale(0.8) translateY(0); }
+            50% { transform: translate(-50%, -50%) scale(1.2) translateY(-30px); }
+            100% { opacity: 0; transform: translate(-50%, -50%) scale(1) translateY(-60px); }
+        }
+
+        /* Progress Engine UI */
+        .progress-card {
+            width: 100%;
+            max-width: 400px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 16px;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--text-sub);
+        }
+
+        .bar-track {
+            width: 100%;
+            height: 12px;
+            background: rgba(0,0,0,0.4);
+            border-radius: 6px;
+            overflow: hidden;
+            position: relative;
+            border: 1px solid var(--border);
+        }
+
+        .bar-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 6px;
+            transition: width 0.3s ease;
+            box-shadow: 0 0 12px var(--accent-glow);
+        }
+
+        .action-btn {
+            width: 100%;
+            margin-top: 12px;
+            padding: 14px;
+            border-radius: var(--radius-md);
+            border: none;
+            background: linear-gradient(135deg, var(--accent), #d97706);
+            color: #000;
+            font-weight: 900;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            cursor: pointer;
+            box-shadow: 0 4px 20px var(--accent-glow);
+            display: none;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-6px); }
+            60% { transform: translateY(-3px); }
+        }
+
+        /* Scrollable Upgrades Grid */
+        .list-container {
+            width: 100%;
+            max-width: 500px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding-bottom: 20px;
+        }
+
+        .upgrade-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            transition: background 0.2s, transform 0.1s;
+            cursor: pointer;
+        }
+
+        .upgrade-card:active {
+            background: var(--bg-card-active);
+            transform: scale(0.98);
+        }
+
+        .upgrade-card.disabled {
+            opacity: 0.4;
+            pointer-events: none;
+            filter: grayscale(0.8);
+        }
+
+        .upgrade-icon {
+            font-size: 1.8rem;
+            width: 48px;
+            height: 48px;
+            background: rgba(0,0,0,0.3);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--border);
+        }
+
+        .upgrade-info {
+            flex: 1;
+        }
+
+        .upgrade-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .upgrade-sub {
+            font-size: 0.75rem;
+            color: var(--text-sub);
+            margin-top: 2px;
+        }
+
+        .upgrade-buy {
+            background: var(--primary);
+            color: #000;
+            font-weight: 800;
+            font-size: 0.8rem;
+            padding: 8px 14px;
+            border-radius: var(--radius-sm);
+            box-shadow: 0 2px 10px var(--primary-glow);
+            text-align: center;
+            min-width: 75px;
+        }
+
+        /* Global Map / Navigation Cards */
+        .map-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 16px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+
+        .map-card.locked {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Fixed Bottom Navigation Bar for Mobile */
+        .bottom-nav {
+            position: relative;
+            z-index: 10;
+            height: 65px;
+            background: var(--bg-card);
+            border-top: 1px solid var(--border);
+            backdrop-filter: blur(20px);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding-bottom: clamp(0px, var(--safe-area-bottom), 20px);
+        }
+
+        .nav-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: var(--text-sub);
+            font-size: 0.7rem;
+            font-weight: 700;
+            gap: 4px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .nav-item.active {
+            color: var(--primary);
+        }
+
+        .nav-item svg {
+            width: 22px;
+            height: 22px;
+            fill: currentColor;
+        }
+
+        /* Slide-Up Overlay Modals */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(8px);
+            z-index: 100;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .sheet {
+            width: 100%;
+            max-width: 500px;
+            background: var(--bg-base);
+            border-top-left-radius: var(--radius-lg);
+            border-top-right-radius: var(--radius-lg);
+            border: 1px solid var(--border);
+            padding: 24px 20px clamp(20px, var(--safe-area-bottom), 40px);
+            transform: translateY(100%);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal-overlay.active .sheet {
+            transform: translateY(0);
+        }
+
+        .sheet-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .sheet-title {
+            font-size: 1.2rem;
+            font-weight: 800;
+        }
+
+        .close-btn {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .theme-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .theme-btn {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 14px;
+            border-radius: var(--radius-md);
+            color: var(--text-main);
+            font-weight: 700;
+            font-size: 0.85rem;
+            cursor: pointer;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .theme-dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+        }
+
+        .setting-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .toggle {
+            width: 50px;
+            height: 28px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 14px;
+            position: relative;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .toggle.active {
+            background: var(--primary);
+        }
+
+        .toggle-handle {
+            width: 22px;
+            height: 22px;
+            background: #fff;
+            border-radius: 50%;
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            transition: transform 0.3s ease;
+        }
+
+        .toggle.active .toggle-handle {
+            transform: translateX(22px);
+        }
     </style>
 </head>
-<body data-theme="light">
+<body>
 
-<div id="map-modal" class="modal-bg" onclick="this.style.display='none'"><div class="modal" onclick="event.stopPropagation()"><h3>Select Temple</h3><div id="map-links"></div></div></div>
-<div id="theme-modal" class="modal-bg" onclick="this.style.display='none'"><div class="modal" onclick="event.stopPropagation()">
-    <h3>Themes</h3>
-    <button class="item-btn" onclick="setTheme('light')">Modern White</button>
-    <button class="item-btn" onclick="setTheme('dark')">Midnight Dark</button>
-    <button class="item-btn" onclick="setTheme('ctr')">CTR (Green/Silver)</button>
-    <button class="item-btn" onclick="setTheme('liahona')">Liahona (Desert/Gold)</button>
-    <button class="item-btn" onclick="setTheme('ironrod')">Iron Rod (Steel/Dark)</button>
-    <button class="item-btn" onclick="setTheme('celestial')">Celestial (Bright Gold)</button>
-    <button class="item-btn" onclick="setTheme('ensign')">Ensign (Burgundy)</button>
-</div></div>
+    <canvas id="particle-canvas"></canvas>
 
-<div class="header">
-    <div class="score" id="display-sp">0</div>
-    <div class="status-msg" id="display-status">Wait for it...</div>
-    <div style="font-size: 0.8rem; font-weight: bold; margin-top: 5px;">
-        ⚡ <span id="display-sps">0</span>/s | ✨ Faith: <span id="display-faith">1.0</span>x
-    </div>
-    <div class="toolbar">
-        <div class="tool-btn" onclick="openMap()">🗺️ Travel</div>
-        <div class="tool-btn" onclick="document.getElementById('theme-modal').style.display='flex'">🎨 Themes</div>
-        <div class="tool-btn" onclick="hardReset()">🛑 Reset</div>
-    </div>
-</div>
+    <header class="top-nav">
+        <div class="score-container">
+            <div class="score-label">Spiritual Power</div>
+            <div class="score" id="display-sp">0</div>
+        </div>
+        <div class="stats-strip">
+            <div class="stat-item">⚡ <span id="display-sps">0</span>/s</div>
+            <div class="stat-item">✨ Faith: <span id="display-faith">1.0</span>x</div>
+        </div>
+    </header>
 
-<div class="container">
-    <div class="game-side">
-        <h3 id="display-tname" style="margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; font-size: 1rem;">Loading...</h3>
-        <div id="click-area"><img id="temple-img" src="" alt="Temple"></div>
-        <div class="prog-container">
-            <div class="bar"><div id="fill"></div></div>
-            <p id="display-prog" style="font-size: 0.8rem; font-weight: 800; margin-top: 8px;">0% Complete</p>
-            <button id="ded-btn" style="display:none; background:var(--primary); color:white; padding:12px 25px; border-radius:30px; border:none; font-weight:900; cursor:pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.2);" onclick="dedicate()">DEDICATE TEMPLE</button>
+    <main class="app-viewport">
+        <section class="view-panel" id="panel-clicker">
+            <div class="stage-header">
+                <h2 class="temple-title" id="display-tname">Loading...</h2>
+                <div class="status-msg" id="display-status">A small spark of faith...</div>
+            </div>
+
+            <div class="click-stage">
+                <div class="click-aura"></div>
+                <div class="click-target" id="click-target">
+                    <svg class="temple-icon-svg" viewBox="0 0 24 24">
+                        <path d="M12 2L2 12h3v8h14v-8h3L12 2zm0 3.8l5 5V18H7v-7.2l5-5zM11 10h2v6h-2z"/>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="progress-card">
+                <div class="progress-header">
+                    <span>Dedication Progress</span>
+                    <span id="display-prog-pct">0%</span>
+                </div>
+                <div class="bar-track">
+                    <div class="bar-fill" id="fill-bar"></div>
+                </div>
+                <button class="action-btn" id="dedicate-btn">Dedicate Temple</button>
+            </div>
+        </section>
+
+        <section class="view-panel" id="panel-upgrades" style="display: none;">
+            <div class="stage-header">
+                <h2 class="temple-title">Callings & Service</h2>
+                <div class="status-msg">Expand your ward capacity</div>
+            </div>
+            <div class="list-container" id="upgrades-list"></div>
+        </section>
+
+        <section class="view-panel" id="panel-map" style="display: none;">
+            <div class="stage-header">
+                <h2 class="temple-title">Global Map</h2>
+                <div class="status-msg">Travel to active temples</div>
+            </div>
+            <div class="list-container" id="map-list"></div>
+        </section>
+    </main>
+
+    <nav class="bottom-nav">
+        <button class="nav-item active" onclick="switchTab('clicker')">
+            <svg viewBox="0 0 24 24"><path d="M12 2L2 12h3v8h14v-8h3L12 2z"/></svg>
+            Temple
+        </button>
+        <button class="nav-item" onclick="switchTab('upgrades')">
+            <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+            Callings
+        </button>
+        <button class="nav-item" onclick="switchTab('map')">
+            <svg viewBox="0 0 24 24"><path d="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM15 19l-6-2.11V5l6 2.11V19z"/></svg>
+            Travel
+        </button>
+        <button class="nav-item" onclick="openModal('settings-modal')">
+            <svg viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
+            Settings
+        </button>
+    </nav>
+
+    <div class="modal-overlay" id="settings-modal" onclick="closeModal('settings-modal')">
+        <div class="sheet" onclick="event.stopPropagation()">
+            <div class="sheet-header">
+                <div class="sheet-title">Settings & Themes</div>
+                <div class="close-btn" onclick="closeModal('settings-modal')">✕</div>
+            </div>
+
+            <div class="setting-row">
+                <span>Audio Feedback</span>
+                <div class="toggle active" id="toggle-audio" onclick="toggleAudioSetting()">
+                    <div class="toggle-handle"></div>
+                </div>
+            </div>
+
+            <div class="setting-row">
+                <span>Haptic Vibration</span>
+                <div class="toggle active" id="toggle-haptics" onclick="toggleHapticsSetting()">
+                    <div class="toggle-handle"></div>
+                </div>
+            </div>
+
+            <div style="margin: 20px 0 10px; font-weight: 700; font-size: 0.9rem; color: var(--text-sub);">Select Theme</div>
+            <div class="theme-grid">
+                <button class="theme-btn" onclick="setTheme('celestial')">
+                    Celestial
+                    <div class="theme-dot" style="background: #d4af37;"></div>
+                </button>
+                <button class="theme-btn" onclick="setTheme('dark')">
+                    Midnight
+                    <div class="theme-dot" style="background: #a855f7;"></div>
+                </button>
+                <button class="theme-btn" onclick="setTheme('ironrod')">
+                    Iron Rod
+                    <div class="theme-dot" style="background: #10b981;"></div>
+                </button>
+            </div>
+
+            <button style="width: 100%; margin-top: 25px; padding: 14px; background: rgba(239, 68, 68, 0.2); border: 1px solid rgba(239, 68, 68, 0.4); color: #ef4444; border-radius: var(--radius-md); font-weight: 800; cursor: pointer;" onclick="hardReset()">
+                Reset Saved Progress
+            </button>
         </div>
     </div>
-    <div class="menu-side" id="menu-container"></div>
-</div>
 
-<script>
-    // Price factor reduced from 1.3 to 1.15 for easier progression
-    const PRICE_FACTOR = 1.15;
-    
-    let state = { sp: 0, currentT: 0, unlockedT: 0, faith: 1.0, counts: {}, total: 0, theme: 'light' };
-    
-    const temples = [
-        { name: "Kirtland Ohio", goal: 10000, img: "kirtland.png", callings: [{n: "Clerk", c: 10, s: 1, i: "✍️"}, {n: "Exec Sec", c: 150, s: 5, i: "📅"}, {n: "2nd Counselor", c: 1500, s: 20, i: "📋"}, {n: "1st Counselor", c: 10000, s: 90, i: "💼"}, {n: "Bishop", c: 75000, s: 400, i: "🗝️"}, {n: "Recorder", c: 500000, s: 2000, i: "💰"}, {n: "Librarian", c: 3000000, s: 8000, i: "📚"}, {n: "Building Rep", c: 20000000, s: 35000, i: "🔑"}, {n: "High Councilor", c: 150000000, s: 150000, i: "🏛️"}, {n: "Stake President", c: 1000000000, s: 800000, i: "👔"}] },
-        { name: "Manti Utah", goal: 400000, img: "manti.png", callings: [{n: "Gardener", c: 8000, s: 30, i: "🌻"}, {n: "Carpenter", c: 50000, s: 150, i: "🪵"}, {n: "Mason", c: 250000, s: 700, i: "🧱"}, {n: "Dancer", c: 2000000, s: 3500, i: "💃"}, {n: "Cast Member", c: 12000000, s: 15000, i: "🎭"}, {n: "Farmer", c: 75000000, s: 80000, i: "🚜"}, {n: "Chorister", c: 500000000, s: 400000, i: "🎼"}, {n: "Guide", c: 3000000000, s: 2000000, i: "⛪"}, {n: "Patriarch", c: 20000000000, s: 10000000, i: "🖐️"}, {n: "Architect", c: 150000000000, s: 60000000, i: "📐"}] },
-        { name: "Logan Utah", goal: 10000000, img: "logan.png", callings: [{n: "Mt Guide", c: 200000, s: 500, i: "🏔️"}, {n: "Sawyer", c: 1500000, s: 3500, i: "⚙️"}, {n: "Settler", c: 10000000, s: 15000, i: "🚜"}, {n: "Quarryman", c: 70000000, s: 75000, i: "⛏️"}, {n: "Janitor", c: 400000000, s: 400000, i: "🧹"}, {n: "Singer", c: 2500000000, s: 2000000, i: "🎵"}, {n: "Farmer", c: 15000000000, s: 10000000, i: "🐄"}, {n: "Clerk", c: 100000000000, s: 60000000, i: "📂"}, {n: "HP Leader", c: 750000000000, s: 350000000, i: "👴"}, {n: "Castle Builder", c: 5000000000000, s: 1500000000, i: "🏰"}] },
-        { name: "Mesa Arizona", goal: 500000000, img: "mesa.png", callings: [{n: "Picker", c: 5000000, s: 6000, i: "🍊"}, {n: "Crew", c: 35000000, s: 30000, i: "🧵"}, {n: "Cast", c: 150000000, s: 200000, i: "🎭"}, {n: "Decorator", c: 1200000000, s: 1000000, i: "✨"}, {n: "Missionary", c: 8000000000, s: 6000000, i: "☀️"}, {n: "Branch Clerk", c: 50000000000, s: 35000000, i: "🇪🇸"}, {n: "Historian", c: 350000000000, s: 150000000, i: "🌳"}, {n: "Stake Pres", c: 1500000000000, s: 800000000, i: "👔"}, {n: "Gardener", c: 10000000000000, s: 4500000000, i: "🌵"}, {n: "Pioneer", c: 75000000000000, s: 25000000000, i: "🏜️"}] },
-        { name: "Lehi Utah", goal: 5000000000, img: "lehi.png", callings: [{n: "Support", c: 80000000, s: 150000, i: "💻"}, {n: "Dev", c: 500000000, s: 900000, i: "🖥️"}, {n: "Cooling", c: 3500000000, s: 5000000, i: "❄️"}, {n: "Volunteer", c: 20000000000, s: 25000000, i: "⌨️"}, {n: "Researcher", c: 120000000000, s: 150000000, i: "🌳"}, {n: "CEO", c: 800000000000, s: 800000000, i: "🏢"}, {n: "Historian", c: 5000000000000, s: 5000000000, i: "📜"}, {n: "Fiber Tech", c: 35000000000000, s: 25000000000, i: "🔌"}, {n: "Lead", c: 200000000000000, s: 150000000000, i: "💾"}, {n: "Virtual", c: 1500000000000000, s: 800000000000, i: "🌐"}] },
-        { name: "Nauvoo Illinois", goal: 100000000000, img: "nauvoo.png", callings: [{n: "Baptistry", c: 2500000000, s: 2000000, i: "🌊"}, {n: "Initiatory", c: 15000000000, s: 10000000, i: "🕯️"}, {n: "Guide", c: 100000000000, s: 60000000, i: "✨"}, {n: "Witness", c: 750000000000, s: 350000000, i: "💍"}, {n: "Linen", c: 4000000000000, s: 1500000000, i: "👕"}, {n: "Organist", c: 25000000000000, s: 8000000000, i: "🎹"}, {n: "Coord.", c: 150000000000000, s: 35000000000, i: "🕒"}, {n: "Recorder", c: 1000000000000000, s: 150000000000, i: "📜"}, {n: "Counselor", c: 7500000000000000, s: 800000000000, i: "🏛️"}, {n: "President", c: 50000000000000000, s: 4000000000000, i: "🗝️"}] },
-        { name: "Phoenix Arizona", goal: 2000000000000, img: "phoenix.png", callings: [{n: "Teacher", c: 75000000000, s: 300000000, i: "🍎"}, {n: "FHE", c: 500000000000, s: 1500000000, i: "🏠"}, {n: "Chair", c: 3500000000000, s: 10000000000, i: "🎈"}, {n: "YM Pres", c: 25000000000000, s: 55000000000, i: "🏕️"}, {n: "YW Pres", c: 150000000000000, s: 250000000000, i: "🛡️"}, {n: "Clerk", c: 1000000000000000, s: 1500000000000, i: "📁"}, {n: "RS Pres", c: 6000000000000000, s: 7500000000000, i: "🍲"}, {n: "Leader", c: 40000000000000000, s: 35000000000000, i: "👔"}, {n: "Director", c: 250000000000000000, s: 200000000000000, i: "🗺️"}, {n: "Pioneer", c: 1500000000000000000, s: 1000000000000000, i: "🌵"}] },
-        { name: "Salt Lake City", goal: 50000000000000, img: "salt.png", callings: [{n: "Choir", c: 2000000000000, s: 15000000000, i: "🎵"}, {n: "Grounds", c: 12000000000000, s: 75000000000, i: "🌷"}, {n: "Center", c: 75000000000000, s: 350000000000, i: "🗺️"}, {n: "Usher", c: 500000000000000, s: 1500000000000, i: "👔"}, {n: "Historian", c: 3500000000000000, s: 12000000000000, i: "📜"}, {n: "Seventy", c: 20000000000000000, s: 65000000000000, i: "🌍"}, {n: "Apostle", c: 120000000000000000, s: 350000000000000, i: "🕊️"}, {n: "Counsel", c: 800000000000000000, s: 1800000000000000, i: "🗝️"}, {n: "Prophet", c: 5000000000000000000, s: 12000000000000000, i: "📜"}, {n: "Faith", c: 35000000000000000000, s: 75000000000000000, i: "🌎"}] },
-        { name: "Bern Switzerland", goal: 2000000000000000, img: "bern.png", callings: [{n: "Guide", c: 75000000000000, s: 750000000000, i: "🏔️"}, {n: "Trans.", c: 500000000000000, s: 5000000000000, i: "🗣️"}, {n: "Matron", c: 3500000000000000, s: 25000000000000, i: "👗"}, {n: "Admin", c: 25000000000000000, s: 120000000000000, i: "🏢"}, {n: "Guard", c: 150000000000000000, s: 750000000000000, i: "🛡️"}, {n: "Counsel", c: 1000000000000000000, s: 5000000000000000, i: "🌍"}, {n: "Multi", c: 6000000000000000000, s: 25000000000000000, i: "📖"}, {n: "Global", c: 35000000000000000000, s: 150000000000000000, i: "🌎"}, {n: "Art", c: 200000000000000000000, s: 800000000000000000, i: "🎨"}, {n: "Pres.", c: 1500000000000000000000, s: 6000000000000000000, i: "👑"}] },
-        { name: "Manila Philippines", goal: 50000000000000000, img: "manila.png", callings: [{n: "Pioneer", c: 7500000000000000, s: 6000000000000, i: "🏝️"}, {n: "Vol.", c: 60000000000000000, s: 45000000000000, i: "🤝"}, {n: "Tagalog", c: 400000000000000000, s: 300000000000000, i: "📜"}, {n: "Inst.", c: 2500000000000000000, s: 1500000000000000, i: "🏫"}, {n: "Auditor", c: 15000000000000000000, s: 10000000000000000, i: "⚖️"}, {n: "Worker", c: 100000000000000000000, s: 65000000000000000, i: "🕯️"}, {n: "Dist.", c: 600000000000000000000, s: 450000000000000000, i: "🗝️"}, {n: "Counsel", c: 4000000000000000000000, s: 2500000000000000000, i: "🤝"}, {n: "Growth", c: 25000000000000000000000, s: 12000000000000000000, i: "🌏"}, {n: "Pres.", c: 150000000000000000000000, s: 75000000000000000000, i: "📜"}] }
-    ];
+    <script>
+        // --- GAME ENGINE DATA & STATE ---
+        const PRICE_FACTOR = 1.15;
+        
+        let state = {
+            sp: 0,
+            currentT: 0,
+            unlockedT: 0,
+            faith: 1.0,
+            counts: {},
+            total: 0,
+            theme: 'celestial',
+            audio: true,
+            haptics: true
+        };
 
-    const flavorTiers = [
-        { t: 0, msgs: ["A small spark of faith.", "The ward is just starting out.", "Finding joy in service."] },
-        { t: 1e5, msgs: ["The local community is noticing.", "Ward socials are buzzing.", "Missionary work is picking up."] },
-        { t: 1e10, msgs: ["Your influence is reaching the city.", "The choir sounds heavenly.", "A pillar of strength."] },
-        { t: 1e16, msgs: ["International growth is exploding.", "Prophetic visions are clear.", "A beacon of light."] }
-    ];
+        const temples = [
+            { name: "Kirtland Ohio", goal: 10000, callings: [{n: "Clerk", c: 10, s: 1, i: "✍️"}, {n: "Exec Sec", c: 150, s: 5, i: "📅"}, {n: "2nd Counselor", c: 1500, s: 20, i: "📋"}, {n: "1st Counselor", c: 10000, s: 90, i: "💼"}, {n: "Bishop", c: 75000, s: 400, i: "🗝️"}, {n: "Recorder", c: 500000, s: 2000, i: "💰"}] },
+            { name: "Manti Utah", goal: 400000, callings: [{n: "Gardener", c: 8000, s: 30, i: "🌻"}, {n: "Carpenter", c: 50000, s: 150, i: "🪵"}, {n: "Mason", c: 250000, s: 700, i: "🧱"}, {n: "Dancer", c: 2000000, s: 3500, i: "💃"}, {n: "Cast Member", c: 12000000, s: 15000, i: "🎭"}] },
+            { name: "Logan Utah", goal: 10000000, callings: [{n: "Mt Guide", c: 200000, s: 500, i: "🏔️"}, {n: "Sawyer", c: 1500000, s: 3500, i: "⚙️"}, {n: "Settler", c: 10000000, s: 15000, i: "🚜"}, {n: "Quarryman", c: 70000000, s: 75000, i: "⛏️"}] },
+            { name: "Mesa Arizona", goal: 500000000, callings: [{n: "Picker", c: 5000000, s: 6000, i: "🍊"}, {n: "Crew", c: 35000000, s: 30000, i: "🧵"}, {n: "Cast", c: 150000000, s: 200000, i: "🎭"}] },
+            { name: "Salt Lake City", goal: 50000000000, callings: [{n: "Choir", c: 2000000000, s: 15000000, i: "🎵"}, {n: "Grounds", c: 12000000000, s: 75000000, i: "🌷"}, {n: "Apostle", c: 120000000000, s: 350000000, i: "🕊️"}] }
+        ];
 
-    function format(n) {
-        if (n >= 1e33) return (n/1e33).toFixed(1) + 'Dc';
-        if (n >= 1e30) return (n/1e30).toFixed(1) + 'No';
-        if (n >= 1e27) return (n/1e27).toFixed(1) + 'Oc';
-        if (n >= 1e24) return (n/1e24).toFixed(1) + 'Sp';
-        if (n >= 1e21) return (n/1e21).toFixed(1) + 'Sx';
-        if (n >= 1e18) return (n/1e18).toFixed(1) + 'Qi';
-        if (n >= 1e15) return (n/1e15).toFixed(1) + 'Qa';
-        if (n >= 1e12) return (n/1e12).toFixed(1) + 'T';
-        if (n >= 1e9) return (n/1e9).toFixed(1) + 'B';
-        if (n >= 1e6) return (n/1e6).toFixed(1) + 'M';
-        if (n >= 1e3) return (n/1e3).toFixed(1) + 'k';
-        return Math.floor(n);
-    }
+        const flavorMessages = [
+            "A small spark of faith.",
+            "The community is gathering.",
+            "Ward socials are buzzing.",
+            "Light is spreading globally.",
+            "A beacon of hope and peace."
+        ];
 
-    function getSPS() {
-        let total = 0;
-        for (let tIdx in state.counts) {
-            temples[tIdx].callings.forEach((c, i) => { total += (state.counts[tIdx][i] || 0) * c.s; });
+        // --- AUDIO ENGINE (WEB AUDIO API) ---
+        let audioCtx = null;
+
+        function initAudio() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
         }
-        return total * state.faith;
-    }
 
-    function buildMenu() {
-        const container = document.getElementById('menu-container');
-        container.innerHTML = ''; 
-        const t = temples[state.currentT];
-        if (!state.counts[state.currentT]) state.counts[state.currentT] = Array(t.callings.length).fill(0);
-        t.callings.forEach((c, i) => {
-            const btn = document.createElement('div');
-            btn.className = 'upgrade-btn';
-            btn.id = `calling-${i}`;
-            btn.onclick = () => buy(i);
-            btn.innerHTML = `<div class="icon">${c.i}</div><div class="details"><b id="n-${i}">${c.n} (0)</b><span id="s-${i}">+0/s</span></div><div class="price" id="p-${i}">0</div>`;
-            container.appendChild(btn);
-        });
-        updateMenuValues();
-    }
+        function playClickSound() {
+            if (!state.audio) return;
+            initAudio();
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(440, audioCtx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.08);
+            
+            gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.08);
+            
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            
+            osc.start();
+            osc.stop(audioCtx.currentTime + 0.08);
+        }
 
-    function updateMenuValues() {
-        const t = temples[state.currentT];
-        t.callings.forEach((c, i) => {
+        function triggerHaptic() {
+            if (state.haptics && navigator.vibrate) {
+                navigator.vibrate(12);
+            }
+        }
+
+        // --- PARTICLE ENGINE ---
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.size = Math.random() * 4 + 2;
+                this.speedX = (Math.random() - 0.5) * 4;
+                this.speedY = (Math.random() - 0.5) * 4 - 2;
+                this.color = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#fbbf24';
+                this.alpha = 1;
+                this.decay = Math.random() * 0.03 + 0.015;
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                this.alpha -= this.decay;
+            }
+
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = this.alpha;
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        function spawnParticles(x, y, count = 8) {
+            for (let i = 0; i < count; i++) {
+                particles.push(new Particle(x, y));
+            }
+        }
+
+        function handleParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = particles.length - 1; i >= 0; i--) {
+                particles[i].update();
+                particles[i].draw();
+                if (particles[i].alpha <= 0) {
+                    particles.splice(i, 1);
+                }
+            }
+            requestAnimationFrame(handleParticles);
+        }
+        handleParticles();
+
+        // --- CORE GAME LOGIC ---
+        function formatNumber(n) {
+            if (n >= 1e12) return (n / 1e12).toFixed(2) + 'T';
+            if (n >= 1e9) return (n / 1e9).toFixed(2) + 'B';
+            if (n >= 1e6) return (n / 1e6).toFixed(2) + 'M';
+            if (n >= 1e3) return (n / 1e3).toFixed(1) + 'k';
+            return Math.floor(n);
+        }
+
+        function getSPS() {
+            let total = 0;
+            for (let tIdx in state.counts) {
+                if (temples[tIdx]) {
+                    temples[tIdx].callings.forEach((c, i) => {
+                        total += (state.counts[tIdx][i] || 0) * c.s;
+                    });
+                }
+            }
+            return total * state.faith;
+        }
+
+        function handleTap(e) {
+            const rect = e.currentTarget.getBoundingClientRect();
+            const x = e.clientX || (e.touches && e.touches[0].clientX) || (rect.left + rect.width / 2);
+            const y = e.clientY || (e.touches && e.touches[0].clientY) || (rect.top + rect.height / 2);
+
+            const gain = Math.max(1, getSPS() * 0.1) * state.faith;
+            state.sp += gain;
+            state.total += gain;
+
+            // Spawn floating text
+            const floatText = document.createElement('div');
+            floatText.className = 'floating-text';
+            floatText.innerText = `+${formatNumber(gain)}`;
+            floatText.style.left = `${x}px`;
+            floatText.style.top = `${y}px`;
+            document.body.appendChild(floatText);
+            setTimeout(() => floatText.remove(), 800);
+
+            // Audio & Haptic Feedback
+            playClickSound();
+            triggerHaptic();
+            spawnParticles(x, y, 6);
+
+            updateUI();
+        }
+
+        function buyCalling(i) {
+            const t = temples[state.currentT];
+            if (!state.counts[state.currentT]) state.counts[state.currentT] = [];
             const count = state.counts[state.currentT][i] || 0;
-            const cost = Math.floor(c.c * Math.pow(PRICE_FACTOR, count));
-            const btn = document.getElementById(`calling-${i}`);
-            if(!btn) return;
-            document.getElementById(`n-${i}`).innerText = `${c.n} (${count})`;
-            document.getElementById(`s-${i}`).innerText = `+${format(c.s * state.faith)}/s`;
-            document.getElementById(`p-${i}`).innerText = format(cost);
-            if (state.sp >= cost) btn.classList.remove('disabled'); else btn.classList.add('disabled');
-        });
-    }
+            const cost = Math.floor(t.callings[i].c * Math.pow(PRICE_FACTOR, count));
 
-    function updateMainUI() {
-        document.getElementById('display-sp').innerText = format(state.sp);
-        document.getElementById('display-sps').innerText = format(getSPS());
-        document.getElementById('display-faith').innerText = state.faith.toFixed(1);
-        const t = temples[state.currentT];
-        document.getElementById('display-tname').innerText = t.name + (state.currentT < state.unlockedT ? " (✓)" : "");
-        document.getElementById('temple-img').src = "temples/" + t.img;
-        const prog = Math.min((state.sp / t.goal) * 100, 100);
-        document.getElementById('fill').style.width = prog + "%";
-        document.getElementById('display-prog').innerText = Math.floor(prog) + "% Complete";
-        document.getElementById('ded-btn').style.display = (prog >= 100 && state.currentT === state.unlockedT && state.currentT < temples.length-1) ? 'inline-block' : 'none';
-        updateMenuValues();
-    }
+            if (state.sp >= cost) {
+                state.sp -= cost;
+                state.counts[state.currentT][i] = count + 1;
+                triggerHaptic();
+                renderUpgrades();
+                updateUI();
+                saveGame();
+            }
+        }
 
-    function buy(i) {
-        const t = temples[state.currentT];
-        const count = state.counts[state.currentT][i] || 0;
-        const cost = Math.floor(t.callings[i].c * Math.pow(PRICE_FACTOR, count));
-        if (state.sp >= cost) { state.sp -= cost; state.counts[state.currentT][i]++; updateMainUI(); save(); }
-    }
+        function dedicateTemple() {
+            if (state.currentT === state.unlockedT && state.unlockedT < temples.length - 1) {
+                state.unlockedT++;
+                state.faith += 2.0;
+                state.currentT = state.unlockedT;
+                triggerHaptic();
+                switchTab('clicker');
+                renderAll();
+                saveGame();
+            }
+        }
 
-    function handleClick() {
-        // Clicks are now 10% of SPS (buffed from 5%)
-        const gain = Math.max(1, (getSPS() * 0.10)) * state.faith;
-        state.sp += gain; state.total += gain; updateMainUI();
-    }
+        // --- UI RENDERERS ---
+        function updateUI() {
+            document.getElementById('display-sp').innerText = formatNumber(state.sp);
+            document.getElementById('display-sps').innerText = formatNumber(getSPS());
+            document.getElementById('display-faith').innerText = state.faith.toFixed(1);
 
-    function openMap() {
-        const container = document.getElementById('map-links'); container.innerHTML = '';
-        temples.forEach((t, i) => { if (i <= state.unlockedT) {
-            const item = document.createElement('div'); item.className = 'item-btn'; item.innerText = t.name;
-            item.onclick = () => { state.currentT = i; buildMenu(); updateMainUI(); document.getElementById('map-modal').style.display='none'; };
-            container.appendChild(item);
-        }});
-        document.getElementById('map-modal').style.display = 'flex';
-    }
+            const t = temples[state.currentT];
+            document.getElementById('display-tname').innerText = t.name + (state.currentT < state.unlockedT ? " (Completed)" : "");
+            
+            const prog = Math.min((state.sp / t.goal) * 100, 100);
+            document.getElementById('fill-bar').style.width = `${prog}%`;
+            document.getElementById('display-prog-pct').innerText = `${Math.floor(prog)}%`;
 
-    function setTheme(t) { state.theme = t; document.body.setAttribute('data-theme', t); buildMenu(); updateMainUI(); save(); document.getElementById('theme-modal').style.display='none'; }
-    
-    function dedicate() { 
-        state.unlockedT++; 
-        state.faith += 2.0; // Buffed from 1.5
-        state.currentT = state.unlockedT; 
-        buildMenu(); 
-        updateMainUI(); 
-        save(); 
-    }
+            const dedBtn = document.getElementById('dedicate-btn');
+            if (prog >= 100 && state.currentT === state.unlockedT && state.currentT < temples.length - 1) {
+                dedBtn.style.display = 'block';
+            } else {
+                dedBtn.style.display = 'none';
+            }
 
-    function cycleStatus() {
-        const el = document.getElementById('display-status');
-        const tier = [...flavorTiers].reverse().find(f => state.total >= f.t);
-        el.style.opacity = 0; setTimeout(() => { el.innerText = tier.msgs[Math.floor(Math.random() * tier.msgs.length)]; el.style.opacity = 1; }, 500);
-    }
-    function hardReset() { if(confirm("Start your journey over?")) { localStorage.clear(); location.reload(); } }
-    function save() { localStorage.setItem('TC_BALANCED_V1', JSON.stringify(state)); }
-    function load() { const data = localStorage.getItem('TC_BALANCED_V1'); if (data) state = JSON.parse(data); setTheme(state.theme || 'light'); }
+            // Real-time upgrade button enable/disable check
+            t.callings.forEach((c, i) => {
+                const count = (state.counts[state.currentT] && state.counts[state.currentT][i]) || 0;
+                const cost = Math.floor(c.c * Math.pow(PRICE_FACTOR, count));
+                const card = document.getElementById(`calling-card-${i}`);
+                if (card) {
+                    if (state.sp >= cost) card.classList.remove('disabled');
+                    else card.classList.add('disabled');
+                }
+            });
+        }
 
-    document.getElementById('click-area').onclick = handleClick;
-    window.onload = load;
-    setInterval(() => { state.sp += getSPS()/10; state.total += getSPS()/10; updateMainUI(); }, 100);
-    setInterval(cycleStatus, 6000);
-</script>
+        function renderUpgrades() {
+            const container = document.getElementById('upgrades-list');
+            container.innerHTML = '';
+            const t = temples[state.currentT];
+
+            if (!state.counts[state.currentT]) state.counts[state.currentT] = [];
+
+            t.callings.forEach((c, i) => {
+                const count = state.counts[state.currentT][i] || 0;
+                const cost = Math.floor(c.c * Math.pow(PRICE_FACTOR, count));
+
+                const card = document.createElement('div');
+                card.className = `upgrade-card ${state.sp < cost ? 'disabled' : ''}`;
+                card.id = `calling-card-${i}`;
+                card.onclick = () => buyCalling(i);
+
+                card.innerHTML = `
+                    <div class="upgrade-icon">${c.i}</div>
+                    <div class="upgrade-info">
+                        <div class="upgrade-title">${c.n} (${count})</div>
+                        <div class="upgrade-sub">+${formatNumber(c.s * state.faith)} SP/sec</div>
+                    </div>
+                    <div class="upgrade-buy">${formatNumber(cost)}</div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function renderMap() {
+            const container = document.getElementById('map-list');
+            container.innerHTML = '';
+
+            temples.forEach((t, i) => {
+                const isUnlocked = i <= state.unlockedT;
+                const card = document.createElement('div');
+                card.className = `map-card ${!isUnlocked ? 'locked' : ''}`;
+                card.onclick = () => {
+                    if (isUnlocked) {
+                        state.currentT = i;
+                        renderAll();
+                        switchTab('clicker');
+                    }
+                };
+
+                card.innerHTML = `
+                    <div>
+                        <div style="font-weight: 800; font-size: 1rem;">${t.name}</div>
+                        <div style="font-size: 0.75rem; color: var(--text-sub);">Goal: ${formatNumber(t.goal)} SP</div>
+                    </div>
+                    <div style="font-weight: 800; font-size: 0.85rem; color: var(--primary);">
+                        ${i === state.currentT ? 'ACTIVE' : isUnlocked ? 'TRAVEL' : 'LOCKED'}
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function renderAll() {
+            renderUpgrades();
+            renderMap();
+            updateUI();
+        }
+
+        // --- NAVIGATION & MODALS ---
+        function switchTab(tabId) {
+            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.view-panel').forEach(el => el.style.display = 'none');
+
+            if (tabId === 'clicker') {
+                document.getElementById('panel-clicker').style.display = 'flex';
+                event.currentTarget && event.currentTarget.classList.add('active');
+            } else if (tabId === 'upgrades') {
+                renderUpgrades();
+                document.getElementById('panel-upgrades').style.display = 'flex';
+                event.currentTarget && event.currentTarget.classList.add('active');
+            } else if (tabId === 'map') {
+                renderMap();
+                document.getElementById('panel-map').style.display = 'flex';
+                event.currentTarget && event.currentTarget.classList.add('active');
+            }
+        }
+
+        function openModal(id) {
+            document.getElementById(id).classList.add('active');
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).classList.remove('active');
+        }
+
+        function setTheme(t) {
+            state.theme = t;
+            document.documentElement.setAttribute('data-theme', t);
+            saveGame();
+        }
+
+        function toggleAudioSetting() {
+            state.audio = !state.audio;
+            document.getElementById('toggle-audio').classList.toggle('active', state.audio);
+            saveGame();
+        }
+
+        function toggleHapticsSetting() {
+            state.haptics = !state.haptics;
+            document.getElementById('toggle-haptics').classList.toggle('active', state.haptics);
+            saveGame();
+        }
+
+        // --- PERSISTENCE ENGINE ---
+        function saveGame() {
+            localStorage.setItem('TC_MOBILE_V1', JSON.stringify(state));
+        }
+
+        function loadGame() {
+            const data = localStorage.getItem('TC_MOBILE_V1');
+            if (data) {
+                try {
+                    state = { ...state, ...JSON.parse(data) };
+                } catch (e) {
+                    console.error("Save state reset due to corrupt data", e);
+                }
+            }
+            setTheme(state.theme || 'celestial');
+            document.getElementById('toggle-audio').classList.toggle('active', state.audio);
+            document.getElementById('toggle-haptics').classList.toggle('active', state.haptics);
+            renderAll();
+        }
+
+        function hardReset() {
+            if (confirm("Are you sure you want to reset all spiritual progress?")) {
+                localStorage.removeItem('TC_MOBILE_V1');
+                location.reload();
+            }
+        }
+
+        // --- INITIALIZATION & TICKER ---
+        document.getElementById('click-target').addEventListener('pointerdown', handleTap);
+        document.getElementById('dedicate-btn').addEventListener('click', dedicateTemple);
+
+        window.onload = () => {
+            loadGame();
+            
+            // Loop: 10 FPS Game Logic Cycle
+            setInterval(() => {
+                const sps = getSPS();
+                state.sp += sps / 10;
+                state.total += sps / 10;
+                updateUI();
+            }, 100);
+
+            // Loop: Autosave every 5s
+            setInterval(saveGame, 5000);
+
+            // Loop: Flavor Message Cycler
+            setInterval(() => {
+                const el = document.getElementById('display-status');
+                el.style.opacity = '0';
+                setTimeout(() => {
+                    el.innerText = flavorMessages[Math.floor(Math.random() * flavorMessages.length)];
+                    el.style.opacity = '1';
+                }, 300);
+            }, 7000);
+        };
+    </script>
 </body>
 </html>
